@@ -28,6 +28,8 @@ const nextConfig: NextConfig = {
           destination: '/explorer/:path*',
         },
       ],
+      afterFiles: [],
+      fallback: [],
     };
   },
 };
