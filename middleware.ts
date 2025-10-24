@@ -20,19 +20,19 @@ export function middleware(request: NextRequest) {
   console.log('Is explorer subdomain?', isExplorerSubdomain);
   
   if (isExplorerSubdomain) {
-    const url = request.nextUrl.clone();
-    
     console.log('✅ Explorer subdomain detected!');
     
     // If already on /explorer path, allow it
-    if (url.pathname.startsWith('/explorer')) {
+    if (request.nextUrl.pathname.startsWith('/explorer')) {
       console.log('Already on /explorer path, allowing...');
       return NextResponse.next();
     }
     
-    // Rewrite root to /explorer
+    // Rewrite root to /explorer, preserving search params
     console.log('Rewriting to /explorer');
-    url.pathname = '/explorer';
+    const url = new URL('/explorer', request.url);
+    // Preserve query parameters if any
+    url.search = request.nextUrl.search;
     return NextResponse.rewrite(url);
   }
   
