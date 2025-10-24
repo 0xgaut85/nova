@@ -2,10 +2,13 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const hostname = request.headers.get('host') || '';
+  // Check x-forwarded-host first (contains the original domain), fallback to host
+  const hostname = request.headers.get('x-forwarded-host') || request.headers.get('host') || '';
   
   console.log('Middleware triggered - hostname:', hostname);
   console.log('Pathname:', request.nextUrl.pathname);
+  console.log('x-forwarded-host:', request.headers.get('x-forwarded-host'));
+  console.log('host:', request.headers.get('host'));
   
   // If accessing from explorer subdomain, rewrite to /explorer
   if (hostname === 'explorer.xgrain402.xyz') {
