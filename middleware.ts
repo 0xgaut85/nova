@@ -4,26 +4,35 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   const hostname = request.headers.get('host') || '';
   
+  console.log('Middleware triggered - hostname:', hostname);
+  console.log('Pathname:', request.nextUrl.pathname);
+  
   // If accessing from explorer subdomain, rewrite to /explorer
-  if (hostname.includes('explorer.xgrain402.xyz') || hostname.includes('explorer.')) {
+  if (hostname === 'explorer.xgrain402.xyz') {
     const url = request.nextUrl.clone();
+    
+    console.log('Explorer subdomain detected!');
     
     // If already on /explorer path, allow it
     if (url.pathname.startsWith('/explorer')) {
+      console.log('Already on /explorer, allowing...');
       return NextResponse.next();
     }
     
     // If on root path, rewrite to /explorer (not redirect)
     if (url.pathname === '/' || url.pathname === '') {
+      console.log('Root path, rewriting to /explorer');
       url.pathname = '/explorer';
       return NextResponse.rewrite(url);
     }
     
     // For any other path on explorer subdomain, also rewrite to /explorer
+    console.log('Other path, rewriting to /explorer');
     url.pathname = '/explorer';
     return NextResponse.rewrite(url);
   }
   
+  console.log('Not explorer subdomain, passing through');
   return NextResponse.next();
 }
 
