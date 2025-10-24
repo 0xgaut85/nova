@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Force navigation link styles */
+nav a {
+  color: #000000 !important;
+  text-decoration: none !important;
+}
+
+nav a:visited {
+  color: #000000 !important;
+}
+
+nav a:hover {
+  color: #000000 !important;
+}
+
+/* Wallet Adapter Button Customization */
+.wallet-adapter-button {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  padding: 0.5rem 1rem !important;
+  height: auto !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.wallet-adapter-button:hover {
+  background-color: #1f1f1f !important;
+}
+
+.wallet-adapter-button:not([disabled]):hover {
+  background-color: #1f1f1f !important;
+}
+
+.wallet-adapter-modal-wrapper {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.wallet-adapter-modal {
+  border-radius: 1rem !important;
+  background-color: #ffffff !important;
+}
+
+/* Blink Animation for "Coming Soon" */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.blink-animation {
+  animation: blink 0.6s ease-in-out infinite;
+}
