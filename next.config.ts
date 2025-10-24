@@ -18,6 +18,16 @@ const nextConfig: NextConfig = {
     return {
       beforeFiles: [
         {
+          source: '/',
+          has: [
+            {
+              type: 'host',
+              value: 'explorer.xgrain402.xyz',
+            },
+          ],
+          destination: '/explorer',
+        },
+        {
           source: '/:path*',
           has: [
             {
