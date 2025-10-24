@@ -208,7 +208,7 @@ function ExplorerContent() {
         </div>
 
       {/* Main Content */}
-      <main className="relative pt-32 px-6 pb-12 max-w-7xl mx-auto">
+      <main className="relative pt-40 px-6 pb-12 max-w-7xl mx-auto">
         {/* Stats Grid */}
         <section className="mb-10">
           <h2 className="text-2xl font-semibold italic text-gray-900 mb-6">Network Overview</h2>
