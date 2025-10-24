@@ -28,7 +28,29 @@ const nextConfig: NextConfig = {
           destination: '/explorer/:path*',
         },
       ],
-      afterFiles: [],
+      afterFiles: [
+        // Don't rewrite static assets
+        {
+          source: '/_next/static/:path*',
+          has: [
+            {
+              type: 'host',
+              value: 'explorer.xgrain402.xyz',
+            },
+          ],
+          destination: '/_next/static/:path*',
+        },
+        {
+          source: '/_next/image/:path*',
+          has: [
+            {
+              type: 'host',
+              value: 'explorer.xgrain402.xyz',
+            },
+          ],
+          destination: '/_next/image/:path*',
+        },
+      ],
       fallback: [],
     };
   },
