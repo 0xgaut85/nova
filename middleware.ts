@@ -4,8 +4,8 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   const hostname = request.headers.get('host') || '';
   
-  // If accessing from explorer subdomain, redirect to /explorer
-  if (hostname.startsWith('explorer.')) {
+  // If accessing from explorer subdomain, rewrite to /explorer
+  if (hostname.includes('explorer.xgrain402.xyz') || hostname.includes('explorer.')) {
     const url = request.nextUrl.clone();
     
     // If already on /explorer path, allow it
@@ -13,15 +13,15 @@ export function middleware(request: NextRequest) {
       return NextResponse.next();
     }
     
-    // If on root path, redirect to /explorer
+    // If on root path, rewrite to /explorer (not redirect)
     if (url.pathname === '/' || url.pathname === '') {
       url.pathname = '/explorer';
-      return NextResponse.redirect(url);
+      return NextResponse.rewrite(url);
     }
     
-    // For any other path, prepend /explorer
-    url.pathname = `/explorer${url.pathname}`;
-    return NextResponse.redirect(url);
+    // For any other path on explorer subdomain, also rewrite to /explorer
+    url.pathname = '/explorer';
+    return NextResponse.rewrite(url);
   }
   
   return NextResponse.next();
@@ -37,7 +37,7 @@ export const config = {
      * - favicon.ico (favicon file)
      * - public files (images, etc)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.svg|.*\\.gif|.*\\.webp).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.svg|.*\\.gif|.*\\.webp|.*\\.mp4).*)',
   ],
 };
 
