@@ -14,6 +14,22 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/:path*',
+          has: [
+            {
+              type: 'host',
+              value: 'explorer.xgrain402.xyz',
+            },
+          ],
+          destination: '/explorer/:path*',
+        },
+      ],
+    };
+  },
 };
 
 export default nextConfig;
