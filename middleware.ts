@@ -2,40 +2,42 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  // Check x-forwarded-host first (contains the original domain), fallback to host
-  const hostname = request.headers.get('x-forwarded-host') || request.headers.get('host') || '';
+  // Get the actual hostname - Vercel uses x-forwarded-host
+  const forwardedHost = request.headers.get('x-forwarded-host');
+  const host = request.headers.get('host');
+  const hostname = forwardedHost || host || '';
   
-  console.log('Middleware triggered - hostname:', hostname);
+  console.log('=== MIDDLEWARE DEBUG ===');
+  console.log('x-forwarded-host:', forwardedHost);
+  console.log('host:', host);
+  console.log('Final hostname:', hostname);
   console.log('Pathname:', request.nextUrl.pathname);
-  console.log('x-forwarded-host:', request.headers.get('x-forwarded-host'));
-  console.log('host:', request.headers.get('host'));
+  console.log('Full URL:', request.url);
   
-  // If accessing from explorer subdomain, rewrite to /explorer
-  if (hostname === 'explorer.xgrain402.xyz') {
+  // Check if we're on the explorer subdomain
+  const isExplorerSubdomain = hostname.startsWith('explorer.') || hostname === 'explorer.xgrain402.xyz';
+  
+  console.log('Is explorer subdomain?', isExplorerSubdomain);
+  
+  if (isExplorerSubdomain) {
     const url = request.nextUrl.clone();
     
-    console.log('Explorer subdomain detected!');
+    console.log('✅ Explorer subdomain detected!');
     
     // If already on /explorer path, allow it
     if (url.pathname.startsWith('/explorer')) {
-      console.log('Already on /explorer, allowing...');
+      console.log('Already on /explorer path, allowing...');
       return NextResponse.next();
     }
     
-    // If on root path, rewrite to /explorer (not redirect)
-    if (url.pathname === '/' || url.pathname === '') {
-      console.log('Root path, rewriting to /explorer');
-      url.pathname = '/explorer';
-      return NextResponse.rewrite(url);
-    }
-    
-    // For any other path on explorer subdomain, also rewrite to /explorer
-    console.log('Other path, rewriting to /explorer');
+    // Rewrite root to /explorer
+    console.log('Rewriting to /explorer');
     url.pathname = '/explorer';
     return NextResponse.rewrite(url);
   }
   
-  console.log('Not explorer subdomain, passing through');
+  console.log('Not explorer subdomain, passing through normally');
+  console.log('========================');
   return NextResponse.next();
 }
 
