@@ -545,6 +545,3 @@ class PayAIClient {
 
 // Export singleton instance
 export const payaiClient = new PayAIClient();
-
-// Export types
-export type { FacilitatorResponse };
