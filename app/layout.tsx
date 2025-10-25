@@ -1,24 +1,25 @@
 import type { Metadata } from "next";
-import { EB_Garamond } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import { WalletProvider } from "./components/WalletProvider";
 
-const garamond = EB_Garamond({ 
+const inter = Inter({ 
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter"
 });
 
 export const metadata: Metadata = {
-  title: "xGrain402",
-  description: "Per-request micropayments for APIs & AI agents on BSC (Binance Smart Chain) using the 402 standard. Instant settlement in USDC/SOL. No accounts, no subscriptions.",
+  title: "Dock402",
+  description: "Discover, test, and integrate AI services using the revolutionary x402 payment protocol. Pay per request with instant settlements on Base and Solana networks.",
   icons: {
     icon: '/logo.png',
     shortcut: '/logo.png',
     apple: '/logo.png',
   },
   openGraph: {
-    title: "xGrain402",
-    description: "Per-request micropayments for APIs & AI agents on BSC (Binance Smart Chain) using the 402 standard.",
+    title: "Dock402",
+    description: "Discover, test, and integrate AI services using the revolutionary x402 payment protocol. Pay per request with instant settlements.",
   },
 };
 
@@ -29,7 +30,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={garamond.className}>{children}</body>
+      <body className={`${inter.variable} font-sans antialiased bg-white`}>
+        <WalletProvider>
+          {children}
+        </WalletProvider>
+      </body>
     </html>
   );
 }

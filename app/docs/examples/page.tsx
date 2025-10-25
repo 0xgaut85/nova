@@ -1,0 +1,413 @@
+'use client';
+
+import Link from 'next/link';
+
+export default function ExamplesPage() {
+  return (
+    <div className="prose prose-sm max-w-none">
+      <h1 className="text-4xl font-light italic text-black mb-4">
+        Code Examples
+      </h1>
+
+      <p className="text-base text-black/80 leading-relaxed mb-8">
+        Complete code examples for building and consuming x402 services. Copy, paste, and customize for your use case.
+      </p>
+
+      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Simple AI Service</h2>
+
+      <p className="text-sm text-black/80 mb-4">
+        A minimal AI text generation service with x402 payments:
+      </p>
+
+      <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 mb-8 overflow-x-auto not-prose">
+        <pre className="whitespace-pre-wrap">
+{`// server.ts
+import express from 'express';
+import { paymentMiddleware } from 'x402-express';
+import OpenAI from 'openai';
+
+const app = express();
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+app.use(express.json());
+app.use(
+  paymentMiddleware(
+    process.env.WALLET_ADDRESS as \`0x\${string}\`,
+    {
+      'POST /generate': {
+        price: '$0.05',
+        network: 'base'
+      }
+    },
+    {
+      url: 'https://facilitator.payai.network'
+    }
+  )
+);
+
+app.post('/generate', async (req, res) => {
+  const { prompt } = req.body;
+  
+  const completion = await openai.chat.completions.create({
+    model: 'gpt-4',
+    messages: [{ role: 'user', content: prompt }]
+  });
+  
+  res.json({
+    result: completion.choices[0].message.content
+  });
+});
+
+app.listen(3000, () => {
+  console.log('AI service running on port 3000');
+});`}
+        </pre>
+      </div>
+
+      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Image Processing Service</h2>
+
+      <p className="text-sm text-black/80 mb-4">
+        Python service for image processing with dynamic pricing:
+      </p>
+
+      <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 mb-8 overflow-x-auto not-prose">
+        <pre className="whitespace-pre-wrap">
+{`# server.py
+from fastapi import FastAPI, File, UploadFile
+from x402 import X402Middleware, require_payment
+from PIL import Image
+import io
+
+app = FastAPI()
+
+x402 = X402Middleware(
+    wallet_address=os.getenv("WALLET_ADDRESS"),
+    network="base",
+    facilitator_url="https://facilitator.payai.network"
+)
+
+app.add_middleware(x402)
+
+def calculate_price(size):
+    # Price based on image size
+    if size < 1_000_000:  # < 1MB
+        return "$0.01"
+    elif size < 5_000_000:  # < 5MB
+        return "$0.05"
+    else:
+        return "$0.10"
+
+@app.post("/resize")
+@require_payment(price=lambda req: calculate_price(req.content_length))
+async def resize_image(
+    file: UploadFile,
+    width: int,
+    height: int
+):
+    contents = await file.read()
+    image = Image.open(io.BytesIO(contents))
+    
+    resized = image.resize((width, height))
+    
+    output = io.BytesIO()
+    resized.save(output, format='PNG')
+    output.seek(0)
+    
+    return {
+        "image": output.getvalue(),
+        "size": len(output.getvalue())
+    }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)`}
+        </pre>
+      </div>
+
+      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Data API Client</h2>
+
+      <p className="text-sm text-black/80 mb-4">
+        Client application consuming x402 data APIs:
+      </p>
+
+      <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 mb-8 overflow-x-auto not-prose">
+        <pre className="whitespace-pre-wrap">
+{`// client.ts
+import { X402Client } from 'x402-client';
+import { ethers } from 'ethers';
+
+async function main() {
+  // Connect wallet
+  const provider = new ethers.BrowserProvider(window.ethereum);
+  const signer = await provider.getSigner();
+  
+  // Initialize x402 client
+  const client = new X402Client({
+    signer,
+    network: 'base',
+    maxPayment: '0.1' // Max 0.1 ETH per request
+  });
+  
+  try {
+    // Fetch weather data
+    const weatherResponse = await client.get(
+      'https://api.example.com/weather?city=NYC'
+    );
+    const weather = await weatherResponse.json();
+    console.log('Weather:', weather);
+    
+    // Fetch financial data
+    const stockResponse = await client.get(
+      'https://api.example.com/stocks/AAPL'
+    );
+    const stock = await stockResponse.json();
+    console.log('Stock price:', stock.price);
+    
+    // Generate AI content
+    const aiResponse = await client.post(
+      'https://api.example.com/generate',
+      {
+        body: JSON.stringify({ prompt: 'Write a poem' }),
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+    const ai = await aiResponse.json();
+    console.log('AI result:', ai.result);
+    
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+main();`}
+        </pre>
+      </div>
+
+      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">React Application</h2>
+
+      <p className="text-sm text-black/80 mb-4">
+        Complete React app with x402 integration:
+      </p>
+
+      <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 mb-8 overflow-x-auto not-prose">
+        <pre className="whitespace-pre-wrap">
+{`// App.tsx
+import { X402Provider, useX402 } from 'x402-react';
+import { useWallet } from '@rainbow-me/rainbowkit';
+import { useState } from 'react';
+
+function DataFetcher() {
+  const { client } = useX402();
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  
+  const fetchPremiumData = async () => {
+    setLoading(true);
+    try {
+      const response = await client.get(
+        'https://api.example.com/premium-data'
+      );
+      const result = await response.json();
+      setData(result);
+    } catch (error) {
+      console.error('Failed to fetch:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  return (
+    <div>
+      <button onClick={fetchPremiumData} disabled={loading}>
+        {loading ? 'Fetching...' : 'Get Premium Data ($0.01)'}
+      </button>
+      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+    </div>
+  );
+}
+
+function App() {
+  const { signer } = useWallet();
+  
+  return (
+    <X402Provider signer={signer} network="base">
+      <div className="app">
+        <h1>x402 Demo App</h1>
+        <DataFetcher />
+      </div>
+    </X402Provider>
+  );
+}
+
+export default App;`}
+        </pre>
+      </div>
+
+      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Batch Processing</h2>
+
+      <p className="text-sm text-black/80 mb-4">
+        Process multiple paid requests efficiently:
+      </p>
+
+      <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 mb-8 overflow-x-auto not-prose">
+        <pre className="whitespace-pre-wrap">
+{`// batch-client.ts
+import { X402Client } from 'x402-client';
+
+async function processBatch(urls: string[]) {
+  const client = new X402Client({ signer, network: 'base' });
+  
+  // Process all requests in parallel
+  const results = await Promise.all(
+    urls.map(async (url) => {
+      try {
+        const response = await client.get(url);
+        return await response.json();
+      } catch (error) {
+        return { error: error.message, url };
+      }
+    })
+  );
+  
+  // Calculate total cost
+  const totalCost = results.length * 0.001; // Assuming $0.001 each
+  console.log(\`Processed \${results.length} requests for $\${totalCost}\`);
+  
+  return results;
+}
+
+// Usage
+const urls = [
+  'https://api.example.com/data/1',
+  'https://api.example.com/data/2',
+  'https://api.example.com/data/3',
+];
+
+const results = await processBatch(urls);`}
+        </pre>
+      </div>
+
+      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Multi-Network Service</h2>
+
+      <p className="text-sm text-black/80 mb-4">
+        Accept payments on multiple blockchain networks:
+      </p>
+
+      <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 mb-8 overflow-x-auto not-prose">
+        <pre className="whitespace-pre-wrap">
+{`// multi-network.ts
+import express from 'express';
+import { paymentMiddleware } from 'x402-express';
+
+const app = express();
+
+// Accept payments on Base, Polygon, or Solana
+app.use(
+  paymentMiddleware(
+    {
+      base: '0xYourBaseAddress',
+      polygon: '0xYourPolygonAddress',
+      solana: 'YourSolanaAddress'
+    },
+    {
+      'GET /data': {
+        price: '$0.001',
+        networks: ['base', 'polygon', 'solana'] // Accept any
+      }
+    }
+  )
+);
+
+app.get('/data', (req, res) => {
+  // Check which network was used
+  const network = req.headers['x-payment-network'];
+  
+  res.json({
+    data: 'Your data',
+    paidOn: network
+  });
+});
+
+app.listen(3000);`}
+        </pre>
+      </div>
+
+      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">CLI Tool</h2>
+
+      <p className="text-sm text-black/80 mb-4">
+        Command-line tool using x402 services:
+      </p>
+
+      <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 mb-8 overflow-x-auto not-prose">
+        <pre className="whitespace-pre-wrap">
+{`#!/usr/bin/env node
+// cli.ts
+import { X402Client } from 'x402-client';
+import { ethers } from 'ethers';
+import { Command } from 'commander';
+
+const program = new Command();
+
+program
+  .name('x402-cli')
+  .description('CLI tool for x402 services')
+  .version('1.0.0');
+
+program
+  .command('weather <city>')
+  .description('Get weather data')
+  .action(async (city) => {
+    const wallet = new ethers.Wallet(process.env.PRIVATE_KEY);
+    const client = new X402Client({ signer: wallet, network: 'base' });
+    
+    const response = await client.get(
+      \`https://api.example.com/weather?city=\${city}\`
+    );
+    const data = await response.json();
+    
+    console.log(\`Weather in \${city}:\`);
+    console.log(\`Temperature: \${data.temperature}°F\`);
+    console.log(\`Condition: \${data.condition}\`);
+  });
+
+program
+  .command('generate <prompt>')
+  .description('Generate AI content')
+  .action(async (prompt) => {
+    const wallet = new ethers.Wallet(process.env.PRIVATE_KEY);
+    const client = new X402Client({ signer: wallet, network: 'base' });
+    
+    const response = await client.post(
+      'https://api.example.com/generate',
+      {
+        body: JSON.stringify({ prompt }),
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+    const data = await response.json();
+    
+    console.log(data.result);
+  });
+
+program.parse();`}
+        </pre>
+      </div>
+
+      <div className="bg-gradient-to-r from-[#FF7B00] to-[#FF9500] rounded-2xl p-6 text-white not-prose">
+        <h3 className="text-lg font-light italic mb-2">More Examples</h3>
+        <p className="text-sm opacity-90 mb-4">
+          Check out our GitHub repository for more examples and starter templates.
+        </p>
+        <a
+          href="https://github.com/dock402"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block px-5 py-2.5 bg-white text-[#FF7B00] rounded-xl text-sm font-light italic hover:shadow-lg transition-all"
+        >
+          View on GitHub
+        </a>
+      </div>
+    </div>
+  );
+}
+
