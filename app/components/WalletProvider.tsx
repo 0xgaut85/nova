@@ -21,3 +21,6 @@ export const WalletProvider: FC<WalletProviderProps> = ({ children }) => {
     </WagmiProvider>
   );
 };
+
+// Export alias for backward compatibility
+export const WalletContextProvider = WalletProvider;
