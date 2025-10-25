@@ -240,7 +240,7 @@ export default function ScrollExperience() {
         </div>
       </section>
 
-      {/* Solana Benefits */}
+      {/* BSC Benefits */}
       <section className="h-screen relative bg-white snap-start">
         <div className="sticky top-0 h-screen relative">
           {/* Top Left - Built */}
@@ -269,7 +269,7 @@ export default function ScrollExperience() {
             </div>
           </motion.div>
           
-          {/* Bottom Right - Solana */}
+          {/* Bottom Right - BSC */}
           <motion.div 
             className="absolute" 
             style={{ bottom: '2rem', right: '2rem' }}
@@ -279,7 +279,7 @@ export default function ScrollExperience() {
             viewport={{ once: true }}
           >
             <div className="text-[6vw] sm:text-[7vw] md:text-[9vw] lg:text-[11vw] font-normal italic leading-[0.8] text-black">
-              Solana
+              BSC
             </div>
           </motion.div>
         </div>

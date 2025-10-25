@@ -5,23 +5,23 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
 import { Search, Activity, TrendingUp, Users, DollarSign, Server, Zap, Globe, ArrowUp, ArrowDown, Wallet, X } from 'lucide-react';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { useAccount, useSignMessage } from 'wagmi';
+import { WalletButton } from '../components/WalletButton';
 import { WalletContextProvider } from '../components/WalletProvider';
 import { useEffect, useState } from 'react';
 
 // Sample data for charts
 const facilityData = [
   { name: 'xGrain Core', transactions: 4000, volume: 2400 },
-  { name: 'SolPay Hub', transactions: 3000, volume: 1398 },
+  { name: 'BSCPay Hub', transactions: 3000, volume: 1398 },
   { name: 'Wheat Protocol', transactions: 2000, volume: 9800 },
   { name: 'Grain Bridge', transactions: 2780, volume: 3908 },
-  { name: 'Solana Gateway', transactions: 1890, volume: 4800 },
+  { name: 'BSC Gateway', transactions: 1890, volume: 4800 },
 ];
 
 const serverData = [
   { name: 'xGrain402', value: 400, color: '#EAB308' },
-  { name: 'SolanaHub', value: 300, color: '#F59E0B' },
+  { name: 'BSCHub', value: 300, color: '#F59E0B' },
   { name: 'WheatNode', value: 200, color: '#D97706' },
   { name: 'Others', value: 100, color: '#92400E' },
 ];
@@ -36,18 +36,18 @@ const transactionData = [
 ];
 
 function ExplorerContent() {
-  const { publicKey, signMessage, connected, disconnect } = useWallet();
+  const { address, isConnected } = useAccount();
+  const { signMessageAsync } = useSignMessage();
   const [isVerified, setIsVerified] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
 
   useEffect(() => {
     const verifyWallet = async () => {
-      if (connected && publicKey && signMessage && !isVerified) {
+      if (isConnected && address && signMessageAsync && !isVerified) {
         setIsVerifying(true);
         try {
-          const message = `Sign this message to verify your wallet ownership for xgrain402 explorer.\n\nWallet: ${publicKey.toString()}\nTimestamp: ${new Date().toISOString()}`;
-          const encodedMessage = new TextEncoder().encode(message);
-          const signature = await signMessage(encodedMessage);
+          const message = `Sign this message to verify your wallet ownership for xgrain402 explorer.\n\nWallet: ${address}\nTimestamp: ${new Date().toISOString()}`;
+          const signature = await signMessageAsync({ message });
           
           // In a real app, you'd verify the signature on the backend
           // For now, we just check if the signature exists
@@ -56,7 +56,6 @@ function ExplorerContent() {
           }
         } catch (error) {
           console.error('Signature verification failed:', error);
-          disconnect();
         } finally {
           setIsVerifying(false);
         }
@@ -64,19 +63,19 @@ function ExplorerContent() {
     };
 
     verifyWallet();
-  }, [connected, publicKey, signMessage, isVerified, disconnect]);
+  }, [isConnected, address, signMessageAsync, isVerified]);
 
   // Reset verification when wallet disconnects
   useEffect(() => {
-    if (!connected) {
+    if (!isConnected) {
       setIsVerified(false);
     }
-  }, [connected]);
+  }, [isConnected]);
 
   return (
     <div className="min-h-screen bg-white">
       {/* Verification Modal */}
-      {connected && !isVerified && isVerifying && (
+      {isConnected && !isVerified && isVerifying && (
         <>
           {/* Backdrop blur */}
           <div className="fixed inset-0 bg-white/80 backdrop-blur-sm z-40" />
@@ -143,9 +142,7 @@ function ExplorerContent() {
               
               <div className="flex items-center gap-6">
                 {/* Wallet Button */}
-                <div className="wallet-adapter-button-wrapper">
-                  <WalletMultiButton className="!bg-black hover:!bg-gray-900 !rounded-lg !text-sm !font-medium !px-4 !py-2 !h-auto" />
-                </div>
+                <WalletButton />
               </div>
         </div>
       </header>
@@ -407,24 +404,10 @@ function ExplorerContent() {
                       <td className="py-4 px-4 text-sm text-gray-900 font-medium">{server.buyers}</td>
                       <td className="py-4 px-4 text-sm text-gray-500">{server.latest}</td>
                       <td className="py-4 px-4">
-                        <svg width="24" height="24" viewBox="0 0 397.7 311.7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <defs>
-                            <linearGradient id="solana-gradient" x1="360.879" y1="351.455" x2="141.213" y2="-69.2936" gradientUnits="userSpaceOnUse">
-                              <stop offset="0" stopColor="#00FFA3"/>
-                              <stop offset="1" stopColor="#DC1FFF"/>
-                            </linearGradient>
-                            <linearGradient id="solana-gradient2" x1="264.829" y1="401.601" x2="45.163" y2="-19.1481" gradientUnits="userSpaceOnUse">
-                              <stop offset="0" stopColor="#00FFA3"/>
-                              <stop offset="1" stopColor="#DC1FFF"/>
-                            </linearGradient>
-                            <linearGradient id="solana-gradient3" x1="312.548" y1="376.688" x2="92.8822" y2="-44.061" gradientUnits="userSpaceOnUse">
-                              <stop offset="0" stopColor="#00FFA3"/>
-                              <stop offset="1" stopColor="#DC1FFF"/>
-                            </linearGradient>
-                          </defs>
-                          <path d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7z" fill="url(#solana-gradient)"/>
-                          <path d="M64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8z" fill="url(#solana-gradient2)"/>
-                          <path d="M333.1 120.1c-2.4-2.4-5.7-3.8-9.2-3.8H6.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z" fill="url(#solana-gradient3)"/>
+                        <svg width="24" height="24" viewBox="0 0 126.61 126.61" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="63.305" cy="63.305" r="63.305" fill="#F3BA2F"/>
+                          <path d="M38.73 53.2l24.575-24.574 24.572 24.574 14.288-14.286L63.305 0 24.444 38.914l14.286 14.286zM0 63.305l14.286-14.287 14.286 14.287-14.286 14.286L0 63.305zm38.73 10.105l24.575 24.574 24.572-24.574 14.288 14.286L63.305 126.61 24.444 87.696l-.002-.002 14.288-14.284zM112.327 63.305l14.286-14.287 14.286 14.287-14.286 14.286-14.286-14.286z" fill="#fff"/>
+                          <path d="M77.43 63.305l-14.125-14.125-14.125 14.125 14.125 14.125L77.43 63.305z" fill="#fff"/>
                         </svg>
                       </td>
                       <td className="py-4 px-4">

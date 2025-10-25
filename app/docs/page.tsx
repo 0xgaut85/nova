@@ -34,7 +34,7 @@ export default function DocsPage() {
             <div className="bg-gradient-to-br from-yellow-50 to-white border-2 border-yellow-500 rounded-3xl p-10 mb-12">
               <p className="text-2xl text-black leading-relaxed mb-6">
                 xgrain402 is revolutionizing how machines transact with each other by providing infrastructure 
-                for instant, trustless micropayments on Solana.
+                for instant, trustless micropayments on BSC (Binance Smart Chain).
               </p>
               <p className="text-xl text-black leading-relaxed">
                 We're building the economic layer for AI agents, IoT devices, and autonomous systems that need 
@@ -108,7 +108,7 @@ export default function DocsPage() {
             
             <div className="prose prose-xl max-w-none">
               <p className="text-2xl text-black leading-relaxed mb-10">
-                x402 is a payment protocol and infrastructure layer built on Solana that enables frictionless 
+                x402 is a payment protocol and infrastructure layer built on BSC (Binance Smart Chain) that enables frictionless 
                 micropayments for machine-to-machine transactions. It's designed specifically for the emerging 
                 agent economy where AI systems, IoT devices, and autonomous services need to transact value 
                 without human intervention.
@@ -144,9 +144,9 @@ export default function DocsPage() {
 
               <h2 className="text-4xl font-bold italic text-black mb-6 mt-12">The Technology</h2>
               <div className="bg-gray-50 rounded-3xl p-10 mb-10">
-                <h3 className="text-2xl font-bold text-black mb-4">Built on Solana</h3>
+                <h3 className="text-2xl font-bold text-black mb-4">Built on BSC (Binance Smart Chain)</h3>
                 <p className="text-xl text-black leading-relaxed mb-6">
-                  x402 leverages Solana's high-performance blockchain to achieve what traditional payment systems 
+                  x402 leverages BSC's high-performance blockchain to achieve what traditional payment systems 
                   can't: sub-cent transactions that settle in milliseconds with fees under $0.001.
                 </p>
                 <div className="grid md:grid-cols-2 gap-6">
@@ -248,7 +248,7 @@ export default function DocsPage() {
                     <div className="space-y-2">
                       <p className="text-black">Bank Transfer: <span className="font-bold">3-5 business days</span></p>
                       <p className="text-black">Credit Card: <span className="font-bold">1-2 business days</span></p>
-                      <p className="text-black text-2xl">x402 on Solana: <span className="font-bold text-yellow-600">400 milliseconds</span></p>
+                      <p className="text-black text-2xl">x402 on BSC: <span className="font-bold text-yellow-600">400 milliseconds</span></p>
                     </div>
                   </div>
                 </div>
@@ -277,7 +277,7 @@ export default function DocsPage() {
               <div className="bg-gradient-to-br from-yellow-50 to-white border-2 border-yellow-500 rounded-3xl p-10 mb-10">
                 <h3 className="text-3xl font-bold text-black mb-6">Radical Economics</h3>
                 <p className="text-xl text-black leading-relaxed mb-6">
-                  x402 leverages Solana's blockchain to make micropayments not just possible, but practical:
+                  x402 leverages BSC's blockchain to make micropayments not just possible, but practical:
                 </p>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="bg-white rounded-2xl p-6">
@@ -294,7 +294,7 @@ export default function DocsPage() {
                   </div>
                   <div className="bg-white rounded-2xl p-6">
                     <h4 className="text-xl font-bold text-black mb-3">Global by Default</h4>
-                    <p className="text-black">No geographic restrictions. If you have a Solana wallet, you can transact.</p>
+                    <p className="text-black">No geographic restrictions. If you have a BSC wallet, you can transact.</p>
                   </div>
                 </div>
               </div>
@@ -326,7 +326,7 @@ export default function DocsPage() {
                 <div className="border-l-4 border-yellow-500 pl-6 py-2">
                   <h3 className="text-2xl font-bold text-black mb-2">3. Blockchain Infrastructure Maturity</h3>
                   <p className="text-lg text-black leading-relaxed">
-                    Solana and other high-performance blockchains have finally achieved the throughput and cost 
+                    BSC (Binance Smart Chain) and other high-performance blockchains have finally achieved the throughput and cost 
                     structure needed to make micropayments viable. The technology is ready.
                   </p>
                 </div>
@@ -384,8 +384,8 @@ export default function DocsPage() {
                     <div>
                       <h3 className="text-2xl font-bold text-black mb-3">Transaction Creation</h3>
                       <p className="text-xl text-black leading-relaxed mb-4">
-                        The x402 SDK creates a Solana transaction with the payment details. The transaction is 
-                        constructed following Solana's standard format and includes all necessary accounts and 
+                        The x402 SDK creates a BSC transaction with the payment details. The transaction is 
+                        constructed following BSC's standard format and includes all necessary accounts and 
                         instructions.
                       </p>
                       <div className="bg-white rounded-xl p-4">
@@ -409,8 +409,8 @@ export default function DocsPage() {
                     <div>
                       <h3 className="text-2xl font-bold text-black mb-3">Signature & Broadcast</h3>
                       <p className="text-xl text-black leading-relaxed">
-                        The transaction is signed by the user's wallet (Phantom, Solflare, etc.) and broadcast to 
-                        the Solana network. Solana validators process the transaction and add it to the blockchain.
+                        The transaction is signed by the user's wallet (MetaMask, Rabby, etc.) and broadcast to 
+                        the BSC network. BSC validators process the transaction and add it to the blockchain.
                       </p>
                     </div>
                   </div>
@@ -424,7 +424,7 @@ export default function DocsPage() {
                     <div>
                       <h3 className="text-2xl font-bold text-black mb-3">Confirmation (~400ms)</h3>
                       <p className="text-xl text-black leading-relaxed">
-                        Solana confirms the transaction with sub-second finality. The payment is now settled and 
+                        BSC confirms the transaction with sub-second finality. The payment is now settled and 
                         irreversible. No chargebacks, no disputes, no waiting for "funds to clear."
                       </p>
                     </div>
@@ -479,14 +479,14 @@ export default function DocsPage() {
                   <div>
                     <h4 className="text-xl font-semibold text-black mb-2">Blockchain Interface</h4>
                     <p className="text-lg text-black leading-relaxed">
-                      Direct integration with Solana using @solana/web3.js. Manages RPC connections, transaction 
+                      Direct integration with BSC using web3.js. Manages RPC connections, transaction 
                       serialization, and confirmation polling.
                     </p>
                   </div>
                   <div>
                     <h4 className="text-xl font-semibold text-black mb-2">Wallet Adapter Integration</h4>
                     <p className="text-lg text-black leading-relaxed">
-                      Seamless connection to Phantom, Solflare, Ledger, and all major Solana wallets through the 
+                      Seamless connection to MetaMask, Rabby, and all major BSC wallets through the 
                       standard Wallet Adapter interface.
                     </p>
                   </div>
@@ -583,7 +583,7 @@ app.get('/api/data',
                       A network of weather sensors deployed across a city:
                     </p>
                     <ul className="space-y-3 text-lg text-black ml-6">
-                      <li>• Each sensor has its own Solana wallet</li>
+                      <li>• Each sensor has its own BSC wallet</li>
                       <li>• Sells temperature/humidity data for $0.0001 per reading</li>
                       <li>• Agricultural companies query sensors near their farms</li>
                       <li>• Logistics companies check conditions along delivery routes</li>
@@ -711,7 +711,7 @@ app.get('/api/data',
               <div className="bg-gray-50 rounded-2xl p-8 mb-10">
                 <ul className="space-y-3 text-lg text-black">
                   <li>• Node.js 18+ installed</li>
-                  <li>• A Solana wallet (Phantom, Solflare, or Ledger)</li>
+                  <li>• A BSC wallet (MetaMask or Rabby)</li>
                   <li>• Basic understanding of TypeScript/JavaScript</li>
                   <li>• SOL for transaction fees (~$0.00025 per transaction)</li>
                 </ul>
@@ -738,7 +738,7 @@ pnpm add @xgrain402/sdk`}</pre>
 
 const xgrain = new XGrain402({
   network: 'mainnet-beta',
-  rpcUrl: process.env.SOLANA_RPC_URL
+  rpcUrl: process.env.BSC_RPC_URL
 });`}</pre>
                   </div>
                 </div>
@@ -828,10 +828,10 @@ const xgrain = new XGrain402({
                 <div className="bg-yellow-50 border-2 border-yellow-500 rounded-2xl p-8">
                   <h3 className="text-2xl font-bold text-black mb-3">Wallet Adapter Integration</h3>
                   <p className="text-lg text-black leading-relaxed mb-4">
-                    Native support for all Solana wallets through the standard Wallet Adapter interface.
+                    Native support for all BSC wallets through the standard Wallet Adapter interface.
                   </p>
                   <ul className="space-y-2 text-black">
-                    <li>• Phantom, Solflare, Ledger</li>
+                    <li>• MetaMask, Rabby</li>
                     <li>• Automatic wallet detection</li>
                     <li>• Connection state management</li>
                     <li>• Multi-wallet support</li>
@@ -905,7 +905,7 @@ pnpm test`}</pre>
 
 const xgrain = new XGrain402({
   network: 'mainnet-beta',
-  rpcUrl: 'https://api.mainnet-beta.solana.com'
+  rpcUrl: 'https://bsc-dataseed.binance.org'
 });`}</pre>
                   </div>
                 </div>
@@ -915,7 +915,7 @@ const xgrain = new XGrain402({
                   <div className="bg-black rounded-2xl p-6">
                     <pre className="text-white text-sm font-mono">{`const xgrain = new XGrain402({
   network: 'mainnet-beta',
-  rpcUrl: process.env.SOLANA_RPC_URL,
+  rpcUrl: process.env.BSC_RPC_URL,
   commitment: 'confirmed',
   confirmationTimeout: 30000,
   skipPreflight: false,
@@ -970,10 +970,10 @@ const xgrain = new XGrain402({
 
                 <div className="bg-gray-50 border-2 border-gray-200 rounded-2xl p-8">
                   <h3 className="text-2xl font-bold text-black mb-4">connectWallet()</h3>
-                  <p className="text-lg text-black mb-6">Connect to a Solana wallet</p>
+                  <p className="text-lg text-black mb-6">Connect to a BSC wallet</p>
                   <div className="bg-white border border-gray-200 rounded-xl p-6">
                     <pre className="text-sm font-mono text-black">{`const wallet = await xgrain.connectWallet({
-  adapter: 'phantom',
+  adapter: 'metamask',
   autoConnect: true
 });`}</pre>
                   </div>
@@ -1080,7 +1080,7 @@ const xgrain = new XGrain402({
                 <div className="bg-gradient-to-br from-yellow-50 to-white border-2 border-yellow-200 rounded-3xl p-10">
                   <h3 className="text-3xl font-bold text-black mb-4">Resource Discovery</h3>
                   <p className="text-xl text-black leading-relaxed mb-6">
-                    Discover and explore x402-compatible Solana programs. All validated resources will be automatically 
+                    Discover and explore x402-compatible BSC smart contracts. All validated resources will be automatically 
                     indexed and made available to the community.
                   </p>
                   <div className="bg-white rounded-2xl p-6">
@@ -1090,7 +1090,7 @@ const xgrain = new XGrain402({
                     </p>
                     <ol className="space-y-2 text-black">
                       <li>1. Navigate to the Resources page</li>
-                      <li>2. Submit the Solana program address</li>
+                      <li>2. Submit the BSC smart contract address</li>
                       <li>3. System validates the x402 schema</li>
                       <li>4. Resource is automatically indexed</li>
                     </ol>
@@ -1118,7 +1118,7 @@ const xgrain = new XGrain402({
                     <li>• Prisma ORM</li>
                     <li>• PostgreSQL Database</li>
                     <li>• Trigger.dev Jobs</li>
-                    <li>• Solana Web3.js</li>
+                    <li>• BSC Web3.js</li>
                     <li>• Real-time indexing</li>
                   </ul>
                 </div>
@@ -1146,7 +1146,7 @@ pnpm dev`}</pre>
                 <h3 className="text-2xl font-bold text-black mb-3">Environment Variables</h3>
                 <ul className="space-y-2 text-lg text-black">
                   <li>• <code className="bg-white px-2 py-1 rounded">DATABASE_URL</code> - PostgreSQL connection string</li>
-                  <li>• <code className="bg-white px-2 py-1 rounded">SOLANA_RPC_URL</code> - Solana RPC endpoint</li>
+                  <li>• <code className="bg-white px-2 py-1 rounded">BSC_RPC_URL</code> - BSC RPC endpoint</li>
                   <li>• <code className="bg-white px-2 py-1 rounded">NEXT_PUBLIC_NETWORK</code> - Network (mainnet-beta/devnet)</li>
                 </ul>
               </div>
@@ -1204,7 +1204,7 @@ pnpm dev`}</pre>
                   <div className="bg-white rounded-2xl p-6 mb-6">
                     <h4 className="text-xl font-bold text-black mb-3">Facilitator Requirements</h4>
                     <ul className="space-y-2 text-lg text-black">
-                      <li>• Valid Solana program address</li>
+                      <li>• Valid BSC smart contract address</li>
                       <li>• x402-compatible schema implementation</li>
                       <li>• Reliable uptime and performance</li>
                       <li>• Proper error handling</li>
@@ -1224,13 +1224,13 @@ pnpm dev`}</pre>
                 <div className="bg-gradient-to-br from-yellow-50 to-white border-2 border-yellow-200 rounded-3xl p-10">
                   <h3 className="text-3xl font-bold text-black mb-4">Resource Providers</h3>
                   <p className="text-xl text-black leading-relaxed mb-6">
-                    Submit x402-compatible Solana programs for automatic indexing and discovery.
+                    Submit x402-compatible BSC smart contracts for automatic indexing and discovery.
                   </p>
                   <div className="bg-white rounded-2xl p-6">
                     <h4 className="text-xl font-bold text-black mb-3">Resource Submission Process</h4>
                     <ol className="space-y-2 text-lg text-black">
                       <li>1. Navigate to the xgrain402-scan resources page</li>
-                      <li>2. Submit your Solana program address</li>
+                      <li>2. Submit your BSC smart contract address</li>
                       <li>3. System validates x402 schema compatibility</li>
                       <li>4. Valid resources are automatically indexed</li>
                       <li>5. Resource becomes discoverable to the community</li>
@@ -1320,7 +1320,7 @@ pnpm dev`}</pre>
                       </p>
                       <ul className="space-y-2 text-lg text-black">
                         <li>• TypeScript SDK with full type definitions</li>
-                        <li>• Solana wallet adapter integration</li>
+                        <li>• BSC wallet adapter integration</li>
                         <li>• Payment transaction creation and signing</li>
                         <li>• Transaction confirmation and validation</li>
                         <li>• NPM package publication</li>
@@ -1349,7 +1349,7 @@ pnpm dev`}</pre>
                         <strong>Target: December 2025</strong>
                       </p>
                       <ul className="space-y-2 text-lg text-black">
-                        <li>• Solana program deployment on mainnet-beta</li>
+                        <li>• BSC smart contract deployment on mainnet</li>
                         <li>• x402 schema specification and standards</li>
                         <li>• On-chain transaction validation</li>
                         <li>• Facilitator registration and discovery</li>
@@ -1446,7 +1446,7 @@ pnpm dev`}</pre>
               <div className="bg-black text-white rounded-3xl p-10 mt-12">
                 <h3 className="text-3xl font-bold mb-6">The Vision</h3>
                 <p className="text-2xl leading-relaxed mb-6">
-                  By end of Q1 2026, x402 will be a robust micropayment infrastructure on Solana, enabling 
+                  By end of Q1 2026, x402 will be a robust micropayment infrastructure on BSC (Binance Smart Chain), enabling 
                   seamless transactions between AI agents, IoT devices, and APIs with negligible fees and 
                   sub-second finality.
                 </p>

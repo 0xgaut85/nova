@@ -10,7 +10,7 @@ const garamond = EB_Garamond({
 
 export const metadata: Metadata = {
   title: "xGrain402",
-  description: "Per-request micropayments for APIs & AI agents on Solana using the 402 standard. Instant settlement in USDC/SOL. No accounts, no subscriptions.",
+  description: "Per-request micropayments for APIs & AI agents on BSC (Binance Smart Chain) using the 402 standard. Instant settlement in USDC/SOL. No accounts, no subscriptions.",
   icons: {
     icon: '/logo.png',
     shortcut: '/logo.png',
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "xGrain402",
-    description: "Per-request micropayments for APIs & AI agents on Solana using the 402 standard.",
+    description: "Per-request micropayments for APIs & AI agents on BSC (Binance Smart Chain) using the 402 standard.",
   },
 };
 
