@@ -1,25 +1,25 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { WalletProvider } from "./components/WalletProvider";
 
-const inter = Inter({ 
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-inter"
-});
-
 export const metadata: Metadata = {
-  title: "Dock402",
-  description: "Discover, test, and integrate AI services using the revolutionary x402 payment protocol. Pay per request with instant settlements on Base and Solana networks.",
+  title: "Lumen402 - Unlocking the Next Economy of APIs",
+  description: "Unlocking the next economy of APIs, AI and digital services through x402 pay-per-request rails. Build and deploy pay-per-request services with instant on-chain micropayments.",
   icons: {
-    icon: '/logo.png',
-    shortcut: '/logo.png',
-    apple: '/logo.png',
+    icon: '/logoblack.png',
+    shortcut: '/logoblack.png',
+    apple: '/logoblack.png',
   },
   openGraph: {
-    title: "Dock402",
-    description: "Discover, test, and integrate AI services using the revolutionary x402 payment protocol. Pay per request with instant settlements.",
+    title: "Lumen402 - Unlocking the Next Economy of APIs",
+    description: "Unlocking the next economy of APIs, AI and digital services through x402 pay-per-request rails. Build and deploy pay-per-request services with instant on-chain micropayments.",
+    images: ['/logoblack.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Lumen402 - Unlocking the Next Economy of APIs",
+    description: "Unlocking the next economy of APIs, AI and digital services through x402 pay-per-request rails.",
+    images: ['/logoblack.png'],
   },
 };
 
@@ -30,7 +30,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased bg-white`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+      </head>
+      <body className="antialiased">
         <WalletProvider>
           {children}
         </WalletProvider>

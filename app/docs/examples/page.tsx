@@ -5,17 +5,17 @@ import Link from 'next/link';
 export default function ExamplesPage() {
   return (
     <div className="prose prose-sm max-w-none">
-      <h1 className="text-4xl font-light italic text-black mb-4">
+      <h1 className="text-4xl font-light text-white mb-4">
         Code Examples
       </h1>
 
-      <p className="text-base text-black/80 leading-relaxed mb-8">
+      <p className="text-base text-gray-400 leading-relaxed mb-8">
         Complete code examples for building and consuming x402 services. Copy, paste, and customize for your use case.
       </p>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Simple AI Service</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Simple AI Service</h2>
 
-      <p className="text-sm text-black/80 mb-4">
+      <p className="text-sm text-gray-400 mb-4">
         A minimal AI text generation service with x402 payments:
       </p>
 
@@ -64,9 +64,9 @@ app.listen(3000, () => {
         </pre>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Image Processing Service</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Image Processing Service</h2>
 
-      <p className="text-sm text-black/80 mb-4">
+      <p className="text-sm text-gray-400 mb-4">
         Python service for image processing with dynamic pricing:
       </p>
 
@@ -124,9 +124,9 @@ if __name__ == "__main__":
         </pre>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Data API Client</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Data API Client</h2>
 
-      <p className="text-sm text-black/80 mb-4">
+      <p className="text-sm text-gray-400 mb-4">
         Client application consuming x402 data APIs:
       </p>
 
@@ -183,9 +183,9 @@ main();`}
         </pre>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">React Application</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">React Application</h2>
 
-      <p className="text-sm text-black/80 mb-4">
+      <p className="text-sm text-gray-400 mb-4">
         Complete React app with x402 integration:
       </p>
 
@@ -243,9 +243,9 @@ export default App;`}
         </pre>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Batch Processing</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Batch Processing</h2>
 
-      <p className="text-sm text-black/80 mb-4">
+      <p className="text-sm text-gray-400 mb-4">
         Process multiple paid requests efficiently:
       </p>
 
@@ -287,9 +287,9 @@ const results = await processBatch(urls);`}
         </pre>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Multi-Network Service</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Multi-Network Service</h2>
 
-      <p className="text-sm text-black/80 mb-4">
+      <p className="text-sm text-gray-400 mb-4">
         Accept payments on multiple blockchain networks:
       </p>
 
@@ -332,9 +332,9 @@ app.listen(3000);`}
         </pre>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">CLI Tool</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">CLI Tool</h2>
 
-      <p className="text-sm text-black/80 mb-4">
+      <p className="text-sm text-gray-400 mb-4">
         Command-line tool using x402 services:
       </p>
 
@@ -393,21 +393,43 @@ program.parse();`}
         </pre>
       </div>
 
-      <div className="bg-gradient-to-r from-[#FF7B00] to-[#FF9500] rounded-2xl p-6 text-white not-prose">
-        <h3 className="text-lg font-light italic mb-2">More Examples</h3>
-        <p className="text-sm opacity-90 mb-4">
-          Check out our GitHub repository for more examples and starter templates.
-        </p>
-        <a
-          href="https://github.com/dock402"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-5 py-2.5 bg-white text-[#FF7B00] rounded-xl text-sm font-light italic hover:shadow-lg transition-all"
-        >
-          View on GitHub
-        </a>
+      <div className="relative rounded-2xl p-6 text-white not-prose overflow-hidden">
+        {/* Enhanced gradient background - black to green */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#74a180]" />
+        
+        {/* Heavy grain texture overlay - increased for more visibility */}
+        <div 
+          className="absolute inset-0 opacity-[0.2] pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat',
+            backgroundSize: '150px 150px'
+          }}
+        />
+        <div 
+          className="absolute inset-0 opacity-[0.12] mix-blend-overlay pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='7' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat',
+            backgroundSize: '100px 100px'
+          }}
+        />
+        
+        <div className="relative z-10">
+          <h3 className="text-lg font-light mb-2">More Examples</h3>
+          <p className="text-sm opacity-90 mb-4">
+            Check out our GitHub repository for more examples and starter templates.
+          </p>
+          <a
+            href="https://github.com/lumen402"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-5 py-2.5 bg-white text-[#74a180] rounded-xl text-sm font-light hover:shadow-lg transition-all"
+          >
+            View on GitHub
+          </a>
+        </div>
       </div>
     </div>
   );
 }
-

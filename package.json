@@ -1,41 +1,63 @@
 {
-  "name": "x402",
-  "version": "0.1.0",
+  "name": "lumen402",
+  "version": "1.0.0",
+  "description": "The App Store for x402 - Discover, test, and integrate x402-enabled services",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "x402",
+    "http-402",
+    "payment",
+    "blockchain",
+    "cryptocurrency",
+    "web3",
+    "base",
+    "solana",
+    "polygon",
+    "bsc",
+    "sei",
+    "peaq",
+    "micropayments",
+    "payai",
+    "lumen402"
+  ],
+  "author": "Lumen402 <contact@lumen402.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
   },
   "dependencies": {
-    "@rainbow-me/rainbowkit": "^2.2.9",
-    "@react-three/drei": "^10.1.0",
-    "@react-three/fiber": "^9.0.0",
-    "@tanstack/react-query": "^5.90.5",
-    "framer-motion": "^12.23.24",
-    "lucide-react": "^0.547.0",
-    "next": "15.1.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "recharts": "^3.3.0",
-    "three": "^0.172.0",
-    "viem": "^2.38.4",
-    "wagmi": "^2.18.2"
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "@solana/wallet-adapter-react-ui": "^0.9.35",
+    "@solana/wallet-adapter-wallets": "^0.19.32",
+    "@solana/web3.js": "^1.95.8",
+    "@tanstack/react-query": "^5.0.0",
+    "framer-motion": "^11.15.0",
+    "lucide-react": "^0.548.0",
+    "next": "^15.1.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.180.0",
+    "viem": "^2.21.54",
+    "wagmi": "^2.13.6"
   },
   "devDependencies": {
-    "@types/node": "^22",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@types/three": "^0.172.0",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.4",
-    "postcss": "^8.4.49",
+    "@tailwindcss/postcss": "^4.1.16",
+    "@types/node": "^22.10.5",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.18.0",
+    "eslint-config-next": "^15.1.6",
+    "postcss": "^8.5.6",
+    "postcss-load-config": "^6.0.1",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
-  },
-  "optionalDependencies": {
-    "pino-pretty": "^13.1.2"
+    "typescript": "^5.7.2"
   }
 }

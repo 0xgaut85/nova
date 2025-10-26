@@ -3,11 +3,14 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import Image from 'next/image';
+import Link from 'next/link';
 import { ServiceMarketplace } from '../components/x402/ServiceMarketplace';
 import { TestingInterface } from '../components/x402/TestingInterface';
 import { CodeGenerator } from '../components/x402/CodeGenerator';
 import { ServiceRegistration } from '../components/x402/ServiceRegistration';
 import { RealPaymentHandler } from '../components/x402/RealPaymentHandler';
+import { PaymentSuccessModal } from '../components/x402/PaymentSuccessModal';
 import { X402Service } from '@/lib/payai-client';
 
 export default function DappPage() {
@@ -24,6 +27,7 @@ export default function DappPage() {
   const [showServiceRegistration, setShowServiceRegistration] = useState(false);
   const [paymentService, setPaymentService] = useState<X402Service | null>(null);
   const [services, setServices] = useState<X402Service[]>([]);
+  const [successTxHash, setSuccessTxHash] = useState<string | null>(null);
   const [paymentHistory, setPaymentHistory] = useState<Array<{
     txHash: string;
     service: string;
@@ -34,13 +38,13 @@ export default function DappPage() {
 
   useEffect(() => {
     setMounted(true);
-    // Load payment history from localStorage
+    // Load payment history from localStorage on mount
     const savedHistory = localStorage.getItem('x402_payment_history');
     if (savedHistory) {
       try {
         setPaymentHistory(JSON.parse(savedHistory));
-      } catch (e) {
-        console.error('Failed to load payment history:', e);
+      } catch (error) {
+        console.error('Failed to parse payment history:', error);
       }
     }
   }, []);
@@ -95,8 +99,8 @@ export default function DappPage() {
     
     setPaymentService(null);
     
-    // Show success message
-    alert(`Payment successful! Transaction: ${txHash.slice(0, 10)}...`);
+    // Show success modal instead of alert
+    setSuccessTxHash(txHash);
   };
 
   const handlePaymentError = (error: string) => {
@@ -131,89 +135,86 @@ export default function DappPage() {
   // Prevent hydration mismatch
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-white via-[#FAFAFA] to-[#F5F5F5]">
-        <header className="backdrop-blur-xl bg-white/70 border-b border-black/5 shadow-lg">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16">
-            <div className="flex items-center justify-between h-16 sm:h-20">
-              <div className="flex items-center gap-2 sm:gap-4">
-                <img src="/logo.png" alt="Dock402" className="w-8 h-8 sm:w-12 sm:h-12" />
-                <div>
-                  <h1 className="text-lg sm:text-2xl font-light italic text-[#1E1E1E]">Dock402</h1>
-                  <p className="text-xs sm:text-sm text-black/60 font-light italic">The App Store for x402</p>
-                </div>
-              </div>
+      <div className="min-h-screen bg-black">
+        <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/[0.06]">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8">
+            <div className="flex justify-between items-center h-20">
+              <Link href="/" className="flex items-center gap-3 group">
+                <Image
+                  src="/logosvg.svg"
+                  alt="Lumen402"
+                  width={72}
+                  height={72}
+                  className="w-[72px] h-[72px] transition-transform duration-300 group-hover:scale-105"
+                />
+                <span className="text-2xl font-normal text-white font-title tracking-wide">Lumen402</span>
+              </Link>
             </div>
           </div>
-        </header>
+        </nav>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-[#FAFAFA] to-[#F5F5F5]">
-      {/* Header */}
-      <header className="backdrop-blur-xl bg-white/70 border-b border-black/5 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16">
-          <div className="flex items-center justify-between h-16 sm:h-20 gap-2">
+    <div className="min-h-screen bg-black">
+      {/* Header - Matching Landing Page Navbar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/[0.06]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8">
+          <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <div className="flex items-center gap-2 sm:gap-4">
-              <img src="/logo.png" alt="Dock402" className="w-8 h-8 sm:w-12 sm:h-12" />
-              <div>
-                <h1 className="text-lg sm:text-2xl font-light italic text-[#1E1E1E]">Dock402</h1>
-                <p className="text-xs sm:text-sm text-black/60 font-light italic hidden sm:block">The App Store for x402</p>
-              </div>
-            </div>
+            <Link href="/" className="flex items-center gap-3 group">
+              <Image
+                src="/logosvg.svg"
+                alt="Lumen402"
+                width={72}
+                height={72}
+                className="w-[72px] h-[72px] transition-transform duration-300 group-hover:scale-105"
+              />
+              <span className="text-2xl font-normal text-white font-title tracking-wide">Lumen402</span>
+            </Link>
 
-            {/* Navigation - Hidden on mobile */}
-            <nav className="hidden lg:flex items-center gap-2">
+            {/* Navigation - Desktop */}
+            <div className="hidden lg:flex items-center gap-10">
               <button
                 onClick={() => setActiveTab('marketplace')}
-                className={`px-6 py-3 text-base font-light italic rounded-2xl transition-all duration-300 ${
+                className={`transition-colors duration-300 text-base font-light tracking-wide ${
                   activeTab === 'marketplace'
-                    ? 'bg-gradient-to-r from-[#FF7B00] to-[#FF9500] text-white shadow-lg shadow-[#FF7B00]/30'
-                    : 'text-black/70 hover:text-black hover:bg-white/50 backdrop-blur-sm'
+                    ? 'text-white'
+                    : 'text-gray-400 hover:text-white'
                 }`}
               >
                 Marketplace
               </button>
               <button
                 onClick={() => setActiveTab('dashboard')}
-                className={`px-6 py-3 text-base font-light italic rounded-2xl transition-all duration-300 ${
+                className={`transition-colors duration-300 text-base font-light tracking-wide ${
                   activeTab === 'dashboard'
-                    ? 'bg-gradient-to-r from-[#FF7B00] to-[#FF9500] text-white shadow-lg shadow-[#FF7B00]/30'
-                    : 'text-black/70 hover:text-black hover:bg-white/50 backdrop-blur-sm'
+                    ? 'text-white'
+                    : 'text-gray-400 hover:text-white'
                 }`}
               >
                 Dashboard
               </button>
               <button
                 onClick={() => setShowServiceRegistration(true)}
-                className="px-6 py-3 text-base font-light italic bg-gradient-to-r from-[#FF7B00] to-[#FF9500] text-white rounded-2xl hover:shadow-lg hover:shadow-[#FF7B00]/30 transition-all duration-300"
+                className="px-4 py-2 bg-[#74a180] text-white rounded-lg text-sm font-light hover:bg-[#8fb896] transition-all duration-300"
               >
-                + Register Service
+                Register Service
               </button>
-            </nav>
+            </div>
 
-            {/* Right Side Actions */}
+            {/* Right Side - Wallet Connection */}
             <div className="flex items-center gap-4">
-              {/* Return to Main Website */}
-              <a
-                href="/"
-                className="px-4 py-3 text-base font-light italic text-black/70 hover:text-black hover:bg-white/50 backdrop-blur-sm rounded-2xl transition-all duration-300"
-              >
-                ← Main Site
-              </a>
-              
-              {/* Wallet Connection */}
               {isConnected ? (
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-3 px-4 py-3 bg-white/40 backdrop-blur-xl text-black rounded-2xl text-base font-light italic shadow-lg border border-white/60">
-                    <div className="w-3 h-3 bg-[#FF7B00] rounded-full animate-pulse"></div>
-                    {formatAddress(address!)}
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl text-white rounded-lg text-sm font-light border border-white/10">
+                    <div className="w-2 h-2 bg-[#74a180] rounded-full animate-pulse"></div>
+                    <span className="hidden sm:inline">{formatAddress(address!)}</span>
                   </div>
                   <button
                     onClick={() => disconnect()}
-                    className="px-4 py-3 text-base font-light italic text-black/70 hover:text-black hover:bg-white/50 backdrop-blur-sm rounded-2xl transition-all duration-300"
+                    className="text-gray-400 hover:text-white transition-colors duration-300 text-sm font-light"
                   >
                     Disconnect
                   </button>
@@ -221,7 +222,7 @@ export default function DappPage() {
               ) : (
                 <button
                   onClick={connectWallet}
-                  className="px-6 py-3 bg-gradient-to-r from-[#FF7B00] to-[#FF9500] text-white rounded-2xl text-base font-light italic hover:shadow-lg hover:shadow-[#FF7B00]/30 transition-all duration-300"
+                  className="px-5 py-2 bg-[#74a180] text-white rounded-lg text-sm font-light hover:bg-[#8fb896] transition-all duration-300"
                 >
                   Connect Wallet
                 </button>
@@ -229,47 +230,158 @@ export default function DappPage() {
             </div>
           </div>
         </div>
-      </header>
+      </nav>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-8 sm:py-12">
+      {/* Main Content - Add top padding for fixed nav */}
+      <main className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 pt-32 pb-20">
         {activeTab === 'marketplace' && (
           <div>
-            {/* Hero Section */}
-            <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light italic text-black mb-4 sm:mb-6 leading-tight">
-                The App Store for x402
-              </h2>
-              <p className="text-base sm:text-lg lg:text-xl text-black/80 max-w-4xl mx-auto leading-relaxed font-light italic px-4">
-                Discover, test, and integrate AI services using the revolutionary x402 payment protocol. 
-                Pay per request, no subscriptions, instant settlements.
-              </p>
+            {/* Hero Section - Full Width with Grain Background */}
+            <div className="relative -mx-6 sm:-mx-8 lg:-mx-12 px-6 sm:px-8 lg:px-12 py-20 mb-16 overflow-hidden">
+              {/* Gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#74a180]/10 via-transparent to-black" />
               
-              {/* Stats */}
-              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mt-8 sm:mt-12 px-4">
-                <div className="text-center bg-white/40 backdrop-blur-xl rounded-2xl p-4 sm:p-6 shadow-lg border border-white/60 min-w-[140px] sm:min-w-[160px]">
-                  <div className="text-3xl sm:text-4xl font-light italic text-[#FF7B00] mb-1">80+</div>
-                  <div className="text-sm sm:text-base text-black/70 font-light italic">Live Services</div>
-                </div>  
-                <div className="text-center bg-white/40 backdrop-blur-xl rounded-2xl p-4 sm:p-6 shadow-lg border border-white/60 min-w-[140px] sm:min-w-[160px]">
-                  <div className="text-3xl sm:text-4xl font-light italic text-black mb-1">6</div>
-                  <div className="text-sm sm:text-base text-black/70 font-light italic">Categories</div>
+              {/* Heavy grain texture overlay */}
+              <div
+                className="absolute inset-0 opacity-[0.15] pointer-events-none"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                  backgroundRepeat: 'repeat',
+                  backgroundSize: '150px 150px'
+                }}
+              />
+              
+              <div className="relative z-10 max-w-6xl mx-auto">
+                <div className="text-left mb-12">
+                  <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light text-white mb-6 leading-tight">
+                    Discover <span className="font-title text-white">Lumen</span> Services
+                  </h1>
+                  <p className="text-xl text-gray-400 max-w-3xl font-light leading-relaxed">
+                    The decentralized marketplace for pay-per-request APIs. Connect your wallet, browse live services, and start making micropayments on-chain.
+                  </p>
                 </div>
-                <div className="text-center bg-white/40 backdrop-blur-xl rounded-2xl p-4 sm:p-6 shadow-lg border border-white/60 min-w-[140px] sm:min-w-[160px]">
-                  <div className="text-3xl sm:text-4xl font-light italic text-[#FF7B00] mb-1">$0.01+</div>
-                  <div className="text-sm sm:text-base text-black/70 font-light italic">Starting at</div>
-                </div>
-                <div className="text-center bg-white/40 backdrop-blur-xl rounded-2xl p-4 sm:p-6 shadow-lg border border-white/60 min-w-[140px] sm:min-w-[160px]">
-                  <div className="text-3xl sm:text-4xl font-light italic text-[#FF7B00] flex items-center gap-2 sm:gap-3 justify-center mb-1">
-                    <span className="w-2 h-2 sm:w-3 sm:h-3 bg-[#FF7B00] rounded-full animate-pulse"></span>
-                    <span>Live</span>
+                
+                {/* Blockchain Networks Carousel - Liquid Glass Effect */}
+                <div className="relative">
+                  {/* Liquid Glass Container */}
+                  <div className="relative overflow-hidden rounded-2xl backdrop-blur-xl bg-gradient-to-br from-white/[0.08] via-white/[0.05] to-transparent border border-white/[0.15] p-8">
+                    {/* Glass reflection effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.15] via-transparent to-transparent opacity-60" />
+                    <div className="absolute inset-0 bg-gradient-to-tl from-white/[0.05] via-transparent to-transparent" />
+                    
+                    {/* Inner glow */}
+                    <div className="absolute inset-0 rounded-2xl shadow-[inset_0_0_60px_rgba(116,161,128,0.1)]" />
+                    
+                    <div className="relative z-10">
+                      <h3 className="text-center text-lg font-light text-white/90 mb-6 tracking-wide">
+                        Supported Networks
+                      </h3>
+                      
+                      {/* Rotating Carousel */}
+                      <div className="flex items-center justify-center gap-8 flex-wrap">
+                        {/* Base - Live (colored) */}
+                        <div className="group relative">
+                          <div className="relative w-24 h-24 rounded-xl bg-white/[0.08] backdrop-blur-sm border border-white/20 p-4 transition-all duration-500 hover:scale-110 hover:bg-white/[0.12] hover:border-[#74a180]/50 hover:shadow-[0_0_30px_rgba(116,161,128,0.3)]">
+                            <Image
+                              src="/logos/base.jpg"
+                              alt="Base"
+                              width={64}
+                              height={64}
+                              className="w-full h-full object-cover rounded-lg"
+                            />
+                            <div className="absolute -top-2 -right-2 w-5 h-5 bg-[#74a180] rounded-full flex items-center justify-center border-2 border-black">
+                              <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                            </div>
+                          </div>
+                          <p className="text-center text-xs text-white/80 mt-2 font-light">Base</p>
+                          <p className="text-center text-[10px] text-[#74a180] font-light">Live</p>
+                        </div>
+
+                        {/* Solana - Coming Soon (greyed) */}
+                        <div className="group relative">
+                          <div className="relative w-24 h-24 rounded-xl bg-white/[0.05] backdrop-blur-sm border border-white/10 p-4 transition-all duration-500 hover:scale-105 hover:bg-white/[0.08]">
+                            <Image
+                              src="/logos/solana.jpg"
+                              alt="Solana"
+                              width={64}
+                              height={64}
+                              className="w-full h-full object-cover rounded-lg grayscale opacity-40"
+                            />
+                          </div>
+                          <p className="text-center text-xs text-white/50 mt-2 font-light">Solana</p>
+                          <p className="text-center text-[10px] text-gray-600 font-light">Soon</p>
+                        </div>
+
+                        {/* Polygon - Coming Soon (greyed) */}
+                        <div className="group relative">
+                          <div className="relative w-24 h-24 rounded-xl bg-white/[0.05] backdrop-blur-sm border border-white/10 p-4 transition-all duration-500 hover:scale-105 hover:bg-white/[0.08]">
+                            <Image
+                              src="/logos/polygon.jpg"
+                              alt="Polygon"
+                              width={64}
+                              height={64}
+                              className="w-full h-full object-cover rounded-lg grayscale opacity-40"
+                            />
+                          </div>
+                          <p className="text-center text-xs text-white/50 mt-2 font-light">Polygon</p>
+                          <p className="text-center text-[10px] text-gray-600 font-light">Soon</p>
+                        </div>
+
+                        {/* BSC - Coming Soon (greyed) */}
+                        <div className="group relative">
+                          <div className="relative w-24 h-24 rounded-xl bg-white/[0.05] backdrop-blur-sm border border-white/10 p-4 transition-all duration-500 hover:scale-105 hover:bg-white/[0.08]">
+                            <Image
+                              src="/logos/BSC.jpg"
+                              alt="BSC"
+                              width={64}
+                              height={64}
+                              className="w-full h-full object-cover rounded-lg grayscale opacity-40"
+                            />
+                          </div>
+                          <p className="text-center text-xs text-white/50 mt-2 font-light">BSC</p>
+                          <p className="text-center text-[10px] text-gray-600 font-light">Soon</p>
+                        </div>
+
+                        {/* Peaq - Coming Soon (greyed) */}
+                        <div className="group relative">
+                          <div className="relative w-24 h-24 rounded-xl bg-white/[0.05] backdrop-blur-sm border border-white/10 p-4 transition-all duration-500 hover:scale-105 hover:bg-white/[0.08]">
+                            <Image
+                              src="/logos/peaq.jpg"
+                              alt="Peaq"
+                              width={64}
+                              height={64}
+                              className="w-full h-full object-cover rounded-lg grayscale opacity-40"
+                            />
+                          </div>
+                          <p className="text-center text-xs text-white/50 mt-2 font-light">Peaq</p>
+                          <p className="text-center text-[10px] text-gray-600 font-light">Soon</p>
+                        </div>
+
+                        {/* Sei - Coming Soon (greyed) */}
+                        <div className="group relative">
+                          <div className="relative w-24 h-24 rounded-xl bg-white/[0.05] backdrop-blur-sm border border-white/10 p-4 transition-all duration-500 hover:scale-105 hover:bg-white/[0.08]">
+                            <Image
+                              src="/logos/sei.jpg"
+                              alt="Sei"
+                              width={64}
+                              height={64}
+                              className="w-full h-full object-cover rounded-lg grayscale opacity-40"
+                            />
+                          </div>
+                          <p className="text-center text-xs text-white/50 mt-2 font-light">Sei</p>
+                          <p className="text-center text-[10px] text-gray-600 font-light">Soon</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-sm sm:text-base text-black/70 font-light italic">Real-time</div>
+                  
+                  {/* Animated glow effect around container */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#74a180]/0 via-[#74a180]/10 to-[#74a180]/0 animate-pulse opacity-50 blur-xl -z-10" />
                 </div>
               </div>
             </div>
 
-            {/* Marketplace */}
+            {/* Marketplace Section */}
             <ServiceMarketplace
               onTestService={handleTestService}
               onGetCode={handleGetCode}
@@ -280,248 +392,333 @@ export default function DappPage() {
         )}
 
         {activeTab === 'dashboard' && (
-          <div className="space-y-10">
-            <h2 className="text-4xl font-light italic text-black mb-8">Dashboard & Developer Tools</h2>
+          <div>
+            {/* Dashboard Hero */}
+            <div className="mb-16">
+              <h1 className="text-5xl sm:text-6xl font-light text-white mb-4">Dashboard</h1>
+              <p className="text-xl text-gray-400 font-light">Monitor your activity and manage your x402 services</p>
+            </div>
             
-            {/* User Stats Section */}
-            {!isConnected ? (
-              <div className="text-center py-16 bg-white/40 backdrop-blur-xl rounded-2xl shadow-lg border border-white/60">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-lg">
-                  <div className="w-8 h-8 border-3 border-white rounded-xl"></div>
-                </div>
-                <h3 className="text-black font-light italic text-2xl mb-4">Connect Your Wallet</h3>
-                <p className="text-black/70 text-lg font-light italic mb-6 max-w-2xl mx-auto leading-relaxed">
-                  Connect your wallet to view payment history and manage your x402 transactions
-                </p>
-                <button
-                  onClick={connectWallet}
-                  className="px-10 py-4 bg-gradient-to-r from-[#FF7B00] to-[#FF9500] text-white rounded-2xl text-lg font-light italic hover:shadow-lg hover:shadow-[#FF7B00]/30 transition-all duration-300"
-                >
-                  Connect Wallet
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-8">
-                {/* Wallet Info */}
-                <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-8 shadow-lg border border-white/60">
-                  <h3 className="text-xl font-light italic text-black mb-6">Wallet Information</h3>
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center py-3 px-5 bg-white/30 backdrop-blur-sm rounded-xl border border-white/40">
-                      <span className="text-black/70 text-base font-light italic">Address:</span>
-                      <span className="font-mono text-base text-black font-light italic">{address}</span>
-                    </div>
-                    <div className="flex justify-between items-center py-3 px-5 bg-white/30 backdrop-blur-sm rounded-xl border border-white/40">
-                      <span className="text-black/70 text-base font-light italic">Network:</span>
-                      <span className="text-black text-base font-light italic">{getNetworkName(chainId)}</span>
+            {/* Two Column Layout */}
+            <div className="grid lg:grid-cols-12 gap-8 mb-16">
+              {/* Left Column - Wallet & Stats */}
+              <div className="lg:col-span-5 space-y-8">
+                {/* User Stats Section */}
+                {!isConnected ? (
+                  <div className="relative overflow-hidden">
+                    {/* Gradient background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#74a180]/20 to-transparent" />
+                    
+                    {/* Grain texture */}
+                    <div
+                      className="absolute inset-0 opacity-[0.1] pointer-events-none"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                        backgroundRepeat: 'repeat',
+                        backgroundSize: '150px 150px'
+                      }}
+                    />
+                    
+                    <div className="relative text-center py-16 px-8 border border-white/10">
+                      <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                        <Image
+                          src="/logosvg.svg"
+                          alt="Lumen402"
+                          width={96}
+                          height={96}
+                          className="w-24 h-24 opacity-80"
+                        />
+                      </div>
+                      <h3 className="text-2xl text-white font-light mb-3">Connect Wallet</h3>
+                      <p className="text-gray-400 text-base font-light mb-8 max-w-sm mx-auto leading-relaxed">
+                        View your payment history and transaction details
+                      </p>
+                      <button
+                        onClick={connectWallet}
+                        className="px-8 py-3 bg-[#74a180] text-white rounded-lg text-base font-light hover:bg-[#8fb896] transition-all duration-300"
+                      >
+                        Connect Wallet
+                      </button>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="space-y-8">
+                    {/* Wallet Info */}
+                    <div className="bg-black/40 backdrop-blur-sm border border-white/10 p-8">
+                      <h3 className="text-lg font-light text-white mb-6 flex items-center gap-2">
+                        <div className="w-2 h-2 bg-[#74a180] rounded-full animate-pulse"></div>
+                        Connected Wallet
+                      </h3>
+                      <div className="space-y-3">
+                        <div className="flex justify-between items-center py-3 px-4 bg-white/5 rounded border border-white/10">
+                          <span className="text-gray-400 text-sm font-light">Address</span>
+                          <span className="font-mono text-sm text-white font-light">{address}</span>
+                        </div>
+                        <div className="flex justify-between items-center py-3 px-4 bg-white/5 rounded border border-white/10">
+                          <span className="text-gray-400 text-sm font-light">Network</span>
+                          <span className="text-white text-sm font-light">{getNetworkName(chainId)}</span>
+                        </div>
+                      </div>
+                    </div>
 
-                {/* Supported Networks */}
-                <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-8 shadow-lg border border-white/60">
-                  <h3 className="text-xl font-light italic text-black mb-4">Supported Networks</h3>
-                  <p className="text-black/70 text-base font-light italic mb-6">
-                    x402 works across multiple high-performance blockchains
-                  </p>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    <div className="flex items-center gap-2 p-3 bg-white/30 backdrop-blur-sm rounded-xl border border-white/40">
-                      <img src="/logos/base.jpg" alt="Base" className="w-7 h-7 rounded-lg object-cover" />
-                      <div>
-                        <p className="font-light italic text-sm text-black">Base</p>
-                        <p className="text-xs text-black/60 font-light italic">Mainnet</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 p-3 bg-white/30 backdrop-blur-sm rounded-xl border border-white/40">
-                      <img src="/logos/solana.jpg" alt="Solana" className="w-7 h-7 rounded-lg object-cover" />
-                      <div>
-                        <p className="font-light italic text-sm text-black">Solana</p>
-                        <p className="text-xs text-black/60 font-light italic">Coming Soon</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 p-3 bg-white/30 backdrop-blur-sm rounded-xl border border-white/40">
-                      <img src="/logos/polygon.jpg" alt="Polygon" className="w-7 h-7 rounded-lg object-cover" />
-                      <div>
-                        <p className="font-light italic text-sm text-black">Polygon</p>
-                        <p className="text-xs text-black/60 font-light italic">Coming Soon</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 p-3 bg-white/30 backdrop-blur-sm rounded-xl border border-white/40">
-                      <img src="/logos/sei.jpg" alt="Sei" className="w-7 h-7 rounded-lg object-cover" />
-                      <div>
-                        <p className="font-light italic text-sm text-black">Sei</p>
-                        <p className="text-xs text-black/60 font-light italic">Coming Soon</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 p-3 bg-white/30 backdrop-blur-sm rounded-xl border border-white/40">
-                      <img src="/logos/BSC.jpg" alt="BSC" className="w-7 h-7 rounded-lg object-cover" />
-                      <div>
-                        <p className="font-light italic text-sm text-black">BSC</p>
-                        <p className="text-xs text-black/60 font-light italic">Coming Soon</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 p-3 bg-white/30 backdrop-blur-sm rounded-xl border border-white/40">
-                      <img src="/logos/peaq.jpg" alt="Peaq" className="w-7 h-7 rounded-lg object-cover" />
-                      <div>
-                        <p className="font-light italic text-sm text-black">Peaq</p>
-                        <p className="text-xs text-black/60 font-light italic">Coming Soon</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Recent Transactions */}
-                <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-8 shadow-lg border border-white/60">
-                  <h3 className="text-xl font-light italic text-black mb-4">Recent x402 Payments</h3>
-                  {paymentHistory.length === 0 ? (
-                    <div className="text-center py-10 text-black/60">
-                      <p className="text-base font-light italic">Payment history will appear here once you start using x402 services</p>
-                    </div>
-                  ) : (
-                    <div className="space-y-3">
-                      {paymentHistory.slice(0, 10).map((payment, index) => (
-                        <div key={index} className="flex items-center justify-between p-4 bg-white/30 backdrop-blur-sm rounded-xl border border-white/40 hover:bg-white/40 transition-all">
-                          <div className="flex-1">
-                            <p className="font-light italic text-sm text-black mb-1">{payment.service}</p>
-                            <p className="text-xs text-black/60 font-light italic">
-                              {new Date(payment.timestamp).toLocaleString()}
-                            </p>
-                          </div>
-                          <div className="flex items-center gap-4">
-                            <div className="text-right">
-                              <p className="font-light italic text-sm text-black">{payment.amount}</p>
-                              <p className="text-xs text-black/60 font-light italic">{payment.network}</p>
-                            </div>
-                            <a
-                              href={`https://basescan.org/tx/${payment.txHash}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-3 py-1.5 bg-gradient-to-r from-[#FF7B00] to-[#FF9500] text-white rounded-lg text-xs font-light italic hover:shadow-lg transition-all"
-                            >
-                              View TX
-                            </a>
+                    {/* Supported Networks */}
+                    <div className="bg-black/40 backdrop-blur-sm border border-white/10 p-8">
+                      <h3 className="text-lg font-light text-white mb-2">Supported Networks</h3>
+                      <p className="text-gray-400 text-sm font-light mb-6">
+                        x402 works across multiple chains
+                      </p>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="flex items-center gap-2 p-3 bg-white/5 rounded border border-white/10 hover:border-[#74a180]/30 transition-all">
+                          <img src="/logos/base.jpg" alt="Base" className="w-6 h-6 rounded object-cover" />
+                          <div>
+                            <p className="font-light text-xs text-white">Base</p>
+                            <p className="text-[10px] text-gray-500 font-light">Mainnet</p>
                           </div>
                         </div>
-                      ))}
+                        <div className="flex items-center gap-2 p-3 bg-white/5 rounded border border-white/10">
+                          <img src="/logos/solana.jpg" alt="Solana" className="w-6 h-6 rounded object-cover" />
+                          <div>
+                            <p className="font-light text-xs text-white">Solana</p>
+                            <p className="text-[10px] text-gray-500 font-light">Soon</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 p-3 bg-white/5 rounded border border-white/10">
+                          <img src="/logos/polygon.jpg" alt="Polygon" className="w-6 h-6 rounded object-cover" />
+                          <div>
+                            <p className="font-light text-xs text-white">Polygon</p>
+                            <p className="text-[10px] text-gray-500 font-light">Soon</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 p-3 bg-white/5 rounded border border-white/10">
+                          <img src="/logos/peaq.jpg" alt="Peaq" className="w-6 h-6 rounded object-cover" />
+                          <div>
+                            <p className="font-light text-xs text-white">Peaq</p>
+                            <p className="text-[10px] text-gray-500 font-light">Soon</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
-            )}
 
-            {/* Developer Tools Section */}
-            <div className="bg-white/40 backdrop-blur-xl rounded-2xl shadow-lg p-10 border border-white/60">
-              <h2 className="text-3xl font-light italic mb-6 text-black">Build Your Own x402 Service</h2>
-              <p className="text-black/70 mb-8 text-lg font-light italic leading-relaxed">
-                Deploy your own x402-enabled API and register it on the marketplace. 
-                Start accepting payments per request using the revolutionary HTTP 402 protocol.
-              </p>
+              {/* Right Column - Recent Transactions */}
+              <div className="lg:col-span-7">
+                {isConnected && (
+                  <div className="bg-black/40 backdrop-blur-sm border border-white/10 p-8 h-full">
+                    <h3 className="text-lg font-light text-white mb-6">Recent Payments</h3>
+                    {paymentHistory.length === 0 ? (
+                      <div className="flex items-center justify-center h-64 text-center">
+                        <div>
+                          <svg className="w-16 h-16 text-gray-600 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                          <p className="text-base font-light text-gray-500">No payments yet</p>
+                          <p className="text-sm font-light text-gray-600 mt-2">Your transaction history will appear here</p>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-2">
+                        {paymentHistory.slice(0, 10).map((payment, index) => (
+                          <div key={index} className="flex items-center justify-between p-4 bg-white/5 rounded border border-white/10 hover:bg-white/10 hover:border-[#74a180]/30 transition-all">
+                            <div className="flex-1">
+                              <p className="font-light text-sm text-white mb-1">{payment.service}</p>
+                              <p className="text-xs text-gray-500 font-light">
+                                {new Date(payment.timestamp).toLocaleString()}
+                              </p>
+                            </div>
+                            <div className="flex items-center gap-4">
+                              <div className="text-right">
+                                <p className="font-light text-sm text-white">{payment.amount}</p>
+                                <p className="text-xs text-gray-500 font-light">{payment.network}</p>
+                              </div>
+                              <a
+                                href={`https://basescan.org/tx/${payment.txHash}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-3 py-1.5 bg-[#74a180] text-white rounded text-xs font-light hover:bg-[#8fb896] transition-all"
+                              >
+                                View
+                              </a>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Developer Tools Section - Full Width */}
+            <div className="relative overflow-hidden mb-16">
+              {/* Gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] to-[#74a180]/20" />
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Express Starter */}
-                <div className="bg-white/40 backdrop-blur-sm rounded-xl p-6 hover:shadow-lg hover:bg-white/50 transition-all duration-300 border border-white/50">
-                  <h3 className="font-light italic text-xl mb-3 text-black">Express Starter</h3>
-                  <p className="text-black/70 text-base mb-5 font-light italic leading-relaxed">
-                    Get started with Express.js and x402 in minutes
+              {/* Heavy grain texture overlay */}
+              <div
+                className="absolute inset-0 opacity-[0.15] pointer-events-none"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                  backgroundRepeat: 'repeat',
+                  backgroundSize: '150px 150px'
+                }}
+              />
+              
+              <div className="relative z-10 p-12 border border-white/10">
+                <div className="max-w-4xl mb-10">
+                  <h2 className="text-4xl font-light mb-4 text-white">Build Your Own Service</h2>
+                  <p className="text-gray-400 text-lg font-light leading-relaxed">
+                    Deploy your x402-enabled API and start accepting micropayments. Choose your stack and integrate in minutes.
                   </p>
-                  <button
-                    onClick={() => router.push('/docs/server-express')}
-                    className="w-full px-5 py-3 bg-gradient-to-r from-[#1E1E1E] to-[#2A2A2A] text-white rounded-xl hover:shadow-lg hover:shadow-[#1E1E1E]/30 transition-all duration-300 text-base font-light italic"
-                  >
-                    View Docs →
-                  </button>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                  {/* Express Starter */}
+                  <div className="group bg-white/5 border border-white/10 p-6 hover:border-[#74a180]/50 transition-all duration-300">
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="font-light text-lg text-white">Express.js</h3>
+                      <svg className="w-5 h-5 text-gray-500 group-hover:text-[#74a180] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-400 text-sm mb-6 font-light leading-relaxed">
+                      Node.js server with x402 middleware
+                    </p>
+                    <button
+                      onClick={() => router.push('/docs/server-express')}
+                      className="w-full px-4 py-2 bg-white/10 text-white rounded hover:bg-[#74a180] transition-all duration-300 text-sm font-light border border-white/10"
+                    >
+                      View Guide
+                    </button>
+                  </div>
+
+                  {/* Python Starter */}
+                  <div className="group bg-white/5 border border-white/10 p-6 hover:border-[#74a180]/50 transition-all duration-300">
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="font-light text-lg text-white">Python</h3>
+                      <svg className="w-5 h-5 text-gray-500 group-hover:text-[#74a180] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-400 text-sm mb-6 font-light leading-relaxed">
+                      FastAPI/Flask integration
+                    </p>
+                    <button
+                      onClick={() => router.push('/docs/server-python')}
+                      className="w-full px-4 py-2 bg-white/10 text-white rounded hover:bg-[#74a180] transition-all duration-300 text-sm font-light border border-white/10"
+                    >
+                      View Guide
+                    </button>
+                  </div>
+
+                  {/* Echo Merchant */}
+                  <div className="group bg-white/5 border border-white/10 p-6 hover:border-[#74a180]/50 transition-all duration-300">
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="font-light text-lg text-white">Echo Merchant</h3>
+                      <svg className="w-5 h-5 text-gray-500 group-hover:text-[#74a180] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-400 text-sm mb-6 font-light leading-relaxed">
+                      Free testing service
+                    </p>
+                    <button
+                      onClick={() => router.push('/docs/echo-merchant')}
+                      className="w-full px-4 py-2 bg-white/10 text-white rounded hover:bg-[#74a180] transition-all duration-300 text-sm font-light border border-white/10"
+                    >
+                      View Guide
+                    </button>
+                  </div>
+
+                  {/* Client Libraries */}
+                  <div className="group bg-white/5 border border-white/10 p-6 hover:border-[#74a180]/50 transition-all duration-300">
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="font-light text-lg text-white">Client Libraries</h3>
+                      <svg className="w-5 h-5 text-gray-500 group-hover:text-[#74a180] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-400 text-sm mb-6 font-light leading-relaxed">
+                      HTTP client integrations
+                    </p>
+                    <button
+                      onClick={() => router.push('/docs/clients')}
+                      className="w-full px-4 py-2 bg-white/10 text-white rounded hover:bg-[#74a180] transition-all duration-300 text-sm font-light border border-white/10"
+                    >
+                      View Guide
+                    </button>
+                  </div>
+
+                  {/* Facilitator API */}
+                  <div className="group bg-white/5 border border-white/10 p-6 hover:border-[#74a180]/50 transition-all duration-300">
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="font-light text-lg text-white">Facilitator API</h3>
+                      <svg className="w-5 h-5 text-gray-500 group-hover:text-[#74a180] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-400 text-sm mb-6 font-light leading-relaxed">
+                      Payment verification
+                    </p>
+                    <button
+                      onClick={() => router.push('/docs/facilitators')}
+                      className="w-full px-4 py-2 bg-white/10 text-white rounded hover:bg-[#74a180] transition-all duration-300 text-sm font-light border border-white/10"
+                    >
+                      View Guide
+                    </button>
+                  </div>
+
+                  {/* Register Service - Highlighted */}
+                  <div className="bg-[#74a180]/20 border border-[#74a180]/50 p-6 hover:bg-[#74a180]/30 transition-all duration-300">
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="font-light text-lg text-white">Register Service</h3>
+                      <svg className="w-5 h-5 text-[#74a180]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-300 text-sm mb-6 font-light leading-relaxed">
+                      List on the marketplace
+                    </p>
+                    <button
+                      onClick={() => setShowServiceRegistration(true)}
+                      className="w-full px-4 py-2 bg-[#74a180] text-white rounded hover:bg-[#8fb896] transition-all duration-300 text-sm font-light"
+                    >
+                      Register Now
+                    </button>
+                  </div>
                 </div>
 
-                {/* Python Starter */}
-                <div className="bg-white/40 backdrop-blur-sm rounded-xl p-6 hover:shadow-lg hover:bg-white/50 transition-all duration-300 border border-white/50">
-                  <h3 className="font-light italic text-xl mb-3 text-black">Python Starter</h3>
-                  <p className="text-black/70 text-base mb-5 font-light italic leading-relaxed">
-                    FastAPI/Flask with x402 payment integration
-                  </p>
-                  <button
-                    onClick={() => router.push('/docs/server-python')}
-                    className="w-full px-5 py-3 bg-gradient-to-r from-[#1E1E1E] to-[#2A2A2A] text-white rounded-xl hover:shadow-lg hover:shadow-[#1E1E1E]/30 transition-all duration-300 text-base font-light italic"
-                  >
-                    View Docs →
-                  </button>
+                {/* How it Works - Compact */}
+                <div className="border-t border-white/10 pt-10">
+                  <h3 className="font-light text-xl mb-6 text-white">Quick Start</h3>
+                  <div className="grid md:grid-cols-4 gap-6">
+                    <div className="flex gap-3">
+                      <div className="flex-shrink-0 w-8 h-8 bg-[#74a180]/20 rounded-full flex items-center justify-center border border-[#74a180]/30">
+                        <span className="text-[#74a180] text-sm font-light">1</span>
+                      </div>
+                      <p className="text-sm font-light text-gray-400 leading-relaxed">Deploy your API</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <div className="flex-shrink-0 w-8 h-8 bg-[#74a180]/20 rounded-full flex items-center justify-center border border-[#74a180]/30">
+                        <span className="text-[#74a180] text-sm font-light">2</span>
+                      </div>
+                      <p className="text-sm font-light text-gray-400 leading-relaxed">Test with Echo</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <div className="flex-shrink-0 w-8 h-8 bg-[#74a180]/20 rounded-full flex items-center justify-center border border-[#74a180]/30">
+                        <span className="text-[#74a180] text-sm font-light">3</span>
+                      </div>
+                      <p className="text-sm font-light text-gray-400 leading-relaxed">Register service</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <div className="flex-shrink-0 w-8 h-8 bg-[#74a180]/20 rounded-full flex items-center justify-center border border-[#74a180]/30">
+                        <span className="text-[#74a180] text-sm font-light">4</span>
+                      </div>
+                      <p className="text-sm font-light text-gray-400 leading-relaxed">Start earning</p>
+                    </div>
+                  </div>
                 </div>
-
-                {/* Echo Merchant */}
-                <div className="bg-white/40 backdrop-blur-sm rounded-xl p-6 hover:shadow-lg hover:bg-white/50 transition-all duration-300 border border-white/50">
-                  <h3 className="font-light italic text-xl mb-3 text-black">Echo Merchant</h3>
-                  <p className="text-black/70 text-base mb-5 font-light italic leading-relaxed">
-                    FREE testing service to try x402 protocol
-                  </p>
-                  <button
-                    onClick={() => router.push('/docs/echo-merchant')}
-                    className="w-full px-5 py-3 bg-gradient-to-r from-[#1E1E1E] to-[#2A2A2A] text-white rounded-xl hover:shadow-lg hover:shadow-[#1E1E1E]/30 transition-all duration-300 text-base font-light italic"
-                  >
-                    View Docs →
-                  </button>
-                </div>
-
-                {/* Client Libraries */}
-                <div className="bg-white/40 backdrop-blur-sm rounded-xl p-6 hover:shadow-lg hover:bg-white/50 transition-all duration-300 border border-white/50">
-                  <h3 className="font-light italic text-xl mb-3 text-black">Client Libraries</h3>
-                  <p className="text-black/70 text-base mb-5 font-light italic leading-relaxed">
-                    Axios, Fetch, HTTPX integrations for x402
-                  </p>
-                  <button
-                    onClick={() => router.push('/docs/clients')}
-                    className="w-full px-5 py-3 bg-gradient-to-r from-[#1E1E1E] to-[#2A2A2A] text-white rounded-xl hover:shadow-lg hover:shadow-[#1E1E1E]/30 transition-all duration-300 text-base font-light italic"
-                  >
-                    View Docs →
-                  </button>
-                </div>
-
-                {/* Facilitator API */}
-                <div className="bg-white/40 backdrop-blur-sm rounded-xl p-6 hover:shadow-lg hover:bg-white/50 transition-all duration-300 border border-white/50">
-                  <h3 className="font-light italic text-xl mb-3 text-black">Facilitator API</h3>
-                  <p className="text-black/70 text-base mb-5 font-light italic leading-relaxed">
-                    Payment verification and settlement
-                  </p>
-                  <button
-                    onClick={() => router.push('/docs/facilitators')}
-                    className="w-full px-5 py-3 bg-gradient-to-r from-[#1E1E1E] to-[#2A2A2A] text-white rounded-xl hover:shadow-lg hover:shadow-[#1E1E1E]/30 transition-all duration-300 text-base font-light italic"
-                  >
-                    View Docs →
-                  </button>
-                </div>
-
-                {/* Register Service */}
-                <div className="bg-gradient-to-br from-[#FF7B00]/20 to-[#FF9500]/20 backdrop-blur-xl rounded-xl p-6 hover:shadow-lg hover:from-[#FF7B00]/30 hover:to-[#FF9500]/30 transition-all duration-300 border border-[#FF7B00]/30">
-                  <h3 className="font-light italic text-xl mb-3 text-black">Register Your Service</h3>
-                  <p className="text-black/70 text-base mb-5 font-light italic leading-relaxed">
-                    List your x402 service on the marketplace
-                  </p>
-                  <button
-                    onClick={() => setShowServiceRegistration(true)}
-                    className="w-full px-5 py-3 bg-gradient-to-r from-[#FF7B00] to-[#FF9500] text-white rounded-xl hover:shadow-lg hover:shadow-[#FF7B00]/30 transition-all duration-300 text-base font-light italic"
-                  >
-                    Register Now →
-                  </button>
-                </div>
-              </div>
-
-              <div className="mt-12 p-8 bg-white/30 backdrop-blur-sm rounded-2xl border border-white/40">
-                <h3 className="font-light italic text-2xl mb-6 text-black">How it Works</h3>
-                <ol className="space-y-5 text-black/80">
-                  <li className="flex gap-4 items-start">
-                    <span className="font-light italic text-[#FF7B00] text-xl bg-white/50 rounded-full w-9 h-9 flex items-center justify-center">1</span>
-                    <span className="text-lg font-light italic leading-relaxed">Deploy your API with x402 support (Express, FastAPI, etc.)</span>
-                  </li>
-                  <li className="flex gap-4 items-start">
-                    <span className="font-light italic text-[#FF7B00] text-xl bg-white/50 rounded-full w-9 h-9 flex items-center justify-center">2</span>
-                    <span className="text-lg font-light italic leading-relaxed">Test with Echo Merchant to ensure HTTP 402 responses work</span>
-                  </li>
-                  <li className="flex gap-4 items-start">
-                    <span className="font-light italic text-[#FF7B00] text-xl bg-white/50 rounded-full w-9 h-9 flex items-center justify-center">3</span>
-                    <span className="text-lg font-light italic leading-relaxed">Register your service on the marketplace</span>
-                  </li>
-                  <li className="flex gap-4 items-start">
-                    <span className="font-light italic text-[#FF7B00] text-xl bg-white/50 rounded-full w-9 h-9 flex items-center justify-center">4</span>
-                    <span className="text-lg font-light italic leading-relaxed">Users discover and pay for your API per request</span>
-                  </li>
-                </ol>
               </div>
             </div>
           </div>
@@ -559,6 +756,14 @@ export default function DappPage() {
           onSuccess={handlePaymentSuccess}
           onError={handlePaymentError}
           onClose={() => setPaymentService(null)}
+        />
+      )}
+
+      {/* Payment Success Modal */}
+      {successTxHash && (
+        <PaymentSuccessModal
+          txHash={successTxHash}
+          onClose={() => setSuccessTxHash(null)}
         />
       )}
     </div>

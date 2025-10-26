@@ -20,7 +20,7 @@ const facilityData = [
 ];
 
 const serverData = [
-  { name: 'xGrain402', value: 400, color: '#EAB308' },
+  { name: 'Lumen402', value: 400, color: '#EAB308' },
   { name: 'BSCHub', value: 300, color: '#F59E0B' },
   { name: 'WheatNode', value: 200, color: '#D97706' },
   { name: 'Others', value: 100, color: '#92400E' },
@@ -46,7 +46,7 @@ function ExplorerContent() {
       if (isConnected && address && signMessageAsync && !isVerified) {
         setIsVerifying(true);
         try {
-          const message = `Sign this message to verify your wallet ownership for xgrain402 explorer.\n\nWallet: ${address}\nTimestamp: ${new Date().toISOString()}`;
+          const message = `Sign this message to verify your wallet ownership for Lumen402 explorer.\n\nWallet: ${address}\nTimestamp: ${new Date().toISOString()}`;
           const signature = await signMessageAsync({ message });
           
           // In a real app, you'd verify the signature on the backend
@@ -94,7 +94,7 @@ function ExplorerContent() {
                   <div className="p-4 rounded-2xl bg-gray-100">
                     <Image 
                       src="/logo.png" 
-                      alt="xgrain402 Logo" 
+                      alt="Lumen402 Logo" 
                       width={48} 
                       height={48}
                     />
@@ -129,14 +129,14 @@ function ExplorerContent() {
             <div className="p-2 rounded-xl bg-gray-100 group-hover:bg-gray-200 transition-colors">
                   <Image 
                     src="/logo.png" 
-                    alt="xgrain402 Logo" 
+                    alt="Lumen402 Logo" 
                 width={28} 
                 height={28}
                     priority
                   />
                 </div>
             <h1 className="text-xl font-semibold italic text-gray-900">
-              xgrain402<span className="text-yellow-600">scan</span>
+              Lumen402<span className="text-yellow-600">scan</span>
                 </h1>
               </Link>
               

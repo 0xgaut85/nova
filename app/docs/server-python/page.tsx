@@ -5,43 +5,43 @@ import Link from 'next/link';
 export default function PythonServerPage() {
   return (
     <div className="prose prose-sm max-w-none">
-      <h1 className="text-4xl font-light italic text-black mb-4">
+      <h1 className="text-4xl font-light text-white mb-4">
         Python Server
       </h1>
 
-      <p className="text-base text-black/80 leading-relaxed mb-8">
+      <p className="text-base text-gray-400 leading-relaxed mb-8">
         Add x402 payments to your FastAPI or Flask server. Perfect for AI services, data APIs, and Python-based backends.
       </p>
 
-      <div className="bg-gradient-to-br from-white/80 to-white/40 backdrop-blur-xl rounded-2xl p-6 border border-black/5 shadow-xl mb-8 not-prose">
-        <h2 className="text-lg font-light italic text-black mb-2">Python Support</h2>
-        <p className="text-sm text-black/80 leading-relaxed">
+      <div className="bg-black/80 backdrop-blur-xl rounded-2xl p-6 border border-white/[0.15] mb-8 not-prose">
+        <h2 className="text-lg font-light text-white mb-2">Python Support</h2>
+        <p className="text-sm text-gray-400 leading-relaxed">
           The x402 Python SDK works with FastAPI, Flask, and any ASGI/WSGI framework. 
           Perfect for machine learning APIs, data services, and Python-based microservices.
         </p>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Installation</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Installation</h2>
 
       <div className="space-y-3 mb-8 not-prose">
         <div>
-          <p className="text-xs font-light italic text-black/80 mb-2">pip</p>
+          <p className="text-xs font-light text-gray-500 mb-2">pip</p>
           <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90">
             <code>pip install x402-python</code>
           </div>
         </div>
 
         <div>
-          <p className="text-xs font-light italic text-black/80 mb-2">poetry</p>
+          <p className="text-xs font-light text-gray-500 mb-2">poetry</p>
           <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90">
             <code>poetry add x402-python</code>
           </div>
         </div>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">FastAPI Example</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">FastAPI Example</h2>
 
-      <p className="text-sm text-black/80 mb-4">
+      <p className="text-sm text-gray-400 mb-4">
         Add x402 payment protection to your FastAPI endpoints:
       </p>
 
@@ -87,9 +87,9 @@ if __name__ == "__main__":
         </pre>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Flask Example</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Flask Example</h2>
 
-      <p className="text-sm text-black/80 mb-4">
+      <p className="text-sm text-gray-400 mb-4">
         Use x402 with Flask applications:
       </p>
 
@@ -134,9 +134,9 @@ if __name__ == "__main__":
         </pre>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Configuration</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Configuration</h2>
 
-      <p className="text-sm text-black/80 mb-4">
+      <p className="text-sm text-gray-400 mb-4">
         Set up your environment variables:
       </p>
 
@@ -153,10 +153,10 @@ CDP_API_KEY_SECRET=your_cdp_key_secret`}
         </pre>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Advanced Usage</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Advanced Usage</h2>
 
-      <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5 mb-4">
-        <h3 className="text-sm font-light italic text-black mb-3">Custom Pricing Logic</h3>
+      <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15] mb-4">
+        <h3 className="text-sm font-light text-white mb-3">Custom Pricing Logic</h3>
         <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 not-prose">
           <pre className="whitespace-pre-wrap">
 {`@app.get("/dynamic-pricing")
@@ -176,8 +176,8 @@ def calculate_price(request):
         </div>
       </div>
 
-      <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5 mb-8">
-        <h3 className="text-sm font-light italic text-black mb-3">Multiple Networks</h3>
+      <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15] mb-8">
+        <h3 className="text-sm font-light text-white mb-3">Multiple Networks</h3>
         <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 not-prose">
           <pre className="whitespace-pre-wrap">
 {`# Accept payment on multiple networks
@@ -192,60 +192,81 @@ async def multi_network_endpoint():
         </div>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Use Cases</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Use Cases</h2>
 
       <div className="grid md:grid-cols-2 gap-4 mb-8 not-prose">
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">AI & ML Services</h3>
-          <p className="text-sm text-black/80">
+        <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
+          <h3 className="text-sm font-light text-white mb-2">AI & ML Services</h3>
+          <p className="text-sm text-gray-400">
             Monetize GPT models, image generation, data analysis, and machine learning inference APIs
           </p>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">Data APIs</h3>
-          <p className="text-sm text-black/80">
+        <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
+          <h3 className="text-sm font-light text-white mb-2">Data APIs</h3>
+          <p className="text-sm text-gray-400">
             Charge per query for financial data, weather data, market analytics, and real-time feeds
           </p>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">Scraping Services</h3>
-          <p className="text-sm text-black/80">
+        <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
+          <h3 className="text-sm font-light text-white mb-2">Scraping Services</h3>
+          <p className="text-sm text-gray-400">
             Monetize web scraping, data extraction, and content aggregation endpoints
           </p>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">Processing APIs</h3>
-          <p className="text-sm text-black/80">
+        <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
+          <h3 className="text-sm font-light text-white mb-2">Processing APIs</h3>
+          <p className="text-sm text-gray-400">
             Charge for PDF generation, image processing, video conversion, and data transformation
           </p>
         </div>
       </div>
 
-      <div className="bg-gradient-to-r from-[#FF7B00] to-[#FF9500] rounded-2xl p-6 text-white not-prose">
-        <h3 className="text-lg font-light italic mb-2">Deploy Your Python Service</h3>
-        <p className="text-sm opacity-90 mb-4">
-          Ready to deploy? Learn about client integration and production deployment.
-        </p>
-        <div className="flex gap-3">
-          <Link
-            href="/docs/clients"
-            className="px-5 py-2.5 bg-white text-[#FF7B00] rounded-xl text-sm font-light italic hover:shadow-lg transition-all"
-          >
-            Client Integration
-          </Link>
-          <Link
-            href="/docs/deployment"
-            className="px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white rounded-xl text-sm font-light italic hover:bg-white/20 transition-all"
-          >
-            Deployment Guide
-          </Link>
+      <div className="relative rounded-2xl p-6 text-white not-prose overflow-hidden">
+        {/* Enhanced gradient background - black to green */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#74a180]" />
+        
+        {/* Heavy grain texture overlay - increased for more visibility */}
+        <div 
+          className="absolute inset-0 opacity-[0.2] pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat',
+            backgroundSize: '150px 150px'
+          }}
+        />
+        <div 
+          className="absolute inset-0 opacity-[0.12] mix-blend-overlay pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='7' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat',
+            backgroundSize: '100px 100px'
+          }}
+        />
+        
+        <div className="relative z-10">
+          <h3 className="text-lg font-light mb-2">Deploy Your Python Service</h3>
+          <p className="text-sm opacity-90 mb-4">
+            Ready to deploy? Learn about client integration and production deployment.
+          </p>
+          <div className="flex gap-3">
+            <Link
+              href="/docs/clients"
+              className="px-5 py-2.5 bg-white text-[#74a180] rounded-xl text-sm font-light hover:shadow-lg transition-all"
+            >
+              Client Integration
+            </Link>
+            <Link
+              href="/docs/deployment"
+              className="px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white rounded-xl text-sm font-light hover:bg-white/20 transition-all"
+            >
+              Deployment Guide
+            </Link>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-

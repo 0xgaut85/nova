@@ -1,14 +1,14 @@
-# xGrain402 - The App Store for x402
+# Lumen402 - The App Store for x402
 
-![xGrain402](public/logo.png)
+![Lumen402](public/logo.png)
 
 **The first real marketplace for x402-enabled AI services and APIs**
 
 Live at: [Your Domain Here]
 
-## 🌟 What is xGrain402?
+## 🌟 What is Lumen402?
 
-xGrain402 is the **App Store for x402 protocol** - a revolutionary marketplace where developers can discover, test, and use AI services with instant micropayments. Built on PayAI's x402 infrastructure, we enable **real blockchain payments** for API usage without subscriptions or accounts.
+Lumen402 is the **App Store for x402 protocol** - a revolutionary marketplace where developers can discover, test, and use AI services with instant micropayments. Built on PayAI's x402 infrastructure, we enable **real blockchain payments** for API usage without subscriptions or accounts.
 
 ## 🚀 Features
 
@@ -41,8 +41,8 @@ xGrain402 is the **App Store for x402 protocol** - a revolutionary marketplace w
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/xGrain402.git
-cd xGrain402
+git clone https://github.com/yourusername/Lumen402.git
+cd Lumen402
 
 # Install dependencies
 npm install
@@ -147,9 +147,9 @@ app.use(paymentMiddleware(
 ));
 ```
 
-### 2. Register on xGrain402
+### 2. Register on Lumen402
 
-1. Connect your wallet to xGrain402
+1. Connect your wallet to Lumen402
 2. Click "Register Service" button
 3. Fill in service details
 4. Submit for review (approved within 24 hours)
@@ -176,7 +176,7 @@ All payments and interactions are:
 
 ## 🌍 Ecosystem Integration
 
-xGrain402 integrates with the complete PayAI ecosystem:
+Lumen402 integrates with the complete PayAI ecosystem:
 
 - **PayAI Facilitator**: Service discovery and payment coordination
 - **Echo Merchant**: Protocol testing and validation
@@ -208,19 +208,19 @@ MIT License - see LICENSE file for details
 ## 🔗 Links
 
 - **Website**: [Your Domain]
-- **Twitter**: [@dock402](https://x.com/dock402)
-- **GitHub**: [github.com/dock402](https://github.com/dock402)
-- **Explorer**: [explorer.xgrain402.xyz](https://explorer.xgrain402.xyz)
+- **Twitter**: [@lumen402](https://x.com/lumen402)
+- **GitHub**: [github.com/lumen402](https://github.com/lumen402)
+- **Explorer**: [explorer.lumen402.com](https://explorer.lumen402.com)
 - **PayAI Docs**: [docs.payai.network](https://docs.payai.network)
 
 ## 💬 Support
 
 - Discord: [Join our Discord](#)
-- Twitter: [@dock402](https://x.com/dock402)
-- Email: support@dock402.xyz
+- Twitter: [@lumen402](https://x.com/lumen402)
+- Email: support@lumen402.com
 
 ---
 
 **Built with ❤️ using PayAI's x402 Protocol**
 
-*xGrain402 - Making micropayments accessible for everyone*
+*Lumen402 - Making micropayments accessible for everyone*

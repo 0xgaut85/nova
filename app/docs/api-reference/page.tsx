@@ -5,44 +5,44 @@ import Link from 'next/link';
 export default function APIReferencePage() {
   return (
     <div className="prose prose-sm max-w-none">
-      <h1 className="text-4xl font-light italic text-black mb-4">
+      <h1 className="text-4xl font-light text-white mb-4">
         API Reference
       </h1>
 
-      <p className="text-base text-black/80 leading-relaxed mb-8">
+      <p className="text-base text-gray-400 leading-relaxed mb-8">
         Complete API reference for x402 libraries, middleware, and facilitator endpoints.
       </p>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Express Middleware</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Express Middleware</h2>
 
-      <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5 mb-6">
-        <h3 className="text-base font-light italic text-black mb-3">paymentMiddleware()</h3>
-        <p className="text-sm text-black/80 mb-4">
+      <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15] mb-6">
+        <h3 className="text-base font-light text-white mb-3">paymentMiddleware()</h3>
+        <p className="text-sm text-gray-400 mb-4">
           Creates Express middleware for x402 payment protection.
         </p>
         
-        <h4 className="text-sm font-light italic text-black mb-2">Parameters</h4>
+        <h4 className="text-sm font-light text-white mb-2">Parameters</h4>
         <div className="space-y-2 mb-4">
-          <div className="bg-white/60 rounded-lg p-3 border border-black/5">
-            <code className="text-xs font-mono text-[#FF7B00]">payTo</code>
-            <span className="text-xs text-black/80 ml-2">string | Record&lt;string, string&gt;</span>
-            <p className="text-xs text-black/80 mt-1 m-0">Wallet address(es) to receive payments</p>
+          <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
+            <code className="text-xs font-mono text-[#74a180]">payTo</code>
+            <span className="text-xs text-gray-400 ml-2">string | Record&lt;string, string&gt;</span>
+            <p className="text-xs text-gray-400 mt-1 m-0">Wallet address(es) to receive payments</p>
           </div>
           
-          <div className="bg-white/60 rounded-lg p-3 border border-black/5">
-            <code className="text-xs font-mono text-[#FF7B00]">routes</code>
-            <span className="text-xs text-black/80 ml-2">Record&lt;string, RouteConfig&gt;</span>
-            <p className="text-xs text-black/80 mt-1 m-0">Route configurations with pricing</p>
+          <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
+            <code className="text-xs font-mono text-[#74a180]">routes</code>
+            <span className="text-xs text-gray-400 ml-2">Record&lt;string, RouteConfig&gt;</span>
+            <p className="text-xs text-gray-400 mt-1 m-0">Route configurations with pricing</p>
           </div>
           
-          <div className="bg-white/60 rounded-lg p-3 border border-black/5">
-            <code className="text-xs font-mono text-[#FF7B00]">options</code>
-            <span className="text-xs text-black/80 ml-2">MiddlewareOptions</span>
-            <p className="text-xs text-black/80 mt-1 m-0">Facilitator URL and other settings</p>
+          <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
+            <code className="text-xs font-mono text-[#74a180]">options</code>
+            <span className="text-xs text-gray-400 ml-2">MiddlewareOptions</span>
+            <p className="text-xs text-gray-400 mt-1 m-0">Facilitator URL and other settings</p>
           </div>
         </div>
 
-        <h4 className="text-sm font-light italic text-black mb-2">Example</h4>
+        <h4 className="text-sm font-light text-white mb-2">Example</h4>
         <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 not-prose overflow-x-auto">
           <pre className="whitespace-pre-wrap">
 {`app.use(
@@ -68,30 +68,30 @@ export default function APIReferencePage() {
         </div>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Python Decorators</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Python Decorators</h2>
 
-      <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5 mb-6">
-        <h3 className="text-base font-light italic text-black mb-3">@require_payment()</h3>
-        <p className="text-sm text-black/80 mb-4">
+      <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15] mb-6">
+        <h3 className="text-base font-light text-white mb-3">@require_payment()</h3>
+        <p className="text-sm text-gray-400 mb-4">
           Decorator to protect endpoints with x402 payments.
         </p>
         
-        <h4 className="text-sm font-light italic text-black mb-2">Parameters</h4>
+        <h4 className="text-sm font-light text-white mb-2">Parameters</h4>
         <div className="space-y-2 mb-4">
-          <div className="bg-white/60 rounded-lg p-3 border border-black/5">
-            <code className="text-xs font-mono text-[#FF7B00]">price</code>
-            <span className="text-xs text-black/80 ml-2">str | Callable</span>
-            <p className="text-xs text-black/80 mt-1 m-0">Price as dollar string or function</p>
+          <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
+            <code className="text-xs font-mono text-[#74a180]">price</code>
+            <span className="text-xs text-gray-400 ml-2">str | Callable</span>
+            <p className="text-xs text-gray-400 mt-1 m-0">Price as dollar string or function</p>
           </div>
           
-          <div className="bg-white/60 rounded-lg p-3 border border-black/5">
-            <code className="text-xs font-mono text-[#FF7B00]">network</code>
-            <span className="text-xs text-black/80 ml-2">str</span>
-            <p className="text-xs text-black/80 mt-1 m-0">Blockchain network (base, polygon, solana)</p>
+          <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
+            <code className="text-xs font-mono text-[#74a180]">network</code>
+            <span className="text-xs text-gray-400 ml-2">str</span>
+            <p className="text-xs text-gray-400 mt-1 m-0">Blockchain network (base, polygon, solana)</p>
           </div>
         </div>
 
-        <h4 className="text-sm font-light italic text-black mb-2">Example</h4>
+        <h4 className="text-sm font-light text-white mb-2">Example</h4>
         <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 not-prose overflow-x-auto">
           <pre className="whitespace-pre-wrap">
 {`@app.get("/data")
@@ -111,81 +111,81 @@ async def generate(request):
         </div>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Client Library</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Client Library</h2>
 
-      <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5 mb-6">
-        <h3 className="text-base font-light italic text-black mb-3">X402Client</h3>
-        <p className="text-sm text-black/80 mb-4">
+      <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15] mb-6">
+        <h3 className="text-base font-light text-white mb-3">X402Client</h3>
+        <p className="text-sm text-gray-400 mb-4">
           Client for consuming x402-protected services.
         </p>
         
-        <h4 className="text-sm font-light italic text-black mb-2">Constructor</h4>
+        <h4 className="text-sm font-light text-white mb-2">Constructor</h4>
         <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 not-prose overflow-x-auto mb-4">
           <pre className="whitespace-pre-wrap">
 {`new X402Client(options: X402ClientOptions)`}
           </pre>
         </div>
 
-        <h4 className="text-sm font-light italic text-black mb-2">Options</h4>
+        <h4 className="text-sm font-light text-white mb-2">Options</h4>
         <div className="space-y-2 mb-4">
-          <div className="bg-white/60 rounded-lg p-3 border border-black/5">
-            <code className="text-xs font-mono text-[#FF7B00]">signer</code>
-            <span className="text-xs text-black/80 ml-2">Signer</span>
-            <p className="text-xs text-black/80 mt-1 m-0">Ethers.js signer or wallet instance</p>
+          <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
+            <code className="text-xs font-mono text-[#74a180]">signer</code>
+            <span className="text-xs text-gray-400 ml-2">Signer</span>
+            <p className="text-xs text-gray-400 mt-1 m-0">Ethers.js signer or wallet instance</p>
           </div>
           
-          <div className="bg-white/60 rounded-lg p-3 border border-black/5">
-            <code className="text-xs font-mono text-[#FF7B00]">network</code>
-            <span className="text-xs text-black/80 ml-2">string</span>
-            <p className="text-xs text-black/80 mt-1 m-0">Network to use for payments</p>
+          <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
+            <code className="text-xs font-mono text-[#74a180]">network</code>
+            <span className="text-xs text-gray-400 ml-2">string</span>
+            <p className="text-xs text-gray-400 mt-1 m-0">Network to use for payments</p>
           </div>
           
-          <div className="bg-white/60 rounded-lg p-3 border border-black/5">
-            <code className="text-xs font-mono text-[#FF7B00]">maxPayment</code>
-            <span className="text-xs text-black/80 ml-2">string (optional)</span>
-            <p className="text-xs text-black/80 mt-1 m-0">Maximum payment per request</p>
+          <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
+            <code className="text-xs font-mono text-[#74a180]">maxPayment</code>
+            <span className="text-xs text-gray-400 ml-2">string (optional)</span>
+            <p className="text-xs text-gray-400 mt-1 m-0">Maximum payment per request</p>
           </div>
           
-          <div className="bg-white/60 rounded-lg p-3 border border-black/5">
-            <code className="text-xs font-mono text-[#FF7B00]">autoApprove</code>
-            <span className="text-xs text-black/80 ml-2">boolean (optional)</span>
-            <p className="text-xs text-black/80 mt-1 m-0">Auto-approve payments (default: true)</p>
+          <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
+            <code className="text-xs font-mono text-[#74a180]">autoApprove</code>
+            <span className="text-xs text-gray-400 ml-2">boolean (optional)</span>
+            <p className="text-xs text-gray-400 mt-1 m-0">Auto-approve payments (default: true)</p>
           </div>
         </div>
 
-        <h4 className="text-sm font-light italic text-black mb-2">Methods</h4>
+        <h4 className="text-sm font-light text-white mb-2">Methods</h4>
         <div className="space-y-3">
-          <div className="bg-white/60 rounded-lg p-3 border border-black/5">
-            <code className="text-xs font-mono text-[#FF7B00]">get(url, options?)</code>
-            <p className="text-xs text-black/80 mt-1 m-0">Make GET request with automatic payment</p>
+          <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
+            <code className="text-xs font-mono text-[#74a180]">get(url, options?)</code>
+            <p className="text-xs text-gray-400 mt-1 m-0">Make GET request with automatic payment</p>
           </div>
           
-          <div className="bg-white/60 rounded-lg p-3 border border-black/5">
-            <code className="text-xs font-mono text-[#FF7B00]">post(url, options?)</code>
-            <p className="text-xs text-black/80 mt-1 m-0">Make POST request with automatic payment</p>
+          <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
+            <code className="text-xs font-mono text-[#74a180]">post(url, options?)</code>
+            <p className="text-xs text-gray-400 mt-1 m-0">Make POST request with automatic payment</p>
           </div>
           
-          <div className="bg-white/60 rounded-lg p-3 border border-black/5">
-            <code className="text-xs font-mono text-[#FF7B00]">put(url, options?)</code>
-            <p className="text-xs text-black/80 mt-1 m-0">Make PUT request with automatic payment</p>
+          <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
+            <code className="text-xs font-mono text-[#74a180]">put(url, options?)</code>
+            <p className="text-xs text-gray-400 mt-1 m-0">Make PUT request with automatic payment</p>
           </div>
           
-          <div className="bg-white/60 rounded-lg p-3 border border-black/5">
-            <code className="text-xs font-mono text-[#FF7B00]">delete(url, options?)</code>
-            <p className="text-xs text-black/80 mt-1 m-0">Make DELETE request with automatic payment</p>
+          <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
+            <code className="text-xs font-mono text-[#74a180]">delete(url, options?)</code>
+            <p className="text-xs text-gray-400 mt-1 m-0">Make DELETE request with automatic payment</p>
           </div>
         </div>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Facilitator API</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Facilitator API</h2>
 
-      <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5 mb-6">
-        <h3 className="text-base font-light italic text-black mb-3">POST /verify</h3>
-        <p className="text-sm text-black/80 mb-4">
+      <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15] mb-6">
+        <h3 className="text-base font-light text-white mb-3">POST /verify</h3>
+        <p className="text-sm text-gray-400 mb-4">
           Verify a blockchain transaction for x402 payment.
         </p>
         
-        <h4 className="text-sm font-light italic text-black mb-2">Request</h4>
+        <h4 className="text-sm font-light text-white mb-2">Request</h4>
         <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 not-prose overflow-x-auto mb-4">
           <pre className="whitespace-pre-wrap">
 {`POST https://facilitator.payai.network/verify
@@ -201,7 +201,7 @@ Content-Type: application/json
           </pre>
         </div>
 
-        <h4 className="text-sm font-light italic text-black mb-2">Response</h4>
+        <h4 className="text-sm font-light text-white mb-2">Response</h4>
         <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 not-prose overflow-x-auto">
           <pre className="whitespace-pre-wrap">
 {`{
@@ -217,73 +217,95 @@ Content-Type: application/json
         </div>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">HTTP Headers</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">HTTP Headers</h2>
 
       <div className="space-y-3 mb-8">
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">X-Accept-Payment</h3>
-          <p className="text-sm text-black/80 mb-2">Server indicates payment is required</p>
+        <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
+          <h3 className="text-sm font-light text-white mb-2">X-Accept-Payment</h3>
+          <p className="text-sm text-gray-400 mb-2">Server indicates payment is required</p>
           <code className="text-xs font-mono bg-[#1E1E1E] text-white/90 px-2 py-1 rounded">
             X-Accept-Payment: pay.base 0.001 USDC
           </code>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">X-Payment-Address</h3>
-          <p className="text-sm text-black/80 mb-2">Wallet address to send payment to</p>
+        <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
+          <h3 className="text-sm font-light text-white mb-2">X-Payment-Address</h3>
+          <p className="text-sm text-gray-400 mb-2">Wallet address to send payment to</p>
           <code className="text-xs font-mono bg-[#1E1E1E] text-white/90 px-2 py-1 rounded">
             X-Payment-Address: 0x742d35Cc6634C0532925a3b8...
           </code>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">X-Payment-Network</h3>
-          <p className="text-sm text-black/80 mb-2">Blockchain network for payment</p>
+        <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
+          <h3 className="text-sm font-light text-white mb-2">X-Payment-Network</h3>
+          <p className="text-sm text-gray-400 mb-2">Blockchain network for payment</p>
           <code className="text-xs font-mono bg-[#1E1E1E] text-white/90 px-2 py-1 rounded">
             X-Payment-Network: base
           </code>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">X-Payment-Proof</h3>
-          <p className="text-sm text-black/80 mb-2">Client provides transaction hash as proof</p>
+        <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
+          <h3 className="text-sm font-light text-white mb-2">X-Payment-Proof</h3>
+          <p className="text-sm text-gray-400 mb-2">Client provides transaction hash as proof</p>
           <code className="text-xs font-mono bg-[#1E1E1E] text-white/90 px-2 py-1 rounded">
             X-Payment-Proof: 0x5f2d8a...
           </code>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">X-Facilitator-URL</h3>
-          <p className="text-sm text-black/80 mb-2">URL for payment verification</p>
+        <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
+          <h3 className="text-sm font-light text-white mb-2">X-Facilitator-URL</h3>
+          <p className="text-sm text-gray-400 mb-2">URL for payment verification</p>
           <code className="text-xs font-mono bg-[#1E1E1E] text-white/90 px-2 py-1 rounded">
             X-Facilitator-URL: https://facilitator.payai.network
           </code>
         </div>
       </div>
 
-      <div className="bg-gradient-to-r from-[#FF7B00] to-[#FF9500] rounded-2xl p-6 text-white not-prose">
-        <h3 className="text-lg font-light italic mb-2">Need Help?</h3>
-        <p className="text-sm opacity-90 mb-4">
-          Check out code examples or visit the full PayAI documentation.
-        </p>
-        <div className="flex gap-3">
-          <Link
-            href="/docs/examples"
-            className="px-5 py-2.5 bg-white text-[#FF7B00] rounded-xl text-sm font-light italic hover:shadow-lg transition-all"
-          >
-            Code Examples
-          </Link>
-          <a
-            href="https://docs.payai.network"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white rounded-xl text-sm font-light italic hover:bg-white/20 transition-all"
-          >
-            PayAI Docs
-          </a>
+      <div className="relative rounded-2xl p-6 text-white not-prose overflow-hidden">
+        {/* Enhanced gradient background - black to green */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#74a180]" />
+        
+        {/* Heavy grain texture overlay - increased for more visibility */}
+        <div 
+          className="absolute inset-0 opacity-[0.2] pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat',
+            backgroundSize: '150px 150px'
+          }}
+        />
+        <div 
+          className="absolute inset-0 opacity-[0.12] mix-blend-overlay pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='7' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat',
+            backgroundSize: '100px 100px'
+          }}
+        />
+        
+        <div className="relative z-10">
+          <h3 className="text-lg font-light mb-2">Need Help?</h3>
+          <p className="text-sm opacity-90 mb-4">
+            Check out code examples or visit the full PayAI documentation.
+          </p>
+          <div className="flex gap-3">
+            <Link
+              href="/docs/examples"
+              className="px-5 py-2.5 bg-white text-[#74a180] rounded-xl text-sm font-light hover:shadow-lg transition-all"
+            >
+              Code Examples
+            </Link>
+            <a
+              href="https://docs.payai.network"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white rounded-xl text-sm font-light hover:bg-white/20 transition-all"
+            >
+              PayAI Docs
+            </a>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-

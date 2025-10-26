@@ -1,246 +1,120 @@
 'use client';
 
 import Link from 'next/link';
+import DocStep from '../../components/docs/DocStep';
+import CTABox from '../../components/docs/CTABox';
 
 export default function X402ProtocolPage() {
   return (
-    <div className="prose prose-sm max-w-none">
-      <h1 className="text-4xl font-light italic text-black mb-4">
-        What is x402?
+    <div className="max-w-none">
+      <h1 className="text-5xl sm:text-6xl font-normal text-white mb-8 tracking-wide leading-tight">
+        x402 Protocol
       </h1>
 
-      <p className="text-base text-black/80 leading-relaxed mb-8">
-        x402 (HTTP 402) is a payment protocol that enables micropayments for HTTP requests. 
-        It brings native payments to APIs, allowing services to charge per request with instant, 
-        blockchain-based settlements.
+      <p className="text-xl text-gray-400 font-light leading-relaxed mb-16">
+        The HTTP 402 payment protocol reimagined for the blockchain era. Native micropayments for every HTTP request.
       </p>
 
-      <div className="bg-gradient-to-br from-white/80 to-white/40 backdrop-blur-xl rounded-2xl p-6 border border-black/5 shadow-xl mb-8 not-prose">
-        <h2 className="text-lg font-light italic text-black mb-2">The Vision</h2>
-        <p className="text-sm text-black/80 leading-relaxed">
-          HTTP 402 "Payment Required" has existed since HTTP/1.1 but was never implemented. 
-          x402 brings this vision to life using blockchain technology for instant, trustless micropayments.
+      <div className="bg-black/80 backdrop-blur-sm rounded-lg p-10 border border-white/[0.15] mb-16">
+        <h2 className="text-2xl font-medium text-white mb-4">Protocol Vision</h2>
+        <p className="text-base text-gray-400 font-light leading-relaxed">
+          HTTP 402 "Payment Required" was defined in HTTP/1.1 but never implemented. x402 brings this vision to reality using blockchain technology, enabling instant trustless micropayments at internet scale.
         </p>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">How x402 Works</h2>
+      <h2 className="text-3xl font-medium text-white mb-8 tracking-wide">Request Flow</h2>
 
-      <div className="space-y-3 mb-8">
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-xs font-light italic">
-              1
-            </div>
-            <h3 className="text-sm font-light italic text-black m-0">Client Makes Request</h3>
-          </div>
-          <p className="text-sm text-black/80 m-0 pl-10">
-            A client sends an HTTP request to an x402-protected endpoint
+      <div className="space-y-4 mb-16">
+        <DocStep 
+          number={1}
+          title="Client Request"
+          description="Client sends HTTP request to an x402-protected API endpoint"
+        />
+
+        <DocStep 
+          number={2}
+          title="402 Response"
+          description="Server returns HTTP 402 with payment instructions: amount, address, and accepted tokens"
+        />
+
+        <DocStep 
+          number={3}
+          title="Payment Execution"
+          description="Client creates and signs blockchain transaction to specified payment address"
+        />
+
+        <DocStep 
+          number={4}
+          title="Proof Submission"
+          description="Client retries request with transaction signature as payment proof in headers"
+        />
+
+        <DocStep 
+          number={5}
+          title="Validation & Response"
+          description="Server verifies payment on-chain and returns requested resource if valid"
+        />
+      </div>
+
+      <h2 className="text-3xl font-medium text-white mb-8 tracking-wide">Core Advantages</h2>
+
+      <div className="grid md:grid-cols-2 gap-6 mb-16">
+        <div className="bg-black/60 backdrop-blur-sm rounded-lg p-8 border border-white/[0.12]">
+          <h3 className="text-lg font-medium text-white mb-3">True Micropayments</h3>
+          <p className="text-base text-gray-400 font-light leading-relaxed">
+            Charge $0.0001 per request. Traditional payment rails collapse at this scale.
           </p>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-xs font-light italic">
-              2
-            </div>
-            <h3 className="text-sm font-light italic text-black m-0">Server Returns 402</h3>
-          </div>
-          <p className="text-sm text-black/80 mb-3 pl-10">
-            Server responds with HTTP 402 and payment instructions:
-          </p>
-          <div className="bg-[#1E1E1E] rounded-lg p-4 ml-10 font-mono text-xs text-white/90 overflow-x-auto">
-            <pre className="m-0 whitespace-pre-wrap break-all">
-{`HTTP/1.1 402 Payment Required
-X-Accept-Payment: pay.sol 0.001 SOL
-X-Payment-Address: 7xKXtg2CW...`}
-            </pre>
-          </div>
-        </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-xs font-light italic">
-              3
-            </div>
-            <h3 className="text-sm font-light italic text-black m-0">Client Pays</h3>
-          </div>
-          <p className="text-sm text-black/80 m-0 pl-10">
-            Client creates and signs a blockchain transaction to the payment address
+        <div className="bg-black/60 backdrop-blur-sm rounded-lg p-8 border border-white/[0.12]">
+          <h3 className="text-lg font-medium text-white mb-3">Sub-Second Settlement</h3>
+          <p className="text-base text-gray-400 font-light leading-relaxed">
+            Payments finalize on-chain in under a second. No multi-day clearing windows.
           </p>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-xs font-light italic">
-              4
-            </div>
-            <h3 className="text-sm font-light italic text-black m-0">Retry with Proof</h3>
-          </div>
-          <p className="text-sm text-black/80 mb-3 pl-10">
-            Client retries the request with transaction signature:
+        <div className="bg-black/60 backdrop-blur-sm rounded-lg p-8 border border-white/[0.12]">
+          <h3 className="text-lg font-medium text-white mb-3">Borderless Commerce</h3>
+          <p className="text-base text-gray-400 font-light leading-relaxed">
+            Anyone with a wallet can transact. No geographic restrictions or card networks.
           </p>
-          <div className="bg-[#1E1E1E] rounded-lg p-4 ml-10 font-mono text-xs text-white/90 overflow-x-auto">
-            <pre className="m-0 whitespace-pre-wrap break-all">
-{`GET /api/service HTTP/1.1
-X-Payment-Proof: 5KJp9c3...signature...
-X-Payment-Network: solana`}
-            </pre>
-          </div>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-xs font-light italic">
-              5
-            </div>
-            <h3 className="text-sm font-light italic text-black m-0">Server Validates & Responds</h3>
-          </div>
-          <p className="text-sm text-black/80 m-0 pl-10">
-            Server verifies the payment on-chain and returns the requested resource
+        <div className="bg-black/60 backdrop-blur-sm rounded-lg p-8 border border-white/[0.12]">
+          <h3 className="text-lg font-medium text-white mb-3">Machine Economy Ready</h3>
+          <p className="text-base text-gray-400 font-light leading-relaxed">
+            Perfect for AI agents and autonomous systems that need to pay for services.
           </p>
         </div>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Key Benefits</h2>
+      <h2 className="text-3xl font-medium text-white mb-8 tracking-wide">Multi-Chain Support</h2>
 
-      <div className="grid md:grid-cols-2 gap-4 mb-8 not-prose">
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">Micropayments</h3>
-          <p className="text-sm text-black/80 leading-relaxed">
-            Charge as little as $0.0001 per request. Traditional payment processors can't handle this.
-          </p>
-        </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">Instant Settlement</h3>
-          <p className="text-sm text-black/80 leading-relaxed">
-            Payments settle in seconds on-chain. No waiting days for payment processors.
-          </p>
-        </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">Global by Default</h3>
-          <p className="text-sm text-black/80 leading-relaxed">
-            Anyone with a crypto wallet can pay. No credit cards, no regional restrictions.
-          </p>
-        </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">No Chargebacks</h3>
-          <p className="text-sm text-black/80 leading-relaxed">
-            Blockchain transactions are final. No fraud risk or payment disputes.
-          </p>
-        </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">Machine-to-Machine</h3>
-          <p className="text-sm text-black/80 leading-relaxed">
-            Perfect for AI agents that need to autonomously pay for services.
-          </p>
-        </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">Usage-Based Pricing</h3>
-          <p className="text-sm text-black/80 leading-relaxed">
-            Users pay only for what they use. No subscriptions to manage.
-          </p>
-        </div>
+      <div className="grid md:grid-cols-3 gap-4 mb-16">
+        {[
+          { name: 'Base', logo: '/logos/base.jpg', desc: 'L2 Ethereum • Low fees' },
+          { name: 'Solana', logo: '/logos/solana.jpg', desc: 'High performance • Sub-cent fees' },
+          { name: 'Polygon', logo: '/logos/polygon.jpg', desc: 'EVM compatible • Fast' },
+          { name: 'BSC', logo: '/logos/BSC.jpg', desc: 'Binance chain • Low cost' },
+          { name: 'Sei', logo: '/logos/sei.jpg', desc: 'Optimized L1 • Speed' },
+          { name: 'Peaq', logo: '/logos/peaq.jpg', desc: 'DePIN network • IoT' }
+        ].map((chain) => (
+          <div key={chain.name} className="bg-black/80 backdrop-blur-sm rounded-lg p-6 border border-white/[0.15] hover:border-[#74a180]/30 transition-all">
+            <div className="flex items-center gap-3 mb-3">
+              <img src={chain.logo} alt={chain.name} className="w-10 h-10 rounded-lg object-cover" />
+              <h4 className="text-base font-medium text-white">{chain.name}</h4>
+            </div>
+            <p className="text-sm text-gray-400 font-light">{chain.desc}</p>
+          </div>
+        ))}
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Supported Networks</h2>
-
-      <p className="text-sm text-black/80 mb-4">
-        x402 works across multiple blockchain networks, each optimized for different use cases:
-      </p>
-
-      <div className="grid md:grid-cols-3 gap-3 mb-8 not-prose">
-        <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-black/5 hover:border-[#FF7B00]/20 hover:shadow-lg transition-all">
-          <div className="flex items-center gap-2 mb-2">
-            <img src="/logos/base.jpg" alt="Base" className="w-8 h-8 rounded-lg object-cover" />
-            <div>
-              <h4 className="text-sm font-light italic text-black">Base</h4>
-              <p className="text-xs text-black/50">L2 Ethereum</p>
-            </div>
-          </div>
-          <p className="text-xs text-black/80">Low fees, fast, EVM-compatible</p>
-        </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-black/5 hover:border-[#FF7B00]/20 hover:shadow-lg transition-all">
-          <div className="flex items-center gap-2 mb-2">
-            <img src="/logos/solana.jpg" alt="Solana" className="w-8 h-8 rounded-lg object-cover" />
-            <div>
-              <h4 className="text-sm font-light italic text-black">Solana</h4>
-              <p className="text-xs text-black/50">High Performance</p>
-            </div>
-          </div>
-          <p className="text-xs text-black/80">Ultra-fast, sub-cent fees</p>
-        </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-black/5 hover:border-[#FF7B00]/20 hover:shadow-lg transition-all">
-          <div className="flex items-center gap-2 mb-2">
-            <img src="/logos/polygon.jpg" alt="Polygon" className="w-8 h-8 rounded-lg object-cover" />
-            <div>
-              <h4 className="text-sm font-light italic text-black">Polygon</h4>
-              <p className="text-xs text-black/50">L2 Scaling</p>
-            </div>
-          </div>
-          <p className="text-xs text-black/80">Ethereum-compatible</p>
-        </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-black/5 hover:border-[#FF7B00]/20 hover:shadow-lg transition-all">
-          <div className="flex items-center gap-2 mb-2">
-            <img src="/logos/BSC.jpg" alt="BSC" className="w-8 h-8 rounded-lg object-cover" />
-            <div>
-              <h4 className="text-sm font-light italic text-black">BSC</h4>
-              <p className="text-xs text-black/50">Binance Chain</p>
-            </div>
-          </div>
-          <p className="text-xs text-black/80">Fast blocks, low cost</p>
-        </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-black/5 hover:border-[#FF7B00]/20 hover:shadow-lg transition-all">
-          <div className="flex items-center gap-2 mb-2">
-            <img src="/logos/sei.jpg" alt="Sei" className="w-8 h-8 rounded-lg object-cover" />
-            <div>
-              <h4 className="text-sm font-light italic text-black">Sei</h4>
-              <p className="text-xs text-black/50">Optimized L1</p>
-            </div>
-          </div>
-          <p className="text-xs text-black/80">Built for speed</p>
-        </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-black/5 hover:border-[#FF7B00]/20 hover:shadow-lg transition-all">
-          <div className="flex items-center gap-2 mb-2">
-            <img src="/logos/peaq.jpg" alt="Peaq" className="w-8 h-8 rounded-lg object-cover" />
-            <div>
-              <h4 className="text-sm font-light italic text-black">Peaq</h4>
-              <p className="text-xs text-black/50">DePIN Network</p>
-            </div>
-          </div>
-          <p className="text-xs text-black/80">IoT & Machine Economy</p>
-        </div>
-      </div>
-
-      <div className="bg-gradient-to-r from-[#FF7B00] to-[#FF9500] rounded-2xl p-6 text-white not-prose mt-8">
-        <h3 className="text-lg font-light italic mb-2">Start Building with x402</h3>
-        <p className="text-sm opacity-90 mb-4">
-          Ready to integrate x402 payments into your service?
-        </p>
-        <div className="flex gap-3">
-          <Link
-            href="/docs/server-express"
-            className="px-5 py-2.5 bg-white text-[#FF7B00] rounded-xl text-sm font-light italic hover:shadow-lg transition-all"
-          >
-            Express.js Server
-          </Link>
-          <Link
-            href="/docs/server-python"
-            className="px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white rounded-xl text-sm font-light italic hover:bg-white/20 transition-all"
-          >
-            Python Server
-          </Link>
-        </div>
-      </div>
+      <CTABox 
+        title="Start Building"
+        description="Ready to integrate x402 payments? Choose your stack and start building in minutes."
+        buttonText="View Guides"
+        buttonHref="/docs/server-express"
+      />
     </div>
   );
 }

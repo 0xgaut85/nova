@@ -5,25 +5,25 @@ import Link from 'next/link';
 export default function ClientsPage() {
   return (
     <div className="prose prose-sm max-w-none">
-      <h1 className="text-4xl font-light italic text-black mb-4">
+      <h1 className="text-4xl font-light text-white mb-4">
         Client Libraries
       </h1>
 
-      <p className="text-base text-black/80 leading-relaxed mb-8">
+      <p className="text-base text-gray-400 leading-relaxed mb-8">
         Integrate x402 payments into your applications using our client libraries. Automatic payment handling for HTTP requests.
       </p>
 
-      <div className="bg-gradient-to-br from-white/80 to-white/40 backdrop-blur-xl rounded-2xl p-6 border border-black/5 shadow-xl mb-8 not-prose">
-        <h2 className="text-lg font-light italic text-black mb-2">How Client Libraries Work</h2>
-        <p className="text-sm text-black/80 leading-relaxed">
+      <div className="bg-black/80 backdrop-blur-xl rounded-2xl p-6 border border-white/[0.15] mb-8 not-prose">
+        <h2 className="text-lg font-light text-white mb-2">How Client Libraries Work</h2>
+        <p className="text-sm text-gray-400 leading-relaxed">
           x402 client libraries automatically handle the HTTP 402 payment flow. When you make a request to a protected endpoint,
           the library detects the 402 response, creates a payment transaction, and retries the request with payment proof.
         </p>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">JavaScript / TypeScript</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">JavaScript / TypeScript</h2>
 
-      <p className="text-sm text-black/80 mb-4">
+      <p className="text-sm text-gray-400 mb-4">
         Install the x402 client for Node.js or browser environments:
       </p>
 
@@ -31,7 +31,7 @@ export default function ClientsPage() {
         <code>npm install x402-client</code>
       </div>
 
-      <h3 className="text-lg font-light italic text-black mb-3">Basic Usage</h3>
+      <h3 className="text-lg font-light text-white mb-3">Basic Usage</h3>
 
       <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 mb-6 overflow-x-auto not-prose">
         <pre className="whitespace-pre-wrap">
@@ -55,7 +55,7 @@ console.log(data);`}
         </pre>
       </div>
 
-      <h3 className="text-lg font-light italic text-black mb-3">POST Requests</h3>
+      <h3 className="text-lg font-light text-white mb-3">POST Requests</h3>
 
       <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 mb-6 overflow-x-auto not-prose">
         <pre className="whitespace-pre-wrap">
@@ -72,7 +72,7 @@ const result = await response.json();`}
         </pre>
       </div>
 
-      <h3 className="text-lg font-light italic text-black mb-3">React Integration</h3>
+      <h3 className="text-lg font-light text-white mb-3">React Integration</h3>
 
       <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 mb-8 overflow-x-auto not-prose">
         <pre className="whitespace-pre-wrap">
@@ -103,9 +103,9 @@ function YourComponent() {
         </pre>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Python</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Python</h2>
 
-      <p className="text-sm text-black/80 mb-4">
+      <p className="text-sm text-gray-400 mb-4">
         Install the Python client library:
       </p>
 
@@ -113,7 +113,7 @@ function YourComponent() {
         <code>pip install x402-python-client</code>
       </div>
 
-      <h3 className="text-lg font-light italic text-black mb-3">Basic Usage</h3>
+      <h3 className="text-lg font-light text-white mb-3">Basic Usage</h3>
 
       <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 mb-6 overflow-x-auto not-prose">
         <pre className="whitespace-pre-wrap">
@@ -137,7 +137,7 @@ print(data)`}
         </pre>
       </div>
 
-      <h3 className="text-lg font-light italic text-black mb-3">Async Support</h3>
+      <h3 className="text-lg font-light text-white mb-3">Async Support</h3>
 
       <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 mb-8 overflow-x-auto not-prose">
         <pre className="whitespace-pre-wrap">
@@ -157,10 +157,10 @@ data = asyncio.run(fetch_data())`}
         </pre>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Configuration Options</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Configuration Options</h2>
 
-      <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5 mb-4">
-        <h3 className="text-sm font-light italic text-black mb-3">Network Selection</h3>
+      <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15] mb-4">
+        <h3 className="text-sm font-light text-white mb-3">Network Selection</h3>
         <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 not-prose">
           <pre className="whitespace-pre-wrap">
 {`const client = new X402Client({
@@ -172,8 +172,8 @@ data = asyncio.run(fetch_data())`}
         </div>
       </div>
 
-      <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5 mb-4">
-        <h3 className="text-sm font-light italic text-black mb-3">Payment Limits</h3>
+      <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15] mb-4">
+        <h3 className="text-sm font-light text-white mb-3">Payment Limits</h3>
         <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 not-prose">
           <pre className="whitespace-pre-wrap">
 {`const client = new X402Client({
@@ -186,8 +186,8 @@ data = asyncio.run(fetch_data())`}
         </div>
       </div>
 
-      <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5 mb-8">
-        <h3 className="text-sm font-light italic text-black mb-3">Custom Headers</h3>
+      <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15] mb-8">
+        <h3 className="text-sm font-light text-white mb-3">Custom Headers</h3>
         <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 not-prose">
           <pre className="whitespace-pre-wrap">
 {`const response = await client.get(
@@ -203,7 +203,7 @@ data = asyncio.run(fetch_data())`}
         </div>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Error Handling</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Error Handling</h2>
 
       <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 mb-8 overflow-x-auto not-prose">
         <pre className="whitespace-pre-wrap">
@@ -224,59 +224,81 @@ data = asyncio.run(fetch_data())`}
         </pre>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Advanced Features</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Advanced Features</h2>
 
       <div className="grid md:grid-cols-2 gap-4 mb-8 not-prose">
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">Payment Caching</h3>
-          <p className="text-sm text-black/80">
+        <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
+          <h3 className="text-sm font-light text-white mb-2">Payment Caching</h3>
+          <p className="text-sm text-gray-400">
             Automatically cache payment proofs to avoid redundant payments for the same resource
           </p>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">Retry Logic</h3>
-          <p className="text-sm text-black/80">
+        <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
+          <h3 className="text-sm font-light text-white mb-2">Retry Logic</h3>
+          <p className="text-sm text-gray-400">
             Built-in retry mechanism for failed payments and network issues
           </p>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">Multi-Network</h3>
-          <p className="text-sm text-black/80">
+        <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
+          <h3 className="text-sm font-light text-white mb-2">Multi-Network</h3>
+          <p className="text-sm text-gray-400">
             Support for multiple blockchain networks with automatic network detection
           </p>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">TypeScript Types</h3>
-          <p className="text-sm text-black/80">
+        <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
+          <h3 className="text-sm font-light text-white mb-2">TypeScript Types</h3>
+          <p className="text-sm text-gray-400">
             Full TypeScript support with comprehensive type definitions
           </p>
         </div>
       </div>
 
-      <div className="bg-gradient-to-r from-[#FF7B00] to-[#FF9500] rounded-2xl p-6 text-white not-prose">
-        <h3 className="text-lg font-light italic mb-2">Learn More</h3>
-        <p className="text-sm opacity-90 mb-4">
-          Check out code examples and understand the payment flow in detail.
-        </p>
-        <div className="flex gap-3">
-          <Link
-            href="/docs/examples"
-            className="px-5 py-2.5 bg-white text-[#FF7B00] rounded-xl text-sm font-light italic hover:shadow-lg transition-all"
-          >
-            Code Examples
-          </Link>
-          <Link
-            href="/docs/payment-flow"
-            className="px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white rounded-xl text-sm font-light italic hover:bg-white/20 transition-all"
-          >
-            Payment Flow
-          </Link>
+      <div className="relative rounded-2xl p-6 text-white not-prose overflow-hidden">
+        {/* Enhanced gradient background - black to green */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#74a180]" />
+        
+        {/* Heavy grain texture overlay - increased for more visibility */}
+        <div 
+          className="absolute inset-0 opacity-[0.2] pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat',
+            backgroundSize: '150px 150px'
+          }}
+        />
+        <div 
+          className="absolute inset-0 opacity-[0.12] mix-blend-overlay pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='7' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat',
+            backgroundSize: '100px 100px'
+          }}
+        />
+        
+        <div className="relative z-10">
+          <h3 className="text-lg font-light mb-2">Learn More</h3>
+          <p className="text-sm opacity-90 mb-4">
+            Check out code examples and understand the payment flow in detail.
+          </p>
+          <div className="flex gap-3">
+            <Link
+              href="/docs/examples"
+              className="px-5 py-2.5 bg-white text-[#74a180] rounded-xl text-sm font-light hover:shadow-lg transition-all"
+            >
+              Code Examples
+            </Link>
+            <Link
+              href="/docs/payment-flow"
+              className="px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white rounded-xl text-sm font-light hover:bg-white/20 transition-all"
+            >
+              Payment Flow
+            </Link>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-

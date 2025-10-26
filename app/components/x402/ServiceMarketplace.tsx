@@ -22,10 +22,15 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
   const [selectedNetwork, setSelectedNetwork] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
+  const [showAll, setShowAll] = useState(false); // New state for "Load More"
 
   const categories = ['All', 'AI', 'Content', 'Development', 'Data', 'Tokens', 'Gaming', 'Social', 'Other'];
   const networks = ['All', 'base', 'base-sepolia', 'solana-mainnet', 'solana-devnet', 'polygon', 'peaq'];
   const [serviceType, setServiceType] = useState<'all' | 'production' | 'test'>('all');
+
+  // Display only first 9 services unless "Load More" is clicked
+  const displayedServices = showAll ? filteredServices : filteredServices.slice(0, 9);
+  const hasMore = filteredServices.length > 9;
 
   // Fetch services on component mount
   useEffect(() => {
@@ -43,6 +48,7 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
   // Filter services when filters change
   useEffect(() => {
     applyFilters();
+    setShowAll(false); // Reset to show only 9 when filters change
   }, [services, selectedCategory, selectedNetwork, searchQuery, serviceType]);
 
   const fetchServices = async () => {
@@ -130,8 +136,8 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
     return (
       <div className="flex items-center justify-center py-12">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#FF7B00] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-[#1E1E1E]/60">Discovering x402 services...</p>
+          <div className="w-16 h-16 border-4 border-[#74a180] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-400 font-light">Discovering x402 services...</p>
         </div>
       </div>
     );
@@ -140,12 +146,12 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
   if (error) {
     return (
       <div className="text-center py-12">
-        <div className="bg-[#FAFAFA] border-2 border-[#1E1E1E] rounded-lg p-6 max-w-md mx-auto">
-          <h3 className="text-[#1E1E1E] font-semibold mb-2">Connection Error</h3>
-          <p className="text-[#1E1E1E]/60 text-sm mb-4">{error}</p>
+        <div className="bg-black/40 backdrop-blur-sm border border-white/[0.15] rounded-lg p-6 max-w-md mx-auto">
+          <h3 className="text-white font-light mb-2">Connection Error</h3>
+          <p className="text-gray-400 text-sm mb-4 font-light">{error}</p>
           <button
             onClick={handleRefresh}
-            className="px-4 py-2 bg-[#FF7B00] text-white rounded hover:bg-[#1E1E1E] transition-colors text-sm font-medium"
+            className="px-4 py-2 bg-[#74a180] text-white rounded hover:bg-[#8fb896] transition-colors text-sm font-light"
           >
             Try Again
           </button>
@@ -159,37 +165,37 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold text-[#1E1E1E]">x402 Service Marketplace</h2>
+          <h2 className="text-3xl font-light text-white">x402 Service Marketplace</h2>
           <div className="flex items-center gap-4 mt-2">
-            <p className="text-[#1E1E1E]/70">
+            <p className="text-gray-400 font-light">
               {filteredServices.length} services available
             </p>
-            <span className="text-[#1E1E1E]/30">|</span>
-            <p className="text-[#FF7B00] font-semibold">
+            <span className="text-gray-700">|</span>
+            <p className="text-[#74a180] font-light">
               {productionCount} Production
             </p>
-            <p className="text-[#1E1E1E]/70 font-semibold">
+            <p className="text-gray-400 font-light">
               {testCount} Test
             </p>
           </div>
           <div className="flex items-center gap-2 mt-2 text-sm">
-            <span className="inline-flex items-center gap-2 text-[#FF7B00] font-medium">
-              <span className="w-2 h-2 bg-[#FF7B00] rounded-full animate-pulse"></span>
+            <span className="inline-flex items-center gap-2 text-[#74a180] font-light">
+              <span className="w-2 h-2 bg-[#74a180] rounded-full animate-pulse"></span>
               <span>Live</span>
             </span>
-            <span className="text-[#1E1E1E]/30">|</span>
-            <span className="text-[#1E1E1E]/60">
+            <span className="text-gray-700">|</span>
+            <span className="text-gray-500 font-light">
               Updated: {lastRefresh.toLocaleTimeString()}
             </span>
-            <span className="text-[#1E1E1E]/30">|</span>
-            <span className="text-[#1E1E1E]/50 text-xs">
+            <span className="text-gray-700">|</span>
+            <span className="text-gray-600 text-xs font-light">
               (auto-refresh: 60s)
             </span>
           </div>
         </div>
         <button
           onClick={handleRefresh}
-          className="px-6 py-3 border-2 border-[#1E1E1E] text-[#1E1E1E] rounded hover:bg-[#1E1E1E] hover:text-white transition-all font-semibold"
+          className="px-6 py-3 border border-white/20 text-white rounded hover:bg-white/10 transition-all font-light"
         >
           Refresh
         </button>
@@ -200,30 +206,30 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
         <div className="flex gap-3">
           <button
             onClick={() => setServiceType('all')}
-            className={`px-6 py-3 rounded font-semibold transition-all ${
+            className={`px-6 py-3 rounded font-light transition-all ${
               serviceType === 'all'
-                ? 'bg-[#1E1E1E] text-white'
-                : 'bg-[#FAFAFA] text-[#1E1E1E] border-2 border-[#1E1E1E] hover:bg-[#1E1E1E] hover:text-white'
+                ? 'bg-white/10 text-white border border-white/20'
+                : 'bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10 hover:text-white'
             }`}
           >
             All Services ({services.length})
           </button>
           <button
             onClick={() => setServiceType('production')}
-            className={`px-6 py-3 rounded font-semibold transition-all ${
+            className={`px-6 py-3 rounded font-light transition-all ${
               serviceType === 'production'
-                ? 'bg-[#FF7B00] text-white'
-                : 'bg-[#FAFAFA] text-[#1E1E1E] border-2 border-[#FF7B00] hover:bg-[#FF7B00] hover:text-white'
+                ? 'bg-[#74a180] text-white'
+                : 'bg-white/5 text-gray-400 border border-[#74a180]/30 hover:bg-[#74a180]/20 hover:text-white'
             }`}
           >
             Production ({productionCount})
           </button>
           <button
             onClick={() => setServiceType('test')}
-            className={`px-6 py-3 rounded font-semibold transition-all ${
+            className={`px-6 py-3 rounded font-light transition-all ${
               serviceType === 'test'
-                ? 'bg-[#1E1E1E] text-white'
-                : 'bg-[#FAFAFA] text-[#1E1E1E] border-2 border-[#1E1E1E] hover:bg-[#1E1E1E] hover:text-white'
+                ? 'bg-white/10 text-white border border-white/20'
+                : 'bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10 hover:text-white'
             }`}
           >
             Test ({testCount})
@@ -232,44 +238,44 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
       </div>
 
       {/* Filters */}
-      <div className="bg-[#FAFAFA] border-2 border-[#1E1E1E] rounded-lg p-6">
+      <div className="bg-black/40 backdrop-blur-sm border border-white/[0.15] rounded-lg p-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Search */}
           <div>
-            <label className="block text-sm font-semibold text-[#1E1E1E] mb-2">Search</label>
+            <label className="block text-sm font-light text-white mb-2">Search</label>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search services..."
-              className="w-full px-4 py-3 border-2 border-[#1E1E1E] rounded focus:outline-none focus:border-[#FF7B00] bg-white text-[#1E1E1E] placeholder-[#1E1E1E]/40 font-medium"
+              className="w-full px-4 py-3 border border-white/20 rounded focus:outline-none focus:border-[#74a180] bg-white/5 text-white placeholder-gray-500 font-light"
             />
           </div>
 
           {/* Category Filter */}
           <div>
-            <label className="block text-sm font-semibold text-[#1E1E1E] mb-2">Category</label>
+            <label className="block text-sm font-light text-white mb-2">Category</label>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-4 py-3 border-2 border-[#1E1E1E] rounded focus:outline-none focus:border-[#FF7B00] bg-white text-[#1E1E1E] font-medium"
+              className="w-full px-4 py-3 border border-white/20 rounded focus:outline-none focus:border-[#74a180] bg-white/5 text-white font-light"
             >
               {categories.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
+                <option key={cat} value={cat} className="bg-black">{cat}</option>
               ))}
             </select>
           </div>
 
           {/* Network Filter */}
           <div>
-            <label className="block text-sm font-semibold text-[#1E1E1E] mb-2">Network</label>
+            <label className="block text-sm font-light text-white mb-2">Network</label>
             <select
               value={selectedNetwork}
               onChange={(e) => setSelectedNetwork(e.target.value)}
-              className="w-full px-4 py-3 border-2 border-[#1E1E1E] rounded focus:outline-none focus:border-[#FF7B00] bg-white text-[#1E1E1E] font-medium"
+              className="w-full px-4 py-3 border border-white/20 rounded focus:outline-none focus:border-[#74a180] bg-white/5 text-white font-light"
             >
               {networks.map(net => (
-                <option key={net} value={net}>{net}</option>
+                <option key={net} value={net} className="bg-black">{net}</option>
               ))}
             </select>
           </div>
@@ -278,30 +284,30 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
 
       {/* Empty State - No Production Services Yet */}
       {filteredServices.length === 0 && serviceType === 'production' && (
-        <div className="text-center py-16 bg-[#FAFAFA] border-2 border-[#1E1E1E] rounded-lg">
-          <h3 className="text-2xl font-bold text-[#1E1E1E] mb-4">
+        <div className="text-center py-16 bg-black/40 backdrop-blur-sm border border-white/[0.15] rounded-lg">
+          <h3 className="text-2xl font-light text-white mb-4">
             Be the First to List Your x402 Service
           </h3>
-          <p className="text-[#1E1E1E]/60 mb-8 max-w-2xl mx-auto">
+          <p className="text-gray-400 mb-8 max-w-2xl mx-auto font-light">
             The x402 ecosystem is growing. Deploy your x402-enabled API and register it here 
             to be discovered by users worldwide.
           </p>
           <div className="flex gap-4 justify-center">
             <button
               onClick={() => router.push('/docs/quickstart')}
-              className="px-6 py-3 bg-[#1E1E1E] text-white rounded hover:bg-[#FF7B00] transition-colors font-medium"
+              className="px-6 py-3 bg-white/10 text-white rounded hover:bg-white/20 transition-colors font-light border border-white/10"
             >
               View x402 Quickstart
             </button>
             <button
               onClick={() => {/* Service registration modal */}}
-              className="px-6 py-3 bg-[#FF7B00] text-white rounded hover:bg-[#1E1E1E] transition-colors font-medium"
+              className="px-6 py-3 bg-[#74a180] text-white rounded hover:bg-[#8fb896] transition-colors font-light"
             >
               Register Your Service
             </button>
           </div>
-          <div className="mt-8 text-sm text-[#1E1E1E]/60">
-            <p>Using Echo Merchant? Switch to Test tab to test x402 protocol</p>
+          <div className="mt-8 text-sm text-gray-500">
+            <p className="font-light">Using Echo Merchant? Switch to Test tab to test x402 protocol</p>
           </div>
         </div>
       )}
@@ -309,24 +315,46 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
       {/* Services Grid */}
       {filteredServices.length === 0 && serviceType !== 'production' ? (
         <div className="text-center py-12">
-          <h3 className="text-[#1E1E1E] font-semibold mb-2">No services found</h3>
-          <p className="text-[#1E1E1E]/60">
+          <h3 className="text-white font-light mb-2">No services found</h3>
+          <p className="text-gray-400 font-light">
             Try adjusting your filters or search query
           </p>
         </div>
       ) : filteredServices.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredServices.map((service) => (
-            <ServiceCard
-              key={service.id}
-              service={service}
-              onTest={onTestService}
-              onGetCode={onGetCode}
-              onPayAndUse={onPayAndUse}
-              isTestingActive={isTestingActive}
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {displayedServices.map((service) => (
+              <ServiceCard
+                key={service.id}
+                service={service}
+                onTest={onTestService}
+                onGetCode={onGetCode}
+                onPayAndUse={onPayAndUse}
+                isTestingActive={isTestingActive}
+              />
+            ))}
+          </div>
+          
+          {/* Load More Button */}
+          {!showAll && hasMore && (
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={() => setShowAll(true)}
+                className="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-[#74a180] text-white rounded-lg transition-all duration-300 font-light text-lg group"
+              >
+                <span className="flex items-center gap-3">
+                  Load More
+                  <span className="text-gray-400 text-sm">
+                    ({filteredServices.length - 9} more)
+                  </span>
+                  <svg className="w-5 h-5 transition-transform group-hover:translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+          )}
+        </>
       ) : null}
     </div>
   );

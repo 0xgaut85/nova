@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
+import Image from 'next/image';
 import { validateServiceEndpoint, validatePaymentAmount } from '@/lib/x402-utils';
 
 interface ServiceRegistrationProps {
@@ -171,240 +172,254 @@ export function ServiceRegistration({ onClose }: ServiceRegistrationProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto border-2 border-[#1E1E1E]">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-2xl font-bold text-[#1E1E1E]">Register x402 Service</h2>
-            <p className="text-[#1E1E1E]/70">Add your API to the x402 marketplace</p>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-[#FAFAFA] rounded transition-colors text-[#1E1E1E]"
-          >
-            ✕
-          </button>
-        </div>
-
-        {/* Connection Status */}
-        {!isConnected && (
-          <div className="mb-6 p-4 bg-[#FF7B00]/10 border-2 border-[#FF7B00] rounded-lg">
-            <p className="text-[#FF7B00] text-sm">
-              <strong>Wallet Required:</strong> Please connect your wallet to register a service.
-            </p>
-          </div>
-        )}
-
-        {/* Success/Error Messages */}
-        {submitResult && (
-          <div className={`mb-6 p-4 rounded-lg border-2 ${
-            submitResult.success 
-              ? 'border-[#FF7B00] bg-[#FF7B00]/10' 
-              : 'border-[#1E1E1E] bg-[#1E1E1E]/10'
-          }`}>
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">
-                {submitResult.success ? '✓' : '✗'}
-              </span>
-              <div>
-                <h4 className={`font-medium ${
-                  submitResult.success ? 'text-[#FF7B00]' : 'text-[#1E1E1E]'
-                }`}>
-                  {submitResult.success ? 'Registration Successful!' : 'Registration Failed'}
-                </h4>
-                <p className={`text-sm ${
-                  submitResult.success ? 'text-[#FF7B00]/80' : 'text-[#1E1E1E]/80'
-                }`}>
-                  {submitResult.message}
-                </p>
-                {submitResult.serviceId && (
-                  <p className="text-xs text-[#FF7B00]/80 mt-1">
-                    Service ID: {submitResult.serviceId}
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Registration Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Service Name */}
-          <div>
-            <label className="block text-sm font-medium text-[#1E1E1E] mb-2">
-              Service Name *
-            </label>
-            <input
-              type="text"
-              value={formData.name}
-              onChange={(e) => handleInputChange('name', e.target.value)}
-              placeholder="e.g., AI Content Generator"
-              className={`w-full px-4 py-3 border-2 rounded focus:ring-2 focus:ring-[#FF7B00] focus:border-transparent ${
-                errors.name ? 'border-[#1E1E1E]' : 'border-[#1E1E1E]'
-              }`}
-            />
-            {errors.name && <p className="text-[#1E1E1E] text-sm mt-1">{errors.name}</p>}
-          </div>
-
-          {/* Description */}
-          <div>
-            <label className="block text-sm font-medium text-[#1E1E1E] mb-2">
-              Description *
-            </label>
-            <textarea
-              value={formData.description}
-              onChange={(e) => handleInputChange('description', e.target.value)}
-              placeholder="Describe what your service does and how it helps users..."
-              rows={3}
-              className={`w-full px-4 py-3 border-2 rounded focus:ring-2 focus:ring-[#FF7B00] focus:border-transparent ${
-                errors.description ? 'border-[#1E1E1E]' : 'border-[#1E1E1E]'
-              }`}
-            />
-            {errors.description && <p className="text-[#1E1E1E] text-sm mt-1">{errors.description}</p>}
-          </div>
-
-          {/* API Endpoint */}
-          <div>
-            <label className="block text-sm font-medium text-[#1E1E1E] mb-2">
-              API Endpoint *
-            </label>
-            <input
-              type="url"
-              value={formData.endpoint}
-              onChange={(e) => handleInputChange('endpoint', e.target.value)}
-              placeholder="https://api.yourservice.com/endpoint"
-              className={`w-full px-4 py-3 border-2 rounded focus:ring-2 focus:ring-[#FF7B00] focus:border-transparent ${
-                errors.endpoint ? 'border-[#1E1E1E]' : 'border-[#1E1E1E]'
-              }`}
-            />
-            {errors.endpoint && <p className="text-[#1E1E1E] text-sm mt-1">{errors.endpoint}</p>}
-            <p className="text-[#1E1E1E]/60 text-xs mt-1">
-              Your API must implement x402 payment middleware
-            </p>
-          </div>
-
-          {/* Price and Currency */}
-          <div className="grid grid-cols-2 gap-4">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="relative bg-black border border-white/[0.15] rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        {/* Grain texture overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.08] pointer-events-none rounded-lg"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat',
+            backgroundSize: '150px 150px'
+          }}
+        />
+        
+        <div className="relative z-10">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-6">
             <div>
-              <label className="block text-sm font-medium text-[#1E1E1E] mb-2">
-                Price per Request *
-              </label>
-              <input
-                type="number"
-                step="0.001"
-                min="0.001"
-                max="1000"
-                value={formData.price.amount}
-                onChange={(e) => handleInputChange('price.amount', e.target.value)}
-                placeholder="0.01"
-                className={`w-full px-4 py-3 border-2 rounded focus:ring-2 focus:ring-[#FF7B00] focus:border-transparent ${
-                  errors.price ? 'border-[#1E1E1E]' : 'border-[#1E1E1E]'
-                }`}
-              />
-              {errors.price && <p className="text-[#1E1E1E] text-sm mt-1">{errors.price}</p>}
+              <h2 className="text-2xl font-light text-white">Register x402 Service</h2>
+              <p className="text-gray-400 font-light">Add your API to the marketplace</p>
             </div>
-
-            <div>
-              <label className="block text-sm font-medium text-[#1E1E1E] mb-2">
-                Currency
-              </label>
-              <select
-                value={formData.price.currency}
-                onChange={(e) => handleInputChange('price.currency', e.target.value)}
-                className="w-full px-4 py-3 border-2 border-[#1E1E1E] rounded focus:ring-2 focus:ring-[#FF7B00] focus:border-transparent"
-              >
-                {currencies.map(currency => (
-                  <option key={currency.id} value={currency.id}>
-                    {currency.name}
-                  </option>
-                ))}
-              </select>
-              {errors.currency && <p className="text-[#1E1E1E] text-sm mt-1">{errors.currency}</p>}
-            </div>
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-white/10 rounded transition-colors text-gray-400 hover:text-white"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </div>
 
-          {/* Network and Category */}
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-[#1E1E1E] mb-2">
-                Network
-              </label>
-              <select
-                value={formData.network}
-                onChange={(e) => handleInputChange('network', e.target.value)}
-                className="w-full px-4 py-3 border-2 border-[#1E1E1E] rounded focus:ring-2 focus:ring-[#FF7B00] focus:border-transparent"
-              >
-                {networks.map(network => (
-                  <option key={network.id} value={network.id}>
-                    {network.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-[#1E1E1E] mb-2">
-                Category
-              </label>
-              <select
-                value={formData.category}
-                onChange={(e) => handleInputChange('category', e.target.value)}
-                className="w-full px-4 py-3 border-2 border-[#1E1E1E] rounded focus:ring-2 focus:ring-[#FF7B00] focus:border-transparent"
-              >
-                {categories.map(category => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          {/* Connected Wallet Info */}
-          {isConnected && address && (
-            <div className="p-4 bg-[#FAFAFA] rounded-lg border-2 border-[#1E1E1E]">
-              <h4 className="font-medium text-[#1E1E1E] mb-2">Connected Wallet</h4>
-              <p className="text-[#1E1E1E] text-sm font-mono">{address}</p>
-              <p className="text-[#1E1E1E]/60 text-xs mt-1">
-                Payments will be sent to this address
+          {/* Connection Status */}
+          {!isConnected && (
+            <div className="mb-6 p-4 bg-[#74a180]/10 border border-[#74a180]/30 rounded-lg">
+              <p className="text-[#74a180] text-sm font-light">
+                <strong className="font-normal">Wallet Required:</strong> Please connect your wallet to register a service.
               </p>
             </div>
           )}
 
-          {/* Submit Button */}
-          <div className="flex gap-3">
-            <button
-              type="submit"
-              disabled={!isConnected || isSubmitting}
-              className={`flex-1 px-4 py-3 rounded font-medium transition-colors ${
-                !isConnected || isSubmitting
-                  ? 'bg-[#1E1E1E]/30 text-[#1E1E1E]/50 cursor-not-allowed'
-                  : 'bg-[#FF7B00] text-white hover:bg-[#1E1E1E]'
-              }`}
-            >
-              {isSubmitting ? 'Submitting...' : 'Register Service'}
-            </button>
-            
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-3 bg-[#FAFAFA] text-[#1E1E1E] rounded hover:bg-[#1E1E1E] hover:text-white transition-colors border-2 border-[#1E1E1E]"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
+          {/* Success/Error Messages */}
+          {submitResult && (
+            <div className={`mb-6 p-4 rounded-lg border ${
+              submitResult.success 
+                ? 'border-[#74a180]/30 bg-[#74a180]/10' 
+                : 'border-red-500/30 bg-red-500/10'
+            }`}>
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">
+                  {submitResult.success ? '✓' : '✗'}
+                </span>
+                <div>
+                  <h4 className={`font-light ${
+                    submitResult.success ? 'text-[#74a180]' : 'text-red-400'
+                  }`}>
+                    {submitResult.success ? 'Registration Successful!' : 'Registration Failed'}
+                  </h4>
+                  <p className={`text-sm font-light ${
+                    submitResult.success ? 'text-[#74a180]/80' : 'text-red-400/80'
+                  }`}>
+                    {submitResult.message}
+                  </p>
+                  {submitResult.serviceId && (
+                    <p className="text-xs text-[#74a180]/80 mt-1 font-light">
+                      Service ID: {submitResult.serviceId}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
-        {/* Info Section */}
-        <div className="mt-6 p-4 bg-[#FAFAFA] rounded-lg border-2 border-[#1E1E1E]">
-          <h4 className="font-medium text-[#1E1E1E] mb-2">Next Steps</h4>
-          <ol className="text-[#1E1E1E]/80 text-sm space-y-1 list-decimal list-inside">
-            <li>Your service will be reviewed within 24 hours</li>
-            <li>Ensure your API implements x402 payment middleware</li>
-            <li>Test your integration using our code generator</li>
-            <li>Once approved, your service will appear in the marketplace</li>
-          </ol>
+          {/* Registration Form */}
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Service Name */}
+            <div>
+              <label className="block text-sm font-light text-white mb-2">
+                Service Name *
+              </label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => handleInputChange('name', e.target.value)}
+                placeholder="e.g., AI Content Generator"
+                className={`w-full px-4 py-3 border rounded bg-white/5 text-white placeholder-gray-500 font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent ${
+                  errors.name ? 'border-red-500/50' : 'border-white/20'
+                }`}
+              />
+              {errors.name && <p className="text-red-400 text-sm mt-1 font-light">{errors.name}</p>}
+            </div>
+
+            {/* Description */}
+            <div>
+              <label className="block text-sm font-light text-white mb-2">
+                Description *
+              </label>
+              <textarea
+                value={formData.description}
+                onChange={(e) => handleInputChange('description', e.target.value)}
+                placeholder="Describe what your service does and how it helps users..."
+                rows={3}
+                className={`w-full px-4 py-3 border rounded bg-white/5 text-white placeholder-gray-500 font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent ${
+                  errors.description ? 'border-red-500/50' : 'border-white/20'
+                }`}
+              />
+              {errors.description && <p className="text-red-400 text-sm mt-1 font-light">{errors.description}</p>}
+            </div>
+
+            {/* API Endpoint */}
+            <div>
+              <label className="block text-sm font-light text-white mb-2">
+                API Endpoint *
+              </label>
+              <input
+                type="url"
+                value={formData.endpoint}
+                onChange={(e) => handleInputChange('endpoint', e.target.value)}
+                placeholder="https://api.yourservice.com/endpoint"
+                className={`w-full px-4 py-3 border rounded bg-white/5 text-white placeholder-gray-500 font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent ${
+                  errors.endpoint ? 'border-red-500/50' : 'border-white/20'
+                }`}
+              />
+              {errors.endpoint && <p className="text-red-400 text-sm mt-1 font-light">{errors.endpoint}</p>}
+              <p className="text-gray-500 text-xs mt-1 font-light">
+                Your API must implement x402 payment middleware
+              </p>
+            </div>
+
+            {/* Price and Currency */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-light text-white mb-2">
+                  Price per Request *
+                </label>
+                <input
+                  type="number"
+                  step="0.001"
+                  min="0.001"
+                  max="1000"
+                  value={formData.price.amount}
+                  onChange={(e) => handleInputChange('price.amount', e.target.value)}
+                  placeholder="0.01"
+                  className={`w-full px-4 py-3 border rounded bg-white/5 text-white placeholder-gray-500 font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent ${
+                    errors.price ? 'border-red-500/50' : 'border-white/20'
+                  }`}
+                />
+                {errors.price && <p className="text-red-400 text-sm mt-1 font-light">{errors.price}</p>}
+              </div>
+
+              <div>
+                <label className="block text-sm font-light text-white mb-2">
+                  Currency
+                </label>
+                <select
+                  value={formData.price.currency}
+                  onChange={(e) => handleInputChange('price.currency', e.target.value)}
+                  className="w-full px-4 py-3 border border-white/20 rounded bg-white/5 text-white font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent"
+                >
+                  {currencies.map(currency => (
+                    <option key={currency.id} value={currency.id} className="bg-black">
+                      {currency.name}
+                    </option>
+                  ))}
+                </select>
+                {errors.currency && <p className="text-red-400 text-sm mt-1 font-light">{errors.currency}</p>}
+              </div>
+            </div>
+
+            {/* Network and Category */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-light text-white mb-2">
+                  Network
+                </label>
+                <select
+                  value={formData.network}
+                  onChange={(e) => handleInputChange('network', e.target.value)}
+                  className="w-full px-4 py-3 border border-white/20 rounded bg-white/5 text-white font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent"
+                >
+                  {networks.map(network => (
+                    <option key={network.id} value={network.id} className="bg-black">
+                      {network.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-light text-white mb-2">
+                  Category
+                </label>
+                <select
+                  value={formData.category}
+                  onChange={(e) => handleInputChange('category', e.target.value)}
+                  className="w-full px-4 py-3 border border-white/20 rounded bg-white/5 text-white font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent"
+                >
+                  {categories.map(category => (
+                    <option key={category.id} value={category.id} className="bg-black">
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Connected Wallet Info */}
+            {isConnected && address && (
+              <div className="p-4 bg-white/5 rounded-lg border border-white/10">
+                <h4 className="font-light text-white mb-2">Connected Wallet</h4>
+                <p className="text-gray-400 text-sm font-mono font-light">{address}</p>
+                <p className="text-gray-500 text-xs mt-1 font-light">
+                  Payments will be sent to this address
+                </p>
+              </div>
+            )}
+
+            {/* Submit Button */}
+            <div className="flex gap-3">
+              <button
+                type="submit"
+                disabled={!isConnected || isSubmitting}
+                className={`flex-1 px-4 py-3 rounded font-light transition-colors ${
+                  !isConnected || isSubmitting
+                    ? 'bg-white/10 text-gray-500 cursor-not-allowed'
+                    : 'bg-[#74a180] text-white hover:bg-[#8fb896]'
+                }`}
+              >
+                {isSubmitting ? 'Submitting...' : 'Register Service'}
+              </button>
+              
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-3 bg-white/5 text-white rounded hover:bg-white/10 transition-colors border border-white/10 font-light"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+
+          {/* Info Section */}
+          <div className="mt-6 p-4 bg-white/5 rounded-lg border border-white/10">
+            <h4 className="font-light text-white mb-2">Next Steps</h4>
+            <ol className="text-gray-400 text-sm space-y-1 list-decimal list-inside font-light">
+              <li>Your service will be reviewed within 24 hours</li>
+              <li>Ensure your API implements x402 payment middleware</li>
+              <li>Test your integration using our code generator</li>
+              <li>Once approved, your service will appear in the marketplace</li>
+            </ol>
+          </div>
         </div>
       </div>
     </div>

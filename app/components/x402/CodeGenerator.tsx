@@ -231,9 +231,9 @@ asyncio.run(main())`;
 
   if (loading) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white rounded-2xl p-6">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
+      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
+        <div className="bg-black border border-white/[0.15] rounded-lg p-8">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#74a180] mx-auto"></div>
         </div>
       </div>
     );
@@ -241,10 +241,10 @@ asyncio.run(main())`;
 
   if (!service) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white rounded-2xl p-6">
-          <p className="text-red-600">Service not found</p>
-          <button onClick={onClose} className="mt-4 px-4 py-2 bg-gray-200 rounded">
+      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
+        <div className="bg-black border border-white/[0.15] rounded-lg p-8">
+          <p className="text-red-400 font-light">Service not found</p>
+          <button onClick={onClose} className="mt-4 px-4 py-2 bg-white/10 text-white rounded hover:bg-white/20 transition-colors font-light">
             Close
           </button>
         </div>
@@ -253,60 +253,72 @@ asyncio.run(main())`;
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="relative bg-black border border-white/[0.15] rounded-lg p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        {/* Grain texture overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.08] pointer-events-none rounded-lg"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat',
+            backgroundSize: '150px 150px'
+          }}
+        />
+        
+        <div className="relative z-10">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-xl font-bold text-gray-900">Integration Code</h2>
-            <p className="text-gray-600">{service.name}</p>
+            <h2 className="text-2xl font-light text-white">Integration Code</h2>
+            <p className="text-gray-400 font-light">{service.name}</p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="text-gray-400 hover:text-white transition-colors"
           >
-            ✕
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </button>
         </div>
 
         {/* Service Info */}
-        <div className="bg-gray-50 rounded-lg p-4 mb-6">
+        <div className="bg-white/5 rounded-lg p-4 mb-6 border border-white/10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
             <div>
-              <span className="text-gray-500">Endpoint:</span>
-              <p className="font-mono text-xs break-all">{service.endpoint}</p>
+              <span className="text-gray-500 font-light">Endpoint:</span>
+              <p className="font-mono text-xs break-all text-white font-light">{service.endpoint}</p>
             </div>
             <div>
-              <span className="text-gray-500">Price:</span>
-              <p className="font-semibold">${service.price.amount} {service.price.currency}</p>
+              <span className="text-gray-500 font-light">Price:</span>
+              <p className="font-light text-white">${service.price.amount} {service.price.currency}</p>
             </div>
             <div>
-              <span className="text-gray-500">Network:</span>
-              <p className="font-semibold">{service.price.network}</p>
+              <span className="text-gray-500 font-light">Network:</span>
+              <p className="font-light text-white">{service.price.network}</p>
             </div>
             <div>
-              <span className="text-gray-500">Category:</span>
-              <p className="font-semibold">{service.category}</p>
+              <span className="text-gray-500 font-light">Category:</span>
+              <p className="font-light text-white">{service.category}</p>
             </div>
           </div>
         </div>
 
         {/* Framework Selection */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-3">Select Framework:</label>
+          <label className="block text-sm font-light text-gray-400 mb-3">Select Framework:</label>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {frameworks.map(framework => (
               <button
                 key={framework.id}
                 onClick={() => setSelectedFramework(framework.id as any)}
-                className={`p-3 rounded-lg border-2 text-left transition-all ${
+                className={`p-3 rounded-lg border text-left transition-all ${
                   selectedFramework === framework.id
-                    ? 'border-blue-500 bg-blue-50'
-                    : 'border-gray-200 hover:border-gray-300'
+                    ? 'border-[#74a180] bg-[#74a180]/10'
+                    : 'border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10'
                 }`}
               >
-                <div className="text-lg mb-1">{framework.icon}</div>
-                <div className="text-sm font-medium text-gray-900">{framework.name}</div>
+                <div className="text-sm font-light text-white">{framework.name}</div>
               </button>
             ))}
           </div>
@@ -315,17 +327,17 @@ asyncio.run(main())`;
         {/* Generated Code */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-semibold text-gray-900">Generated Code</h3>
+            <h3 className="text-lg font-light text-white">Generated Code</h3>
             <button
               onClick={copyToClipboard}
-              className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors"
+              className="px-4 py-2 bg-[#74a180] text-white text-sm rounded hover:bg-[#8fb896] transition-colors font-light"
             >
               📋 Copy
             </button>
           </div>
           
-          <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto">
-            <pre className="text-green-400 text-sm font-mono whitespace-pre-wrap">
+          <div className="bg-black/60 border border-white/10 rounded-lg p-4 overflow-x-auto">
+            <pre className="text-[#74a180] text-sm font-mono whitespace-pre-wrap">
               {generateCode()}
             </pre>
           </div>
@@ -333,10 +345,10 @@ asyncio.run(main())`;
 
         {/* Environment Variables */}
         <div className="mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-3">Environment Variables</h3>
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-            <p className="text-yellow-800 text-sm mb-2">Add these to your .env file:</p>
-            <pre className="text-yellow-900 text-sm font-mono">
+          <h3 className="text-lg font-light text-white mb-3">Environment Variables</h3>
+          <div className="bg-[#74a180]/10 border border-[#74a180]/30 rounded-lg p-4">
+            <p className="text-gray-300 text-sm mb-2 font-light">Add these to your .env file:</p>
+            <pre className="text-white text-sm font-mono">
 {`PAYAI_FACILITATOR_URL=https://facilitator.payai.network
 X402_NETWORK=${service.price.network}
 WALLET_ADDRESS=your_wallet_address_here`}
@@ -345,15 +357,16 @@ WALLET_ADDRESS=your_wallet_address_here`}
         </div>
 
         {/* Next Steps */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h4 className="font-medium text-blue-900 mb-2">Next Steps:</h4>
-          <ol className="text-blue-800 text-sm space-y-1 list-decimal list-inside">
+        <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+          <h4 className="font-light text-white mb-2">Next Steps:</h4>
+          <ol className="text-gray-400 text-sm space-y-1 list-decimal list-inside font-light">
             <li>Install the required x402 client library</li>
             <li>Set up your environment variables</li>
             <li>Configure your wallet for {service.price.network} network</li>
             <li>Test the integration using our Echo Merchant first</li>
             <li>Go live with the actual service endpoint</li>
           </ol>
+        </div>
         </div>
       </div>
     </div>

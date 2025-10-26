@@ -21,7 +21,7 @@ export const config = createConfig({
     }),
     // Coinbase Wallet for Base network optimization
     coinbaseWallet({
-      appName: 'xGrain402',
+      appName: 'Lumen402',
       appLogoUrl: '/logo.png',
     }),
   ],

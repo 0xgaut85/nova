@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 import { payaiClient } from '@/lib/payai-client';
 
+// Force dynamic rendering - don't cache this route
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET() {
   try {
     const result = await payaiClient.discoverServices();
@@ -14,8 +18,14 @@ export async function GET() {
 
     return NextResponse.json({
       success: true,
-      services: result.data,
+      services: result.data || [],
       timestamp: new Date().toISOString(),
+    }, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+      }
     });
   } catch (error) {
     console.error('Service discovery API error:', error);
@@ -60,6 +70,12 @@ export async function POST(request: Request) {
       services: filteredServices,
       filters: { category, network },
       timestamp: new Date().toISOString(),
+    }, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+      }
     });
   } catch (error) {
     console.error('Service filtering API error:', error);

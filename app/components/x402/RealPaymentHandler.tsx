@@ -148,141 +148,153 @@ export function RealPaymentHandler({ service, onSuccess, onError, onClose }: Rea
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl max-w-lg w-full p-6 relative">
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="relative bg-black border border-white/[0.15] rounded-lg max-w-lg w-full p-8">
+        {/* Grain texture overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.08] pointer-events-none rounded-lg"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat',
+            backgroundSize: '150px 150px'
+          }}
+        />
 
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Pay & Use Service</h2>
+        <div className="relative z-10">
+          <button
+            onClick={onClose}
+            className="absolute top-0 right-0 text-gray-400 hover:text-white transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
 
-        {/* Service Details */}
-        <div className="bg-gray-50 rounded-lg p-4 mb-6">
-          <h3 className="font-semibold text-gray-900 mb-2">{service.name}</h3>
-          <p className="text-sm text-gray-600 mb-3">{service.description}</p>
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-600">Price:</span>
-            <span className="font-semibold">{service.price.amount} {service.price.currency}</span>
+          <h2 className="text-2xl font-light text-white mb-6">Pay & Use Service</h2>
+
+          {/* Service Details */}
+          <div className="bg-white/5 rounded-lg p-4 mb-6 border border-white/10">
+            <h3 className="font-light text-white mb-2">{service.name}</h3>
+            <p className="text-sm text-gray-400 mb-3 font-light">{service.description}</p>
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-gray-400 font-light">Price:</span>
+              <span className="font-light text-white">{service.price.amount} {service.price.currency}</span>
+            </div>
+            <div className="flex items-center justify-between text-sm mt-1">
+              <span className="text-gray-400 font-light">Network:</span>
+              <span className="font-light text-white">{networkName}</span>
+            </div>
           </div>
-          <div className="flex items-center justify-between text-sm mt-1">
-            <span className="text-gray-600">Network:</span>
-            <span className="font-semibold">{networkName}</span>
-          </div>
-        </div>
 
-        {/* Payment Steps */}
-        <div className="space-y-4">
-          {/* Step 1: Switch Network */}
-          {step === 'switch-network' && (
-            <div className="border border-orange-200 rounded-lg p-4 bg-orange-50">
-              <div className="flex items-start gap-3">
-                <span className="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-semibold flex-shrink-0">1</span>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-gray-900 mb-2">Switch Network</h4>
-                  <p className="text-sm text-gray-600 mb-3">
-                    Please switch to {networkName} to continue
-                  </p>
-                  <button
-                    onClick={handleSwitchNetwork}
-                    className="w-full px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors font-medium"
-                  >
-                    Switch to {networkName}
-                  </button>
+          {/* Payment Steps */}
+          <div className="space-y-4">
+            {/* Step 1: Switch Network */}
+            {step === 'switch-network' && (
+              <div className="border border-[#74a180]/30 rounded-lg p-4 bg-[#74a180]/10">
+                <div className="flex items-start gap-3">
+                  <span className="w-6 h-6 bg-[#74a180] text-white rounded-full flex items-center justify-center text-sm font-light flex-shrink-0">1</span>
+                  <div className="flex-1">
+                    <h4 className="font-light text-white mb-2">Switch Network</h4>
+                    <p className="text-sm text-gray-400 mb-3 font-light">
+                      Please switch to {networkName} to continue
+                    </p>
+                    <button
+                      onClick={handleSwitchNetwork}
+                      className="w-full px-4 py-2 bg-[#74a180] text-white rounded-lg hover:bg-[#8fb896] transition-colors font-light"
+                    >
+                      Switch to {networkName}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Step 2: Approve USDC */}
-          {(step === 'approve' || step === 'approving') && (
-            <div className="border border-blue-200 rounded-lg p-4 bg-blue-50">
-              <div className="flex items-start gap-3">
-                <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-semibold flex-shrink-0">1</span>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-gray-900 mb-2">Approve USDC Spending</h4>
-                  <p className="text-sm text-gray-600 mb-3">
-                    Allow the service to spend {service.price.amount} USDC from your wallet
-                  </p>
-                  <button
-                    onClick={handleApprove}
-                    disabled={isApprovePending || isApproveConfirming || step === 'approving'}
-                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isApprovePending || isApproveConfirming ? 'Approving...' : 'Approve USDC'}
-                  </button>
+            {/* Step 2: Approve USDC */}
+            {(step === 'approve' || step === 'approving') && (
+              <div className="border border-[#74a180]/30 rounded-lg p-4 bg-[#74a180]/10">
+                <div className="flex items-start gap-3">
+                  <span className="w-6 h-6 bg-[#74a180] text-white rounded-full flex items-center justify-center text-sm font-light flex-shrink-0">1</span>
+                  <div className="flex-1">
+                    <h4 className="font-light text-white mb-2">Approve USDC Spending</h4>
+                    <p className="text-sm text-gray-400 mb-3 font-light">
+                      Allow the service to spend {service.price.amount} USDC from your wallet
+                    </p>
+                    <button
+                      onClick={handleApprove}
+                      disabled={isApprovePending || isApproveConfirming || step === 'approving'}
+                      className="w-full px-4 py-2 bg-[#74a180] text-white rounded-lg hover:bg-[#8fb896] transition-colors font-light disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isApprovePending || isApproveConfirming ? 'Approving...' : 'Approve USDC'}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Step 3: Send Payment */}
-          {(step === 'pay' || step === 'paying') && (
-            <div className="border border-green-200 rounded-lg p-4 bg-green-50">
-              <div className="flex items-start gap-3">
-                <span className="w-6 h-6 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-semibold flex-shrink-0">2</span>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-gray-900 mb-2">Send Payment</h4>
-                  <p className="text-sm text-gray-600 mb-3">
-                    Transfer {service.price.amount} USDC to the service
-                  </p>
-                  <button
-                    onClick={handlePayment}
-                    disabled={isPaymentPending || isPaymentConfirming || step === 'paying'}
-                    className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isPaymentPending || isPaymentConfirming ? 'Processing Payment...' : 'Send Payment'}
-                  </button>
+            {/* Step 3: Send Payment */}
+            {(step === 'pay' || step === 'paying') && (
+              <div className="border border-[#74a180]/30 rounded-lg p-4 bg-[#74a180]/10">
+                <div className="flex items-start gap-3">
+                  <span className="w-6 h-6 bg-[#74a180] text-white rounded-full flex items-center justify-center text-sm font-light flex-shrink-0">2</span>
+                  <div className="flex-1">
+                    <h4 className="font-light text-white mb-2">Send Payment</h4>
+                    <p className="text-sm text-gray-400 mb-3 font-light">
+                      Transfer {service.price.amount} USDC to the service
+                    </p>
+                    <button
+                      onClick={handlePayment}
+                      disabled={isPaymentPending || isPaymentConfirming || step === 'paying'}
+                      className="w-full px-4 py-2 bg-[#74a180] text-white rounded-lg hover:bg-[#8fb896] transition-colors font-light disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isPaymentPending || isPaymentConfirming ? 'Processing Payment...' : 'Send Payment'}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Success */}
-          {step === 'success' && (
-            <div className="border border-green-200 rounded-lg p-4 bg-green-50">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            {/* Success */}
+            {step === 'success' && (
+              <div className="border border-[#74a180]/30 rounded-lg p-4 bg-[#74a180]/10">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-[#74a180] rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h4 className="font-light text-white mb-2">Payment Successful!</h4>
+                  <p className="text-sm text-gray-400 mb-3 font-light">
+                    Your payment has been processed
+                  </p>
+                  {paymentTxHash && (
+                    <a
+                      href={`https://basescan.org/tx/${paymentTxHash}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-[#74a180] hover:text-[#8fb896] transition-colors font-light"
+                    >
+                      View Transaction →
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Error */}
+            {step === 'error' && error && (
+              <div className="border border-red-500/30 rounded-lg p-4 bg-red-500/10">
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                </div>
-                <h4 className="font-semibold text-gray-900 mb-2">Payment Successful!</h4>
-                <p className="text-sm text-gray-600 mb-3">
-                  Your payment has been processed
-                </p>
-                {paymentTxHash && (
-                  <a
-                    href={`https://basescan.org/tx/${paymentTxHash}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-blue-600 hover:underline"
-                  >
-                    View Transaction
-                  </a>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* Error */}
-          {step === 'error' && error && (
-            <div className="border border-red-200 rounded-lg p-4 bg-red-50">
-              <div className="flex items-start gap-3">
-                <svg className="w-6 h-6 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <div>
-                  <h4 className="font-semibold text-red-900 mb-1">Payment Failed</h4>
-                  <p className="text-sm text-red-700">{error}</p>
+                  <div>
+                    <h4 className="font-light text-red-400 mb-1">Payment Failed</h4>
+                    <p className="text-sm text-red-300/80 font-light">{error}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>

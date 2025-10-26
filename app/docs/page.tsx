@@ -1,158 +1,149 @@
 'use client';
 
-import Link from 'next/link';
+import ConceptCard from '../components/docs/ConceptCard';
+import StepCard from '../components/docs/StepCard';
+import BlockchainBadge from '../components/docs/BlockchainBadge';
+import CTABox from '../components/docs/CTABox';
 import { motion } from 'framer-motion';
 
+const blockchains = [
+  { name: 'Base', logo: '/logos/base.jpg' },
+  { name: 'Solana', logo: '/logos/solana.jpg' },
+  { name: 'Polygon', logo: '/logos/polygon.jpg' },
+  { name: 'BSC', logo: '/logos/BSC.jpg' },
+  { name: 'Sei', logo: '/logos/sei.jpg' },
+  { name: 'Peaq', logo: '/logos/peaq.jpg' },
+];
+
 export default function DocsPage() {
-        return (
-    <div className="prose prose-sm max-w-none">
-      <h1 className="text-4xl font-light italic text-black mb-4">
-        Welcome to Dock402 Documentation
-      </h1>
-
-      <p className="text-base text-black/80 leading-relaxed mb-8">
-        Everything you need to build, integrate, and deploy x402-enabled services on the Dock402 marketplace.
-      </p>
-
-      <div className="bg-gradient-to-br from-white/80 to-white/40 backdrop-blur-xl rounded-2xl p-8 border border-black/5 shadow-xl mb-8 not-prose">
-        <h2 className="text-xl font-light italic text-black mb-3">What is Dock402?</h2>
-        <p className="text-sm text-black/80 leading-relaxed">
-          Dock402 is the app store of x402 - a revolutionary marketplace where AI services, APIs, 
-          and tools are discovered, tested, and monetized using the HTTP 402 payment protocol. 
-          Every API request becomes a micropayment transaction settled instantly on the blockchain.
-              </p>
-            </div>
-
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-12">Key Concepts</h2>
-
-      <div className="grid md:grid-cols-2 gap-4 mb-8 not-prose">
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-black/5 hover:border-[#FF7B00]/20 hover:shadow-lg transition-all">
-          <h3 className="text-base font-light italic text-black mb-2">Pay Per Request</h3>
-          <p className="text-sm text-black/80 leading-relaxed">
-            No subscriptions. Users pay only for what they use with instant blockchain settlements.
-          </p>
-              </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-black/5 hover:border-[#FF7B00]/20 hover:shadow-lg transition-all">
-          <h3 className="text-base font-light italic text-black mb-2">Test Before You Pay</h3>
-          <p className="text-sm text-black/80 leading-relaxed">
-            Try services for free with built-in testing interfaces before committing to payments.
-          </p>
-              </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-black/5 hover:border-[#FF7B00]/20 hover:shadow-lg transition-all">
-          <h3 className="text-base font-light italic text-black mb-2">Instant Integration</h3>
-          <p className="text-sm text-black/80 leading-relaxed">
-            Generate integration code and start using services in your applications within minutes.
-          </p>
-              </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-black/5 hover:border-[#FF7B00]/20 hover:shadow-lg transition-all">
-          <h3 className="text-base font-light italic text-black mb-2">Multi-Chain Support</h3>
-          <p className="text-sm text-black/80 leading-relaxed mb-3">
-            Works across multiple blockchain networks:
-          </p>
-          <div className="flex items-center gap-2 flex-wrap">
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-white/50 rounded-lg border border-black/5">
-              <img src="/logos/base.jpg" alt="Base" className="w-4 h-4 rounded" />
-              <span className="text-xs font-light italic text-black">Base</span>
-              </div>
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-white/50 rounded-lg border border-black/5">
-              <img src="/logos/solana.jpg" alt="Solana" className="w-4 h-4 rounded" />
-              <span className="text-xs font-light italic text-black">Solana</span>
-            </div>
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-white/50 rounded-lg border border-black/5">
-              <img src="/logos/polygon.jpg" alt="Polygon" className="w-4 h-4 rounded" />
-              <span className="text-xs font-light italic text-black">Polygon</span>
-          </div>
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-white/50 rounded-lg border border-black/5">
-              <img src="/logos/BSC.jpg" alt="BSC" className="w-4 h-4 rounded" />
-              <span className="text-xs font-light italic text-black">BSC</span>
-                  </div>
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-white/50 rounded-lg border border-black/5">
-              <img src="/logos/sei.jpg" alt="Sei" className="w-4 h-4 rounded" />
-              <span className="text-xs font-light italic text-black">Sei</span>
-                </div>
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-white/50 rounded-lg border border-black/5">
-              <img src="/logos/peaq.jpg" alt="Peaq" className="w-4 h-4 rounded" />
-              <span className="text-xs font-light italic text-black">Peaq</span>
-                    </div>
-                  </div>
-                </div>
-                </div>
-
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-12">Getting Started</h2>
-
-      <div className="space-y-4 mb-8">
-        <div className="flex gap-4 items-start bg-white/40 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-sm font-light italic">
-                      1
-                    </div>
-                    <div>
-            <h3 className="text-sm font-light italic text-black mb-1">Learn About x402</h3>
-            <p className="text-sm text-black/80 leading-relaxed mb-2">
-              Understand how the HTTP 402 payment protocol works and why it's revolutionary.
-            </p>
-            <Link
-              href="/docs/x402-protocol"
-              className="text-sm font-light italic text-[#FF7B00] hover:text-[#FF9500] transition-colors"
-            >
-              Read about x402 →
-            </Link>
-                  </div>
-                </div>
-
-        <div className="flex gap-4 items-start bg-white/40 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-sm font-light italic">
-                      2
-                    </div>
-                    <div>
-            <h3 className="text-sm font-light italic text-black mb-1">Build Your Service</h3>
-            <p className="text-sm text-black/80 leading-relaxed mb-2">
-              Create an x402-enabled API using Express.js, Python, or your preferred framework.
-            </p>
-            <Link
-              href="/docs/server-express"
-              className="text-sm font-light italic text-[#FF7B00] hover:text-[#FF9500] transition-colors"
-            >
-              Server guides →
-            </Link>
-                  </div>
-                </div>
-
-        <div className="flex gap-4 items-start bg-white/40 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-sm font-light italic">
-                      3
-                    </div>
-                    <div>
-            <h3 className="text-sm font-light italic text-black mb-1">Integrate Payments</h3>
-            <p className="text-sm text-black/80 leading-relaxed mb-2">
-              Use client libraries to consume x402 services and handle payments automatically.
-            </p>
-                <Link
-              href="/docs/clients"
-              className="text-sm font-light italic text-[#FF7B00] hover:text-[#FF9500] transition-colors"
-                >
-              Client integration →
-                </Link>
-              </div>
-                  </div>
-                </div>
-
-      <div className="bg-gradient-to-r from-[#FF7B00] to-[#FF9500] rounded-2xl p-8 text-white not-prose mt-12">
-        <h3 className="text-lg font-light italic mb-2">Need Help?</h3>
-        <p className="text-sm opacity-90 mb-4">
-          Check out the full PayAI documentation for detailed implementation guides and API references.
-        </p>
-        <a
-          href="https://docs.payai.network"
-                    target="_blank"
-                    rel="noopener noreferrer"
-          className="inline-block px-5 py-2.5 bg-white text-[#FF7B00] rounded-xl text-sm font-light italic hover:shadow-lg transition-all"
+  return (
+    <div className="max-w-none">
+      {/* Hero Section with Pillars Background */}
+      <div className="relative -mx-6 mb-20 overflow-hidden">
+        {/* Pillars background image */}
+        <div
+          className="absolute inset-0 bg-contain bg-center bg-no-repeat opacity-15 pointer-events-none"
+          style={{
+            backgroundImage: `url('/pillars.png')`,
+            backgroundSize: '120%',
+            backgroundPosition: 'center'
+          }}
+        />
+        
+        {/* Gradient overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-80" />
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="relative z-10 px-6 py-16"
         >
-          Visit PayAI Docs
-        </a>
+          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-normal font-title text-white mb-8 tracking-wide leading-none">
+            Documentation
+          </h1>
+
+          <p className="text-2xl text-gray-400 font-light leading-relaxed mb-0 max-w-3xl">
+            Build and deploy pay-per-request services. Integrate micropayments. Create the next generation of digital commerce.
+          </p>
+        </motion.div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="bg-black/80 backdrop-blur-sm rounded-lg p-12 border border-white/[0.15] mb-24"
+      >
+        <h2 className="text-3xl font-medium text-white mb-5 tracking-wide">What is Lumen402?</h2>
+        <p className="text-lg text-gray-400 font-light leading-relaxed">
+          Lumen402 is unlocking the next economy of APIs, AI and digital services through x402 pay-per-request rails. 
+          Every API call becomes a micropayment transaction, enabling true usage-based pricing with instant on-chain settlement.
+        </p>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
+        <h2 className="text-4xl font-medium text-white mb-12 tracking-wide">Core Principles</h2>
+
+        <div className="grid md:grid-cols-2 gap-6 mb-24">
+          <ConceptCard 
+            title="Usage-Based Pricing"
+            description="Pay exactly for what you consume. No monthly fees, no commitments. Just pure value exchange per request."
+          />
+
+          <ConceptCard 
+            title="Frictionless Testing"
+            description="Explore and test any service before spending a single token. Validate integration before commitment."
+          />
+
+          <ConceptCard 
+            title="Instant Settlement"
+            description="Payments settle in under a second on-chain. No chargebacks, no disputes, complete transparency."
+          />
+
+          <ConceptCard 
+            title="Multi-Chain Native"
+            description="Built for a multi-chain future. Deploy once, transact everywhere:"
+          >
+            <div className="flex items-center gap-3 flex-wrap mt-6">
+              {blockchains.map((blockchain) => (
+                <BlockchainBadge key={blockchain.name} {...blockchain} />
+              ))}
             </div>
-          </div>
-        );
+          </ConceptCard>
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        <h2 className="text-4xl font-medium text-white mb-12 tracking-wide">Quick Start</h2>
+
+        <div className="space-y-6 mb-24">
+          <StepCard 
+            number={1}
+            title="Understand x402"
+            description="Learn how the HTTP 402 payment protocol enables pay-per-request commerce at internet scale."
+            linkText="Protocol Overview"
+            linkHref="/docs/x402-protocol"
+          />
+
+          <StepCard 
+            number={2}
+            title="Deploy Your Service"
+            description="Build x402-enabled services using Express.js, Python, or any HTTP framework you prefer."
+            linkText="Build Guide"
+            linkHref="/docs/server-express"
+          />
+
+          <StepCard 
+            number={3}
+            title="Connect & Transact"
+            description="Integrate client libraries to consume services and handle payments automatically in your apps."
+            linkText="Integration Docs"
+            linkHref="/docs/clients"
+          />
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+      >
+        <CTABox 
+          title="Need Support?"
+          description="Access comprehensive implementation guides, API references, and technical documentation for advanced use cases."
+          buttonText="PayAI Documentation"
+          buttonHref="https://docs.payai.network"
+        />
+      </motion.div>
+    </div>
+  );
 }

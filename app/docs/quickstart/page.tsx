@@ -1,217 +1,155 @@
 'use client';
 
 import Link from 'next/link';
+import DocStep from '../../components/docs/DocStep';
+import CTABox from '../../components/docs/CTABox';
 
 export default function QuickStartPage() {
   return (
-    <div className="prose prose-sm max-w-none">
-      <h1 className="text-4xl font-light italic text-black mb-4">
-        Quick Start Guide
+    <div className="max-w-none">
+      <h1 className="text-5xl sm:text-6xl font-normal text-white mb-8 tracking-wide leading-tight">
+        Quick Start
       </h1>
 
-      <p className="text-base text-black/80 leading-relaxed mb-8">
-        Get started with x402 in 5 minutes. This guide will walk you through creating your first x402-enabled service and making your first payment.
+      <p className="text-xl text-gray-400 font-light leading-relaxed mb-16">
+        Deploy your first x402-enabled service or start consuming paid APIs in under 5 minutes.
       </p>
 
-      <div className="bg-gradient-to-br from-white/80 to-white/40 backdrop-blur-xl rounded-2xl p-6 border border-black/5 shadow-xl mb-8 not-prose">
-        <h2 className="text-lg font-light italic text-black mb-2">Choose Your Path</h2>
-        <p className="text-sm text-black/80 leading-relaxed">
-          Are you building a service to accept payments, or consuming existing x402 services?
+      <div className="bg-black/80 backdrop-blur-sm rounded-lg p-10 border border-white/[0.15] mb-16">
+        <h2 className="text-2xl font-medium text-white mb-4">Choose Your Path</h2>
+        <p className="text-base text-gray-400 font-light leading-relaxed">
+          Building a service to monetize? Or consuming existing services? Pick your path and get started.
         </p>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">For Service Providers</h2>
+      <h2 className="text-3xl font-medium text-white mb-8 tracking-wide">Service Providers</h2>
 
-      <p className="text-sm text-black/80 mb-4">
-        Create an API that accepts x402 payments in minutes:
+      <p className="text-base text-gray-400 font-light mb-8">
+        Launch an API that accepts x402 micropayments:
       </p>
 
-      <div className="space-y-3 mb-8">
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-xs font-light italic">
+      <div className="space-y-4 mb-16">
+        <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15]">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 bg-[#74a180] text-black rounded-lg flex items-center justify-center text-sm font-medium">
               1
             </div>
-            <h3 className="text-sm font-light italic text-black m-0">Choose Your Stack</h3>
+            <h3 className="text-lg font-medium text-white m-0">Select Framework</h3>
           </div>
-          <div className="pl-10 space-y-2">
-            <Link href="/docs/server-express" className="block text-sm text-[#FF7B00] hover:text-[#FF9500]">
+          <div className="pl-11 space-y-3">
+            <Link href="/docs/server-express" className="block text-base text-[#74a180] hover:text-[#8bb99a] transition-colors">
               → Express.js / Node.js
             </Link>
-            <Link href="/docs/server-python" className="block text-sm text-[#FF7B00] hover:text-[#FF9500]">
+            <Link href="/docs/server-python" className="block text-base text-[#74a180] hover:text-[#8bb99a] transition-colors">
               → Python (FastAPI/Flask)
             </Link>
           </div>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-xs font-light italic">
-              2
-            </div>
-            <h3 className="text-sm font-light italic text-black m-0">Install SDK</h3>
-          </div>
-          <div className="pl-10">
-            <div className="bg-[#1E1E1E] rounded-lg p-3 font-mono text-xs text-white/90 not-prose mb-2">
-              <code>npm install x402-express</code>
-            </div>
-            <p className="text-xs text-black/80 m-0">or for Python:</p>
-            <div className="bg-[#1E1E1E] rounded-lg p-3 font-mono text-xs text-white/90 not-prose mt-2">
-              <code>pip install x402-python</code>
-            </div>
-          </div>
-        </div>
+        <DocStep 
+          number={2}
+          title="Install Package"
+          description="Add the x402 middleware to your project via npm or pip"
+        />
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-xs font-light italic">
-              3
-            </div>
-            <h3 className="text-sm font-light italic text-black m-0">Add Payment Middleware</h3>
-          </div>
-          <div className="pl-10">
-            <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 not-prose overflow-x-auto">
-              <pre className="whitespace-pre-wrap">
-{`app.use(paymentMiddleware(
-  "0xYourWalletAddress",
-  {
-    "GET /api": {
-      price: "$0.001",
-      network: "base"
-    }
-  }
-));`}
-              </pre>
-            </div>
-          </div>
-        </div>
+        <DocStep 
+          number={3}
+          title="Configure Middleware"
+          description="Set your payment address and facilitator endpoint in the middleware"
+        />
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-xs font-light italic">
-              4
-            </div>
-            <h3 className="text-sm font-light italic text-black m-0">Deploy & Register</h3>
-          </div>
-          <p className="text-sm text-black/80 m-0 pl-10">
-            Deploy your service and register it on Dock402 marketplace
-          </p>
-        </div>
+        <DocStep 
+          number={4}
+          title="Deploy"
+          description="Push to production and start accepting micropayments instantly"
+        />
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">For Service Consumers</h2>
+      <h2 className="text-3xl font-medium text-white mb-8 tracking-wide">Consumers</h2>
 
-      <p className="text-sm text-black/80 mb-4">
-        Start using x402 services in your application:
+      <p className="text-base text-gray-400 font-light mb-8">
+        Start calling x402-protected APIs:
       </p>
 
-      <div className="space-y-3 mb-8">
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-xs font-light italic">
+      <div className="space-y-4 mb-16">
+        <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15]">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 bg-[#74a180] text-black rounded-lg flex items-center justify-center text-sm font-medium">
               1
             </div>
-            <h3 className="text-sm font-light italic text-black m-0">Browse Marketplace</h3>
+            <h3 className="text-lg font-medium text-white m-0">Discover Services</h3>
           </div>
-          <p className="text-sm text-black/80 m-0 pl-10">
-            Visit <Link href="/dapp" className="text-[#FF7B00] hover:text-[#FF9500]">Dock402 marketplace</Link> to discover services
+          <p className="text-base text-gray-400 font-light pl-11">
+            Browse the <Link href="/dapp" className="text-[#74a180] hover:text-[#8bb99a] transition-colors">marketplace</Link> to find AI services, data APIs, and specialized tools
           </p>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-xs font-light italic">
-              2
-            </div>
-            <h3 className="text-sm font-light italic text-black m-0">Test for Free</h3>
-          </div>
-          <p className="text-sm text-black/80 m-0 pl-10">
-            Use built-in testing interface to try services before paying
-          </p>
+        <DocStep 
+          number={2}
+          title="Test Free"
+          description="Use built-in testing interfaces to validate service behavior before spending"
+        />
+
+        <DocStep 
+          number={3}
+          title="Connect Wallet"
+          description="Link your MetaMask, Phantom, or preferred wallet for transactions"
+        />
+
+        <DocStep 
+          number={4}
+          title="Install Client"
+          description="Add the x402 client library to handle payments automatically"
+        />
+
+        <DocStep 
+          number={5}
+          title="Start Transacting"
+          description="Make API calls with automatic payment handling - just use standard HTTP methods"
+        />
+      </div>
+
+      <h2 className="text-3xl font-medium text-white mb-8 tracking-wide">Quick Example</h2>
+
+      <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15] mb-16">
+        <h3 className="text-lg font-medium text-white mb-4">Server (Express.js)</h3>
+        <div className="bg-black rounded-lg p-6 font-mono text-sm text-gray-300 border border-white/[0.08] overflow-x-auto mb-6">
+          <pre className="whitespace-pre-wrap">
+{`import { x402Middleware } from '@payai/x402-server';
+
+app.use('/api/*', x402Middleware({
+  payTo: "0x742d35Cc...",
+  network: "base"
+}));
+
+app.get('/api/data', (req, res) => {
+  res.json({ result: "paid data" });
+});`}
+          </pre>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-xs font-light italic">
-              3
-            </div>
-            <h3 className="text-sm font-light italic text-black m-0">Install Client Library</h3>
-          </div>
-          <div className="pl-10">
-            <div className="bg-[#1E1E1E] rounded-lg p-3 font-mono text-xs text-white/90 not-prose">
-              <code>npm install x402-client</code>
-            </div>
-          </div>
-        </div>
+        <h3 className="text-lg font-medium text-white mb-4">Client (Node.js)</h3>
+        <div className="bg-black rounded-lg p-6 font-mono text-sm text-gray-300 border border-white/[0.08] overflow-x-auto">
+          <pre className="whitespace-pre-wrap">
+{`import { X402Client } from '@payai/x402-client';
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#FF7B00] to-[#FF9500] text-white rounded-lg flex items-center justify-center text-xs font-light italic">
-              4
-            </div>
-            <h3 className="text-sm font-light italic text-black m-0">Make Paid Requests</h3>
-          </div>
-          <div className="pl-10">
-            <div className="bg-[#1E1E1E] rounded-lg p-4 font-mono text-xs text-white/90 not-prose overflow-x-auto">
-              <pre className="whitespace-pre-wrap">
-{`const client = new X402Client(wallet);
-const data = await client.get(
-  "https://api.example.com/data"
-);`}
-              </pre>
-            </div>
-          </div>
+const client = new X402Client({
+  signer: wallet,
+  network: "base"
+});
+
+const data = await client.get('https://api.example.com/api/data');
+console.log(data);`}
+          </pre>
         </div>
       </div>
 
-      <h2 className="text-2xl font-light italic text-black mb-4 mt-8">Prerequisites</h2>
-
-      <div className="grid md:grid-cols-2 gap-4 mb-8 not-prose">
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">For Developers</h3>
-          <ul className="text-sm text-black/80 space-y-1">
-            <li>• Node.js 18+ or Python 3.9+</li>
-            <li>• Basic web development knowledge</li>
-            <li>• A crypto wallet address</li>
-          </ul>
-        </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-black/5">
-          <h3 className="text-sm font-light italic text-black mb-2">For Users</h3>
-          <ul className="text-sm text-black/80 space-y-1">
-            <li>• MetaMask or compatible wallet</li>
-            <li>• Small amount of crypto for payments</li>
-            <li>• Basic understanding of blockchain</li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="bg-gradient-to-r from-[#FF7B00] to-[#FF9500] rounded-2xl p-6 text-white not-prose">
-        <h3 className="text-lg font-light italic mb-2">Need Help?</h3>
-        <p className="text-sm opacity-90 mb-4">
-          Join our community or check the detailed guides for your specific use case.
-        </p>
-        <div className="flex gap-3">
-          <a
-            href="https://x.com/dock402"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-5 py-2.5 bg-white text-[#FF7B00] rounded-xl text-sm font-light italic hover:shadow-lg transition-all"
-          >
-            Follow on X
-          </a>
-          <a
-            href="https://github.com/dock402"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white rounded-xl text-sm font-light italic hover:bg-white/20 transition-all"
-          >
-            GitHub
-          </a>
-        </div>
-      </div>
+      <CTABox 
+        title="Dive Deeper"
+        description="Explore comprehensive guides, API references, and integration examples for production deployments."
+        buttonText="Full Documentation"
+        buttonHref="/docs/server-express"
+      />
     </div>
   );
 }
-
-

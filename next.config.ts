@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
           has: [
             {
               type: 'host',
-              value: 'explorer.xgrain402.xyz',
+              value: 'explorer.lumen402.com',
             },
           ],
           destination: '/explorer',

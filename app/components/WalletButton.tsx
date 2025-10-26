@@ -66,7 +66,7 @@ export function WalletButton() {
               </h2>
               
               <p className="text-sm text-gray-600 mb-6">
-                Connect with MetaMask or Rabby to access xgrain402 explorer
+                Connect with MetaMask or Rabby to access Lumen402 explorer
               </p>
 
               <div className="space-y-3">
@@ -106,7 +106,7 @@ export function WalletButton() {
 
                 <div className="mt-4 pt-4 border-t border-gray-200">
                   <p className="text-xs text-gray-500 text-center">
-                    By connecting, you agree to xgrain402's terms of service
+                    By connecting, you agree to Lumen402's terms of service
                   </p>
                 </div>
               </div>

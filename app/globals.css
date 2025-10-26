@@ -2,44 +2,146 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'RQND Pro';
+  src: url('/fonts/rqnd.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/fonts/03d5b20d124cd26dc873bd4a8e42313e.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/fonts/653d9381828e9577fb1e417dc047f89d.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/fonts/c446362802681bacaacbad0f39bfc1a5.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
+  --green-accent: #74a180;
+  --green-glow: rgba(116, 161, 128, 0.4);
+  --font-title: 'RQND Pro', 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Suisse Intl', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-}
-
-body {
+  font-family: var(--font-body);
   overflow-x: hidden;
 }
 
-/* Force navigation link styles */
-nav a {
-  color: #000000 !important;
-  text-decoration: none !important;
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-nav a:visited {
-  color: #000000 !important;
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-nav a:hover {
-  color: #000000 !important;
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--green-accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8bb99a;
+}
+
+/* Utility classes */
+.text-green {
+  color: var(--green-accent);
+}
+
+.bg-green {
+  background-color: var(--green-accent);
+}
+
+.border-green {
+  border-color: var(--green-accent);
+}
+
+.hover-green:hover {
+  color: var(--green-accent);
+}
+
+.green-glow {
+  box-shadow: 0 0 20px var(--green-glow);
+}
+
+.green-glow-strong {
+  box-shadow: 0 0 30px rgba(116, 161, 128, 0.6);
+}
+
+.font-title {
+  font-family: var(--font-title);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* Animations */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
 }
 
 /* Wallet Adapter Button Customization */
 .wallet-adapter-button {
-  background-color: #000000 !important;
-  color: #ffffff !important;
+  background-color: var(--green-accent) !important;
+  color: #000000 !important;
   border-radius: 0.5rem !important;
   font-size: 0.875rem !important;
   font-weight: 500 !important;
@@ -49,28 +151,19 @@ nav a:hover {
 }
 
 .wallet-adapter-button:hover {
-  background-color: #1f1f1f !important;
+  background-color: #8bb99a !important;
 }
 
 .wallet-adapter-button:not([disabled]):hover {
-  background-color: #1f1f1f !important;
+  background-color: #8bb99a !important;
 }
 
 .wallet-adapter-modal-wrapper {
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
 .wallet-adapter-modal {
   border-radius: 1rem !important;
-  background-color: #ffffff !important;
-}
-
-/* Soft Blink Animation for "Coming Soon" */
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-.blink-animation {
-  animation: blink 1.5s ease-in-out infinite;
+  background-color: #1a1a1a !important;
+  border: 1px solid var(--green-accent);
 }
