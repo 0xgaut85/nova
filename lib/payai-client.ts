@@ -547,4 +547,4 @@ class PayAIClient {
 export const payaiClient = new PayAIClient();
 
 // Export types
-export type { FacilitatorResponse };
+export type { X402Service };
