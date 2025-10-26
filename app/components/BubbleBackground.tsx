@@ -37,7 +37,8 @@ export default function BubbleBackground() {
     controls.maxDistance = 4;
 
     const pmrem = new THREE.PMREMGenerator(renderer);
-    scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+    const roomEnvironment = new RoomEnvironment(renderer);
+    scene.environment = pmrem.fromScene(roomEnvironment, 0.04).texture;
 
     // Neutral lights - no color tint
     const hemi = new THREE.HemisphereLight(0xffffff, 0x000000, 0.15);
