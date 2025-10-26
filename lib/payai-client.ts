@@ -310,7 +310,7 @@ class PayAIClient {
           return null;
         }
       })
-      .filter((s): s is X402Service => s !== null);
+      .filter((s: X402Service | null): s is X402Service => s !== null);
   }
 
   /**
