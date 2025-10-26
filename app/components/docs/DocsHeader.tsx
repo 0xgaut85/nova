@@ -30,7 +30,7 @@ export default function DocsHeader({ sidebarOpen, setSidebarOpen }: DocsHeaderPr
           {/* Mobile menu toggle */}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="lg:hidden p-2 text-white hover:bg-white/5 rounded-lg transition-all"
+            className="lg:hidden p-3 text-white hover:bg-white/5 rounded-lg transition-all min-w-[44px] min-h-[44px] flex items-center justify-center"
             aria-label="Toggle menu"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -44,7 +44,7 @@ export default function DocsHeader({ sidebarOpen, setSidebarOpen }: DocsHeaderPr
           
           <Link 
             href="/"
-            className="px-4 py-2 text-sm font-light text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+            className="px-4 py-2 text-sm font-light text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all min-h-[44px] flex items-center"
           >
             Home
           </Link>

@@ -91,7 +91,8 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors"
+            className="md:hidden text-white p-3 hover:bg-white/5 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+            aria-label="Toggle mobile menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileMenuOpen ? (
@@ -111,24 +112,24 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -20 }}
             className="md:hidden py-6 border-t border-white/[0.06]"
           >
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-3">
               <Link 
                 href="/docs" 
-                className="text-gray-400 hover:text-white transition-colors duration-300 py-2 font-light"
+                className="text-gray-400 hover:text-white transition-colors duration-300 py-3 px-2 font-light min-h-[44px] flex items-center"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Docs
               </Link>
               <Link 
                 href="/dapp" 
-                className="text-gray-400 hover:text-white transition-colors duration-300 py-2 font-light"
+                className="text-gray-400 hover:text-white transition-colors duration-300 py-3 px-2 font-light min-h-[44px] flex items-center"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 DApp
               </Link>
               <Link 
                 href="/roadmap" 
-                className="text-gray-400 hover:text-white transition-colors duration-300 py-2 font-light"
+                className="text-gray-400 hover:text-white transition-colors duration-300 py-3 px-2 font-light min-h-[44px] flex items-center"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Roadmap
@@ -137,7 +138,7 @@ export default function Navbar() {
                 href="https://github.com/lumen402" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors duration-300 py-2 font-light"
+                className="text-gray-400 hover:text-white transition-colors duration-300 py-3 px-2 font-light min-h-[44px] flex items-center"
               >
                 GitHub
               </a>
@@ -145,7 +146,7 @@ export default function Navbar() {
                 href="https://x.com/lumen402" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors duration-300 py-2 font-light"
+                className="text-gray-400 hover:text-white transition-colors duration-300 py-3 px-2 font-light min-h-[44px] flex items-center"
               >
                 Twitter
               </a>

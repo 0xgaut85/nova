@@ -36,15 +36,15 @@ export default function Hero() {
             className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center"
           >
             {/* Left: Lumen */}
-            <div className="text-left -ml-4 lg:-ml-8">
-              <h1 className="text-8xl sm:text-9xl lg:text-[140px] font-normal font-title leading-none tracking-wide text-white">
+            <div className="text-left -ml-2 sm:-ml-4 lg:-ml-8">
+              <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[140px] font-normal font-title leading-none tracking-wide text-white">
                 Lumen
               </h1>
             </div>
             
             {/* Right: Description */}
             <div className="text-left lg:text-right">
-              <p className="text-3xl sm:text-4xl lg:text-5xl text-gray-400 font-light leading-relaxed">
+              <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-400 font-light leading-relaxed">
                 Unlocking the next economy of APIs, AI and digital services through x402 pay-per-request rails
               </p>
             </div>
@@ -59,19 +59,19 @@ export default function Hero() {
           >
             <Link 
               href="/dapp"
-              className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.12] text-white font-normal rounded-lg transition-all duration-300"
+              className="group inline-flex items-center justify-center gap-3 px-6 py-3 sm:px-10 sm:py-4 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.12] text-white font-normal rounded-lg transition-all duration-300 min-h-[44px] w-full sm:w-auto"
             >
               <span>Launch App</span>
-              <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </Link>
             <Link 
               href="/docs"
-              className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-transparent hover:bg-white/[0.04] border border-white/[0.12] text-white font-normal rounded-lg transition-all duration-300"
+              className="group inline-flex items-center justify-center gap-3 px-6 py-3 sm:px-10 sm:py-4 bg-transparent hover:bg-white/[0.04] border border-white/[0.12] text-white font-normal rounded-lg transition-all duration-300 min-h-[44px] w-full sm:w-auto"
             >
               <span>Documentation</span>
-              <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </Link>
@@ -135,29 +135,29 @@ export default function Hero() {
               }
             `}</style>
 
-            <div className="stats-grid-item bg-black/80 backdrop-blur-sm p-12 text-center border border-white/[0.15]">
+            <div className="stats-grid-item bg-black/80 backdrop-blur-sm p-6 sm:p-8 md:p-12 text-center border border-white/[0.15]">
               <div className="corner-bottom-left" />
               <div className="corner-bottom-right" />
-              <div className="text-6xl font-normal mb-6">6+</div>
-              <div className="text-sm text-gray-400 font-light">Blockchains</div>
+              <div className="text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6">6+</div>
+              <div className="text-xs sm:text-sm text-gray-400 font-light">Blockchains</div>
             </div>
-            <div className="stats-grid-item bg-black/80 backdrop-blur-sm p-12 text-center border border-white/[0.15]">
+            <div className="stats-grid-item bg-black/80 backdrop-blur-sm p-6 sm:p-8 md:p-12 text-center border border-white/[0.15]">
               <div className="corner-bottom-left" />
               <div className="corner-bottom-right" />
-              <div className="text-6xl font-normal mb-6">&lt;1s</div>
-              <div className="text-sm text-gray-400 font-light">Settlement Time</div>
+              <div className="text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6">&lt;1s</div>
+              <div className="text-xs sm:text-sm text-gray-400 font-light">Settlement Time</div>
             </div>
-            <div className="stats-grid-item bg-black/80 backdrop-blur-sm p-12 text-center border border-white/[0.15]">
+            <div className="stats-grid-item bg-black/80 backdrop-blur-sm p-6 sm:p-8 md:p-12 text-center border border-white/[0.15]">
               <div className="corner-bottom-left" />
               <div className="corner-bottom-right" />
-              <div className="text-6xl font-normal mb-6">100+</div>
-              <div className="text-sm text-gray-400 font-light">Active Services</div>
+              <div className="text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6">100+</div>
+              <div className="text-xs sm:text-sm text-gray-400 font-light">Active Services</div>
             </div>
-            <div className="stats-grid-item bg-black/80 backdrop-blur-sm p-12 text-center border border-white/[0.15]">
+            <div className="stats-grid-item bg-black/80 backdrop-blur-sm p-6 sm:p-8 md:p-12 text-center border border-white/[0.15]">
               <div className="corner-bottom-left" />
               <div className="corner-bottom-right" />
-              <div className="text-6xl font-normal mb-6">100%</div>
-              <div className="text-sm text-gray-400 font-light">On-Chain</div>
+              <div className="text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6">100%</div>
+              <div className="text-xs sm:text-sm text-gray-400 font-light">On-Chain</div>
             </div>
           </motion.div>
         </div>

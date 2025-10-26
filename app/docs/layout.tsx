@@ -26,7 +26,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
 
           {/* Main Content */}
           <main className="lg:ml-64 flex-1 min-h-[calc(100vh-73px)]">
-            <div className="max-w-6xl mx-auto px-6 sm:px-12 lg:px-20 py-16 sm:py-24">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-20 py-12 sm:py-16 lg:py-24">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={pathname}

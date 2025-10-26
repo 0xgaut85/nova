@@ -20,9 +20,9 @@ export default function RoadmapPhase({ phase, index, isActive }: RoadmapPhasePro
         animate={isActive ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 1 }}
       >
-        {/* Phase Number - Huge and Subtle */}
+        {/* Phase Number - Smaller on mobile */}
         <motion.div
-          className="text-[120px] sm:text-[160px] lg:text-[180px] font-light text-white/[0.03] leading-none mb-[-60px] sm:mb-[-70px]"
+          className="text-[80px] sm:text-[120px] md:text-[160px] lg:text-[180px] font-light text-white/[0.03] leading-none mb-[-40px] sm:mb-[-50px] md:mb-[-60px]"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
           transition={{ duration: 1, delay: 0.2 }}
@@ -32,7 +32,7 @@ export default function RoadmapPhase({ phase, index, isActive }: RoadmapPhasePro
 
         {/* Phase Title */}
         <motion.h2 
-          className="text-4xl sm:text-5xl lg:text-6xl font-light text-white mb-3"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white mb-3"
           initial={{ opacity: 0, y: 50 }}
           animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -42,7 +42,7 @@ export default function RoadmapPhase({ phase, index, isActive }: RoadmapPhasePro
 
         {/* Period */}
         <motion.p 
-          className="text-lg sm:text-xl text-gray-500 font-light"
+          className="text-base sm:text-lg md:text-xl text-gray-500 font-light"
           initial={{ opacity: 0, x: -30 }}
           animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
           transition={{ duration: 0.8, delay: 0.5 }}

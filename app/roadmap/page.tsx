@@ -107,15 +107,15 @@ export default function RoadmapPage() {
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8">
           <div className="flex justify-between items-center h-20">
-            <Link href="/" className="flex items-center gap-3 group">
+            <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
               <Image
                 src="/logosvg.svg"
                 alt="Lumen402"
                 width={72}
                 height={72}
-                className="w-[72px] h-[72px] transition-transform duration-300 group-hover:scale-105"
+                className="w-12 h-12 sm:w-16 sm:h-16 lg:w-[72px] lg:h-[72px] transition-transform duration-300 group-hover:scale-105"
               />
-              <span className="text-2xl font-normal text-white font-title tracking-wide">Lumen402</span>
+              <span className="text-xl sm:text-2xl font-normal text-white font-title tracking-wide">Lumen402</span>
             </Link>
 
             <div className="hidden md:flex items-center gap-6">
@@ -143,16 +143,17 @@ export default function RoadmapPage() {
       </nav>
 
       {/* Slide Indicators */}
-      <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
+      <div className="fixed right-4 sm:right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2 sm:gap-3">
         {Array.from({ length: totalSlides }).map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+            className={`w-2 h-2 rounded-full transition-all duration-300 min-h-[28px] min-w-[28px] flex items-center justify-center ${
               currentSlide === index 
-                ? 'bg-[#74a180] h-8' 
+                ? 'bg-[#74a180] h-8 w-2' 
                 : 'bg-white/30 hover:bg-white/50'
             }`}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
@@ -254,7 +255,7 @@ export default function RoadmapPage() {
         {/* Phase Slides - Each full screen */}
         {roadmapData.map((phase, index) => (
           <div key={phase.id} className="h-screen w-screen relative flex items-center px-6 sm:px-8 py-20">
-            <div className="relative z-10 max-w-7xl mx-auto w-full">
+            <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-12">
               <RoadmapPhase 
                 phase={phase} 
                 index={index} 
