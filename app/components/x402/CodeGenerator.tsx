@@ -233,7 +233,7 @@ asyncio.run(main())`;
     return (
       <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
         <div className="bg-black border border-white/[0.15] rounded-lg p-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#74a180] mx-auto"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#b2a962] mx-auto"></div>
         </div>
       </div>
     );
@@ -314,7 +314,7 @@ asyncio.run(main())`;
                 onClick={() => setSelectedFramework(framework.id as any)}
                 className={`p-3 rounded-lg border text-left transition-all ${
                   selectedFramework === framework.id
-                    ? 'border-[#74a180] bg-[#74a180]/10'
+                    ? 'border-[#b2a962] bg-[#b2a962]/10'
                     : 'border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10'
                 }`}
               >
@@ -330,14 +330,14 @@ asyncio.run(main())`;
             <h3 className="text-lg font-light text-white">Generated Code</h3>
             <button
               onClick={copyToClipboard}
-              className="px-4 py-2 bg-[#74a180] text-white text-sm rounded hover:bg-[#8fb896] transition-colors font-light"
+              className="px-4 py-2 bg-[#b2a962] text-white text-sm rounded hover:bg-[#c4b876] transition-colors font-light"
             >
               📋 Copy
             </button>
           </div>
           
           <div className="bg-black/60 border border-white/10 rounded-lg p-4 overflow-x-auto">
-            <pre className="text-[#74a180] text-sm font-mono whitespace-pre-wrap">
+            <pre className="text-[#b2a962] text-sm font-mono whitespace-pre-wrap">
               {generateCode()}
             </pre>
           </div>
@@ -346,7 +346,7 @@ asyncio.run(main())`;
         {/* Environment Variables */}
         <div className="mb-6">
           <h3 className="text-lg font-light text-white mb-3">Environment Variables</h3>
-          <div className="bg-[#74a180]/10 border border-[#74a180]/30 rounded-lg p-4">
+          <div className="bg-[#b2a962]/10 border border-[#b2a962]/30 rounded-lg p-4">
             <p className="text-gray-300 text-sm mb-2 font-light">Add these to your .env file:</p>
             <pre className="text-white text-sm font-mono">
 {`PAYAI_FACILITATOR_URL=https://facilitator.payai.network

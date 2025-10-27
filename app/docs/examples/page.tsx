@@ -394,8 +394,8 @@ program.parse();`}
       </div>
 
       <div className="relative rounded-2xl p-6 text-white not-prose overflow-hidden">
-        {/* Enhanced gradient background - black to green */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#74a180]" />
+        {/* Enhanced gradient background - black to yellow */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#b2a962]" />
         
         {/* Heavy grain texture overlay - increased for more visibility */}
         <div 
@@ -421,10 +421,10 @@ program.parse();`}
             Check out our GitHub repository for more examples and starter templates.
           </p>
           <a
-            href="https://github.com/lumen402"
+            href="https://github.com/nova402"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-5 py-2.5 bg-white text-[#74a180] rounded-xl text-sm font-light hover:shadow-lg transition-all"
+            className="inline-block px-5 py-2.5 bg-white text-[#b2a962] rounded-xl text-sm font-light hover:shadow-lg transition-all"
           >
             View on GitHub
           </a>

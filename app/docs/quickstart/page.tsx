@@ -31,16 +31,16 @@ export default function QuickStartPage() {
       <div className="space-y-4 mb-16">
         <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-[#74a180] text-black rounded-lg flex items-center justify-center text-sm font-medium">
+            <div className="w-8 h-8 bg-[#b2a962] text-black rounded-lg flex items-center justify-center text-sm font-medium">
               1
             </div>
             <h3 className="text-lg font-medium text-white m-0">Select Framework</h3>
           </div>
           <div className="pl-11 space-y-3">
-            <Link href="/docs/server-express" className="block text-base text-[#74a180] hover:text-[#8bb99a] transition-colors">
+            <Link href="/docs/server-express" className="block text-base text-[#b2a962] hover:text-[#c4b876] transition-colors">
               → Express.js / Node.js
             </Link>
-            <Link href="/docs/server-python" className="block text-base text-[#74a180] hover:text-[#8bb99a] transition-colors">
+            <Link href="/docs/server-python" className="block text-base text-[#b2a962] hover:text-[#c4b876] transition-colors">
               → Python (FastAPI/Flask)
             </Link>
           </div>
@@ -74,13 +74,13 @@ export default function QuickStartPage() {
       <div className="space-y-4 mb-16">
         <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-[#74a180] text-black rounded-lg flex items-center justify-center text-sm font-medium">
+            <div className="w-8 h-8 bg-[#b2a962] text-black rounded-lg flex items-center justify-center text-sm font-medium">
               1
             </div>
             <h3 className="text-lg font-medium text-white m-0">Discover Services</h3>
           </div>
           <p className="text-base text-gray-400 font-light pl-11">
-            Browse the <Link href="/dapp" className="text-[#74a180] hover:text-[#8bb99a] transition-colors">marketplace</Link> to find AI services, data APIs, and specialized tools
+            Browse the <Link href="/dapp" className="text-[#b2a962] hover:text-[#c4b876] transition-colors">marketplace</Link> to find AI services, data APIs, and specialized tools
           </p>
         </div>
 

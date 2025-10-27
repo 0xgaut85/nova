@@ -15,13 +15,13 @@ export default function DocsHeader({ sidebarOpen, setSidebarOpen }: DocsHeaderPr
         <Link href="/" className="flex items-center gap-3 group">
           <Image 
             src="/logosvg.svg" 
-            alt="Lumen402" 
+            alt="Nova402" 
             width={40} 
             height={40}
             className="transition-transform group-hover:scale-105"
           />
           <div>
-            <h1 className="text-xl font-normal font-title text-white tracking-wide">Lumen402</h1>
+            <h1 className="text-xl font-normal font-title text-white tracking-wide">Nova402</h1>
             <p className="text-xs font-light text-gray-500">Documentation</p>
           </div>
         </Link>

@@ -9,8 +9,8 @@ const garamond = EB_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Lumen402 Explorer",
-  description: "Lumen402 Network Explorer - Track transactions, facilitators, and network activity",
+  title: "Nova402 Explorer",
+  description: "Nova402 Network Explorer - Track transactions, facilitators, and network activity",
   icons: {
     icon: '/logo.png',
     shortcut: '/logo.png',

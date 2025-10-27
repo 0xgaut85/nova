@@ -13,13 +13,13 @@ export default function IntroductionPage() {
       </h1>
 
       <p className="text-xl text-gray-400 font-light leading-relaxed mb-16">
-        Unlocking the next economy of APIs, AI and digital services through x402 pay-per-request rails.
+        Building x402 protocol infrastructure for the emerging API economy and beyond.
       </p>
 
       <div className="bg-black/80 backdrop-blur-sm rounded-lg p-10 border border-white/[0.15] mb-16">
         <h2 className="text-2xl font-medium text-white mb-4">Platform Overview</h2>
         <p className="text-base text-gray-400 font-light leading-relaxed">
-          Lumen402 is a marketplace where services are discovered, tested, and monetized through the HTTP 402 payment protocol. Every API request is a micropayment transaction settling instantly on-chain.
+          Nova402 is a marketplace where services are discovered, tested, and monetized through the HTTP 402 payment protocol. Every API request is a micropayment transaction settling instantly on-chain.
         </p>
       </div>
 
@@ -89,19 +89,19 @@ export default function IntroductionPage() {
         <h3 className="text-xl font-medium text-white mb-6">Monetize Your Services</h3>
         <ul className="space-y-4 text-base text-gray-400 font-light">
           <li className="flex gap-3">
-            <span className="text-[#74a180] flex-shrink-0">→</span>
+            <span className="text-[#b2a962] flex-shrink-0">→</span>
             <span><strong className="text-white font-medium">Zero Payment Infrastructure:</strong> x402 handles all payment processing and settlements</span>
           </li>
           <li className="flex gap-3">
-            <span className="text-[#74a180] flex-shrink-0">→</span>
+            <span className="text-[#b2a962] flex-shrink-0">→</span>
             <span><strong className="text-white font-medium">Immediate Settlement:</strong> Receive funds on-chain instantly with no intermediaries</span>
           </li>
           <li className="flex gap-3">
-            <span className="text-[#74a180] flex-shrink-0">→</span>
+            <span className="text-[#b2a962] flex-shrink-0">→</span>
             <span><strong className="text-white font-medium">Global Distribution:</strong> List once, reach anyone with a crypto wallet</span>
           </li>
           <li className="flex gap-3">
-            <span className="text-[#74a180] flex-shrink-0">→</span>
+            <span className="text-[#b2a962] flex-shrink-0">→</span>
             <span><strong className="text-white font-medium">Request Pricing:</strong> Charge per-use without subscription complexity</span>
           </li>
         </ul>

@@ -190,9 +190,9 @@ export function RealPaymentHandler({ service, onSuccess, onError, onClose }: Rea
           <div className="space-y-4">
             {/* Step 1: Switch Network */}
             {step === 'switch-network' && (
-              <div className="border border-[#74a180]/30 rounded-lg p-4 bg-[#74a180]/10">
+              <div className="border border-[#b2a962]/30 rounded-lg p-4 bg-[#b2a962]/10">
                 <div className="flex items-start gap-3">
-                  <span className="w-6 h-6 bg-[#74a180] text-white rounded-full flex items-center justify-center text-sm font-light flex-shrink-0">1</span>
+                  <span className="w-6 h-6 bg-[#b2a962] text-white rounded-full flex items-center justify-center text-sm font-light flex-shrink-0">1</span>
                   <div className="flex-1">
                     <h4 className="font-light text-white mb-2">Switch Network</h4>
                     <p className="text-sm text-gray-400 mb-3 font-light">
@@ -200,7 +200,7 @@ export function RealPaymentHandler({ service, onSuccess, onError, onClose }: Rea
                     </p>
                     <button
                       onClick={handleSwitchNetwork}
-                      className="w-full px-4 py-2 bg-[#74a180] text-white rounded-lg hover:bg-[#8fb896] transition-colors font-light"
+                      className="w-full px-4 py-2 bg-[#b2a962] text-white rounded-lg hover:bg-[#c4b876] transition-colors font-light"
                     >
                       Switch to {networkName}
                     </button>
@@ -211,9 +211,9 @@ export function RealPaymentHandler({ service, onSuccess, onError, onClose }: Rea
 
             {/* Step 2: Approve USDC */}
             {(step === 'approve' || step === 'approving') && (
-              <div className="border border-[#74a180]/30 rounded-lg p-4 bg-[#74a180]/10">
+              <div className="border border-[#b2a962]/30 rounded-lg p-4 bg-[#b2a962]/10">
                 <div className="flex items-start gap-3">
-                  <span className="w-6 h-6 bg-[#74a180] text-white rounded-full flex items-center justify-center text-sm font-light flex-shrink-0">1</span>
+                  <span className="w-6 h-6 bg-[#b2a962] text-white rounded-full flex items-center justify-center text-sm font-light flex-shrink-0">1</span>
                   <div className="flex-1">
                     <h4 className="font-light text-white mb-2">Approve USDC Spending</h4>
                     <p className="text-sm text-gray-400 mb-3 font-light">
@@ -222,7 +222,7 @@ export function RealPaymentHandler({ service, onSuccess, onError, onClose }: Rea
                     <button
                       onClick={handleApprove}
                       disabled={isApprovePending || isApproveConfirming || step === 'approving'}
-                      className="w-full px-4 py-2 bg-[#74a180] text-white rounded-lg hover:bg-[#8fb896] transition-colors font-light disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-4 py-2 bg-[#b2a962] text-white rounded-lg hover:bg-[#c4b876] transition-colors font-light disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isApprovePending || isApproveConfirming ? 'Approving...' : 'Approve USDC'}
                     </button>
@@ -233,9 +233,9 @@ export function RealPaymentHandler({ service, onSuccess, onError, onClose }: Rea
 
             {/* Step 3: Send Payment */}
             {(step === 'pay' || step === 'paying') && (
-              <div className="border border-[#74a180]/30 rounded-lg p-4 bg-[#74a180]/10">
+              <div className="border border-[#b2a962]/30 rounded-lg p-4 bg-[#b2a962]/10">
                 <div className="flex items-start gap-3">
-                  <span className="w-6 h-6 bg-[#74a180] text-white rounded-full flex items-center justify-center text-sm font-light flex-shrink-0">2</span>
+                  <span className="w-6 h-6 bg-[#b2a962] text-white rounded-full flex items-center justify-center text-sm font-light flex-shrink-0">2</span>
                   <div className="flex-1">
                     <h4 className="font-light text-white mb-2">Send Payment</h4>
                     <p className="text-sm text-gray-400 mb-3 font-light">
@@ -244,7 +244,7 @@ export function RealPaymentHandler({ service, onSuccess, onError, onClose }: Rea
                     <button
                       onClick={handlePayment}
                       disabled={isPaymentPending || isPaymentConfirming || step === 'paying'}
-                      className="w-full px-4 py-2 bg-[#74a180] text-white rounded-lg hover:bg-[#8fb896] transition-colors font-light disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-4 py-2 bg-[#b2a962] text-white rounded-lg hover:bg-[#c4b876] transition-colors font-light disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isPaymentPending || isPaymentConfirming ? 'Processing Payment...' : 'Send Payment'}
                     </button>
@@ -255,9 +255,9 @@ export function RealPaymentHandler({ service, onSuccess, onError, onClose }: Rea
 
             {/* Success */}
             {step === 'success' && (
-              <div className="border border-[#74a180]/30 rounded-lg p-4 bg-[#74a180]/10">
+              <div className="border border-[#b2a962]/30 rounded-lg p-4 bg-[#b2a962]/10">
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-[#74a180] rounded-full flex items-center justify-center mx-auto mb-3">
+                  <div className="w-12 h-12 bg-[#b2a962] rounded-full flex items-center justify-center mx-auto mb-3">
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
@@ -271,7 +271,7 @@ export function RealPaymentHandler({ service, onSuccess, onError, onClose }: Rea
                       href={`https://basescan.org/tx/${paymentTxHash}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-[#74a180] hover:text-[#8fb896] transition-colors font-light"
+                      className="text-sm text-[#b2a962] hover:text-[#c4b876] transition-colors font-light"
                     >
                       View Transaction →
                     </a>

@@ -24,19 +24,19 @@ export default function APIReferencePage() {
         <h4 className="text-sm font-light text-white mb-2">Parameters</h4>
         <div className="space-y-2 mb-4">
           <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
-            <code className="text-xs font-mono text-[#74a180]">payTo</code>
+            <code className="text-xs font-mono text-[#b2a962]">payTo</code>
             <span className="text-xs text-gray-400 ml-2">string | Record&lt;string, string&gt;</span>
             <p className="text-xs text-gray-400 mt-1 m-0">Wallet address(es) to receive payments</p>
           </div>
           
           <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
-            <code className="text-xs font-mono text-[#74a180]">routes</code>
+            <code className="text-xs font-mono text-[#b2a962]">routes</code>
             <span className="text-xs text-gray-400 ml-2">Record&lt;string, RouteConfig&gt;</span>
             <p className="text-xs text-gray-400 mt-1 m-0">Route configurations with pricing</p>
           </div>
           
           <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
-            <code className="text-xs font-mono text-[#74a180]">options</code>
+            <code className="text-xs font-mono text-[#b2a962]">options</code>
             <span className="text-xs text-gray-400 ml-2">MiddlewareOptions</span>
             <p className="text-xs text-gray-400 mt-1 m-0">Facilitator URL and other settings</p>
           </div>
@@ -79,13 +79,13 @@ export default function APIReferencePage() {
         <h4 className="text-sm font-light text-white mb-2">Parameters</h4>
         <div className="space-y-2 mb-4">
           <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
-            <code className="text-xs font-mono text-[#74a180]">price</code>
+            <code className="text-xs font-mono text-[#b2a962]">price</code>
             <span className="text-xs text-gray-400 ml-2">str | Callable</span>
             <p className="text-xs text-gray-400 mt-1 m-0">Price as dollar string or function</p>
           </div>
           
           <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
-            <code className="text-xs font-mono text-[#74a180]">network</code>
+            <code className="text-xs font-mono text-[#b2a962]">network</code>
             <span className="text-xs text-gray-400 ml-2">str</span>
             <p className="text-xs text-gray-400 mt-1 m-0">Blockchain network (base, polygon, solana)</p>
           </div>
@@ -129,25 +129,25 @@ async def generate(request):
         <h4 className="text-sm font-light text-white mb-2">Options</h4>
         <div className="space-y-2 mb-4">
           <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
-            <code className="text-xs font-mono text-[#74a180]">signer</code>
+            <code className="text-xs font-mono text-[#b2a962]">signer</code>
             <span className="text-xs text-gray-400 ml-2">Signer</span>
             <p className="text-xs text-gray-400 mt-1 m-0">Ethers.js signer or wallet instance</p>
           </div>
           
           <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
-            <code className="text-xs font-mono text-[#74a180]">network</code>
+            <code className="text-xs font-mono text-[#b2a962]">network</code>
             <span className="text-xs text-gray-400 ml-2">string</span>
             <p className="text-xs text-gray-400 mt-1 m-0">Network to use for payments</p>
           </div>
           
           <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
-            <code className="text-xs font-mono text-[#74a180]">maxPayment</code>
+            <code className="text-xs font-mono text-[#b2a962]">maxPayment</code>
             <span className="text-xs text-gray-400 ml-2">string (optional)</span>
             <p className="text-xs text-gray-400 mt-1 m-0">Maximum payment per request</p>
           </div>
           
           <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
-            <code className="text-xs font-mono text-[#74a180]">autoApprove</code>
+            <code className="text-xs font-mono text-[#b2a962]">autoApprove</code>
             <span className="text-xs text-gray-400 ml-2">boolean (optional)</span>
             <p className="text-xs text-gray-400 mt-1 m-0">Auto-approve payments (default: true)</p>
           </div>
@@ -156,22 +156,22 @@ async def generate(request):
         <h4 className="text-sm font-light text-white mb-2">Methods</h4>
         <div className="space-y-3">
           <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
-            <code className="text-xs font-mono text-[#74a180]">get(url, options?)</code>
+            <code className="text-xs font-mono text-[#b2a962]">get(url, options?)</code>
             <p className="text-xs text-gray-400 mt-1 m-0">Make GET request with automatic payment</p>
           </div>
           
           <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
-            <code className="text-xs font-mono text-[#74a180]">post(url, options?)</code>
+            <code className="text-xs font-mono text-[#b2a962]">post(url, options?)</code>
             <p className="text-xs text-gray-400 mt-1 m-0">Make POST request with automatic payment</p>
           </div>
           
           <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
-            <code className="text-xs font-mono text-[#74a180]">put(url, options?)</code>
+            <code className="text-xs font-mono text-[#b2a962]">put(url, options?)</code>
             <p className="text-xs text-gray-400 mt-1 m-0">Make PUT request with automatic payment</p>
           </div>
           
           <div className="bg-black/60 rounded-lg p-3 border border-white/[0.08]">
-            <code className="text-xs font-mono text-[#74a180]">delete(url, options?)</code>
+            <code className="text-xs font-mono text-[#b2a962]">delete(url, options?)</code>
             <p className="text-xs text-gray-400 mt-1 m-0">Make DELETE request with automatic payment</p>
           </div>
         </div>
@@ -263,7 +263,7 @@ Content-Type: application/json
 
       <div className="relative rounded-2xl p-6 text-white not-prose overflow-hidden">
         {/* Enhanced gradient background - black to green */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#74a180]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#b2a962]" />
         
         {/* Heavy grain texture overlay - increased for more visibility */}
         <div 
@@ -291,7 +291,7 @@ Content-Type: application/json
           <div className="flex gap-3">
             <Link
               href="/docs/examples"
-              className="px-5 py-2.5 bg-white text-[#74a180] rounded-xl text-sm font-light hover:shadow-lg transition-all"
+              className="px-5 py-2.5 bg-white text-[#b2a962] rounded-xl text-sm font-light hover:shadow-lg transition-all"
             >
               Code Examples
             </Link>

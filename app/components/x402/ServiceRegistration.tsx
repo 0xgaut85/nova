@@ -203,8 +203,8 @@ export function ServiceRegistration({ onClose }: ServiceRegistrationProps) {
 
           {/* Connection Status */}
           {!isConnected && (
-            <div className="mb-6 p-4 bg-[#74a180]/10 border border-[#74a180]/30 rounded-lg">
-              <p className="text-[#74a180] text-sm font-light">
+            <div className="mb-6 p-4 bg-[#b2a962]/10 border border-[#b2a962]/30 rounded-lg">
+              <p className="text-[#b2a962] text-sm font-light">
                 <strong className="font-normal">Wallet Required:</strong> Please connect your wallet to register a service.
               </p>
             </div>
@@ -214,7 +214,7 @@ export function ServiceRegistration({ onClose }: ServiceRegistrationProps) {
           {submitResult && (
             <div className={`mb-6 p-4 rounded-lg border ${
               submitResult.success 
-                ? 'border-[#74a180]/30 bg-[#74a180]/10' 
+                ? 'border-[#b2a962]/30 bg-[#b2a962]/10' 
                 : 'border-red-500/30 bg-red-500/10'
             }`}>
               <div className="flex items-center gap-3">
@@ -223,17 +223,17 @@ export function ServiceRegistration({ onClose }: ServiceRegistrationProps) {
                 </span>
                 <div>
                   <h4 className={`font-light ${
-                    submitResult.success ? 'text-[#74a180]' : 'text-red-400'
+                    submitResult.success ? 'text-[#b2a962]' : 'text-red-400'
                   }`}>
                     {submitResult.success ? 'Registration Successful!' : 'Registration Failed'}
                   </h4>
                   <p className={`text-sm font-light ${
-                    submitResult.success ? 'text-[#74a180]/80' : 'text-red-400/80'
+                    submitResult.success ? 'text-[#b2a962]/80' : 'text-red-400/80'
                   }`}>
                     {submitResult.message}
                   </p>
                   {submitResult.serviceId && (
-                    <p className="text-xs text-[#74a180]/80 mt-1 font-light">
+                    <p className="text-xs text-[#b2a962]/80 mt-1 font-light">
                       Service ID: {submitResult.serviceId}
                     </p>
                   )}
@@ -254,7 +254,7 @@ export function ServiceRegistration({ onClose }: ServiceRegistrationProps) {
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
                 placeholder="e.g., AI Content Generator"
-                className={`w-full px-4 py-3 border rounded bg-white/5 text-white placeholder-gray-500 font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent ${
+                className={`w-full px-4 py-3 border rounded bg-white/5 text-white placeholder-gray-500 font-light focus:outline-none focus:ring-2 focus:ring-[#b2a962] focus:border-transparent ${
                   errors.name ? 'border-red-500/50' : 'border-white/20'
                 }`}
               />
@@ -271,7 +271,7 @@ export function ServiceRegistration({ onClose }: ServiceRegistrationProps) {
                 onChange={(e) => handleInputChange('description', e.target.value)}
                 placeholder="Describe what your service does and how it helps users..."
                 rows={3}
-                className={`w-full px-4 py-3 border rounded bg-white/5 text-white placeholder-gray-500 font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent ${
+                className={`w-full px-4 py-3 border rounded bg-white/5 text-white placeholder-gray-500 font-light focus:outline-none focus:ring-2 focus:ring-[#b2a962] focus:border-transparent ${
                   errors.description ? 'border-red-500/50' : 'border-white/20'
                 }`}
               />
@@ -288,7 +288,7 @@ export function ServiceRegistration({ onClose }: ServiceRegistrationProps) {
                 value={formData.endpoint}
                 onChange={(e) => handleInputChange('endpoint', e.target.value)}
                 placeholder="https://api.yourservice.com/endpoint"
-                className={`w-full px-4 py-3 border rounded bg-white/5 text-white placeholder-gray-500 font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent ${
+                className={`w-full px-4 py-3 border rounded bg-white/5 text-white placeholder-gray-500 font-light focus:outline-none focus:ring-2 focus:ring-[#b2a962] focus:border-transparent ${
                   errors.endpoint ? 'border-red-500/50' : 'border-white/20'
                 }`}
               />
@@ -312,7 +312,7 @@ export function ServiceRegistration({ onClose }: ServiceRegistrationProps) {
                   value={formData.price.amount}
                   onChange={(e) => handleInputChange('price.amount', e.target.value)}
                   placeholder="0.01"
-                  className={`w-full px-4 py-3 border rounded bg-white/5 text-white placeholder-gray-500 font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent ${
+                  className={`w-full px-4 py-3 border rounded bg-white/5 text-white placeholder-gray-500 font-light focus:outline-none focus:ring-2 focus:ring-[#b2a962] focus:border-transparent ${
                     errors.price ? 'border-red-500/50' : 'border-white/20'
                   }`}
                 />
@@ -326,7 +326,7 @@ export function ServiceRegistration({ onClose }: ServiceRegistrationProps) {
                 <select
                   value={formData.price.currency}
                   onChange={(e) => handleInputChange('price.currency', e.target.value)}
-                  className="w-full px-4 py-3 border border-white/20 rounded bg-white/5 text-white font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent"
+                  className="w-full px-4 py-3 border border-white/20 rounded bg-white/5 text-white font-light focus:outline-none focus:ring-2 focus:ring-[#b2a962] focus:border-transparent"
                 >
                   {currencies.map(currency => (
                     <option key={currency.id} value={currency.id} className="bg-black">
@@ -347,7 +347,7 @@ export function ServiceRegistration({ onClose }: ServiceRegistrationProps) {
                 <select
                   value={formData.network}
                   onChange={(e) => handleInputChange('network', e.target.value)}
-                  className="w-full px-4 py-3 border border-white/20 rounded bg-white/5 text-white font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent"
+                  className="w-full px-4 py-3 border border-white/20 rounded bg-white/5 text-white font-light focus:outline-none focus:ring-2 focus:ring-[#b2a962] focus:border-transparent"
                 >
                   {networks.map(network => (
                     <option key={network.id} value={network.id} className="bg-black">
@@ -364,7 +364,7 @@ export function ServiceRegistration({ onClose }: ServiceRegistrationProps) {
                 <select
                   value={formData.category}
                   onChange={(e) => handleInputChange('category', e.target.value)}
-                  className="w-full px-4 py-3 border border-white/20 rounded bg-white/5 text-white font-light focus:outline-none focus:ring-2 focus:ring-[#74a180] focus:border-transparent"
+                  className="w-full px-4 py-3 border border-white/20 rounded bg-white/5 text-white font-light focus:outline-none focus:ring-2 focus:ring-[#b2a962] focus:border-transparent"
                 >
                   {categories.map(category => (
                     <option key={category.id} value={category.id} className="bg-black">
@@ -394,7 +394,7 @@ export function ServiceRegistration({ onClose }: ServiceRegistrationProps) {
                 className={`flex-1 px-4 py-3 rounded font-light transition-colors ${
                   !isConnected || isSubmitting
                     ? 'bg-white/10 text-gray-500 cursor-not-allowed'
-                    : 'bg-[#74a180] text-white hover:bg-[#8fb896]'
+                    : 'bg-[#b2a962] text-white hover:bg-[#c4b876]'
                 }`}
               >
                 {isSubmitting ? 'Submitting...' : 'Register Service'}

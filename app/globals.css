@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'RQND Pro';
-  src: url('/fonts/rqnd.woff2') format('woff2');
+  font-family: 'archetype balmer';
+  src: url('/fonts/Architype-Ballmer.c13827da669fea52279190.f6716e214a802f9cafd87e64c0246898.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -37,9 +37,9 @@
 :root {
   --background: #000000;
   --foreground: #ffffff;
-  --green-accent: #74a180;
-  --green-glow: rgba(116, 161, 128, 0.4);
-  --font-title: 'RQND Pro', 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --yellow-accent: #b2a962;
+  --yellow-glow: rgba(178, 169, 98, 0.4);
+  --font-title: 'archetype balmer', 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-body: 'Suisse Intl', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -71,37 +71,37 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--green-accent);
+  background: var(--yellow-accent);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #8bb99a;
+  background: #c4b876;
 }
 
 /* Utility classes */
-.text-green {
-  color: var(--green-accent);
+.text-yellow {
+  color: var(--yellow-accent);
 }
 
-.bg-green {
-  background-color: var(--green-accent);
+.bg-yellow {
+  background-color: var(--yellow-accent);
 }
 
-.border-green {
-  border-color: var(--green-accent);
+.border-yellow {
+  border-color: var(--yellow-accent);
 }
 
-.hover-green:hover {
-  color: var(--green-accent);
+.hover-yellow:hover {
+  color: var(--yellow-accent);
 }
 
-.green-glow {
-  box-shadow: 0 0 20px var(--green-glow);
+.yellow-glow {
+  box-shadow: 0 0 20px var(--yellow-glow);
 }
 
-.green-glow-strong {
-  box-shadow: 0 0 30px rgba(116, 161, 128, 0.6);
+.yellow-glow-strong {
+  box-shadow: 0 0 30px rgba(178, 169, 98, 0.6);
 }
 
 .font-title {
@@ -140,7 +140,7 @@ html {
 
 /* Wallet Adapter Button Customization */
 .wallet-adapter-button {
-  background-color: var(--green-accent) !important;
+  background-color: var(--yellow-accent) !important;
   color: #000000 !important;
   border-radius: 0.5rem !important;
   font-size: 0.875rem !important;
@@ -151,11 +151,11 @@ html {
 }
 
 .wallet-adapter-button:hover {
-  background-color: #8bb99a !important;
+  background-color: #c4b876 !important;
 }
 
 .wallet-adapter-button:not([disabled]):hover {
-  background-color: #8bb99a !important;
+  background-color: #c4b876 !important;
 }
 
 .wallet-adapter-modal-wrapper {
@@ -165,5 +165,5 @@ html {
 .wallet-adapter-modal {
   border-radius: 1rem !important;
   background-color: #1a1a1a !important;
-  border: 1px solid var(--green-accent);
+  border: 1px solid var(--yellow-accent);
 }

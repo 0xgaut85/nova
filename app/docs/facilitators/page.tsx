@@ -59,7 +59,7 @@ export default function FacilitatorsPage() {
       <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15] mb-8">
         <h3 className="text-lg font-medium text-white mb-4">Verify Transaction</h3>
         <div className="flex items-center gap-3 mb-6">
-          <span className="px-3 py-1 bg-[#74a180]/20 text-[#74a180] rounded text-sm font-medium">POST</span>
+          <span className="px-3 py-1 bg-[#b2a962]/20 text-[#b2a962] rounded text-sm font-medium">POST</span>
           <code className="text-sm font-mono text-gray-300">https://facilitator.payai.network/verify</code>
         </div>
         
@@ -121,7 +121,7 @@ app.use('/api/*', middleware.verify);`}
         title="Deploy a Facilitator"
         description="Want to run your own facilitator? Check out the open-source implementation and deployment guides."
         buttonText="View on GitHub"
-        buttonHref="https://github.com/lumen402/facilitator"
+        buttonHref="https://github.com/nova402/facilitator"
       />
     </div>
   );

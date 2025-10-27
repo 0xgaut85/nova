@@ -183,7 +183,7 @@ export function TestingInterface({ selectedServiceId, onClose }: TestingInterfac
               getStepStatus('requesting') === 'active' 
                 ? 'border-blue-500 bg-blue-50' 
                 : getStepStatus('requesting') === 'completed'
-                ? 'border-green-500 bg-green-50'
+                ? 'border-[#b2a962] bg-[#b2a962]/10'
                 : 'border-gray-200 bg-gray-50'
             }`}>
               <div className="flex items-center gap-3">
@@ -191,7 +191,7 @@ export function TestingInterface({ selectedServiceId, onClose }: TestingInterfac
                   getStepStatus('requesting') === 'active' 
                     ? 'bg-blue-500 text-white' 
                     : getStepStatus('requesting') === 'completed'
-                    ? 'bg-green-500 text-white'
+                    ? 'bg-[#b2a962] text-white'
                     : 'bg-gray-300 text-gray-600'
                 }`}>
                   1
@@ -213,7 +213,7 @@ export function TestingInterface({ selectedServiceId, onClose }: TestingInterfac
               getStepStatus('payment-required') === 'active' 
                 ? 'border-orange-500 bg-orange-50' 
                 : getStepStatus('payment-required') === 'completed'
-                ? 'border-green-500 bg-green-50'
+                ? 'border-[#b2a962] bg-[#b2a962]/10'
                 : 'border-gray-200 bg-gray-50'
             }`}>
               <div className="flex items-center gap-3">
@@ -221,7 +221,7 @@ export function TestingInterface({ selectedServiceId, onClose }: TestingInterfac
                   getStepStatus('payment-required') === 'active' 
                     ? 'bg-orange-500 text-white' 
                     : getStepStatus('payment-required') === 'completed'
-                    ? 'bg-green-500 text-white'
+                    ? 'bg-[#b2a962] text-white'
                     : 'bg-gray-300 text-gray-600'
                 }`}>
                   2
@@ -241,15 +241,15 @@ export function TestingInterface({ selectedServiceId, onClose }: TestingInterfac
             {/* Step 3: Payment & Response */}
             <div className={`p-4 rounded-lg border-2 transition-all ${
               getStepStatus('completed') === 'active' 
-                ? 'border-green-500 bg-green-50' 
+                ? 'border-[#b2a962] bg-[#b2a962]/10' 
                 : getStepStatus('completed') === 'completed'
-                ? 'border-green-500 bg-green-50'
+                ? 'border-[#b2a962] bg-[#b2a962]/10'
                 : 'border-gray-200 bg-gray-50'
             }`}>
               <div className="flex items-center gap-3">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
                   getStepStatus('completed') === 'completed'
-                    ? 'bg-green-500 text-white'
+                    ? 'bg-[#b2a962] text-white'
                     : 'bg-gray-300 text-gray-600'
                 }`}>
                   3
@@ -260,7 +260,7 @@ export function TestingInterface({ selectedServiceId, onClose }: TestingInterfac
                 </div>
                 {getStepStatus('completed') === 'active' && (
                   <div className="ml-auto">
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-green-500"></div>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#b2a962]"></div>
                   </div>
                 )}
               </div>
@@ -275,7 +275,7 @@ export function TestingInterface({ selectedServiceId, onClose }: TestingInterfac
             
             <div className={`p-4 rounded-lg border-2 ${
               testResult.success 
-                ? 'border-green-500 bg-green-50' 
+                ? 'border-[#b2a962] bg-[#b2a962]/10' 
                 : 'border-red-500 bg-red-50'
             }`}>
               <div className="flex items-center gap-3 mb-3">

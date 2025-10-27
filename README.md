@@ -1,12 +1,12 @@
-# @lumen402/x402-sdk
+# @nova402/x402-sdk
 
 *Multi-chain x402 payment infrastructure for the decentralized web*
 
-The Lumen402 x402 SDK provides production-ready payment processing capabilities built for multiple high-performance blockchains. This SDK enables developers to integrate sophisticated microtransaction functionality into web applications, supporting automated payment flows with HTTP 402 Payment Required protocol.
+The Nova402 x402 SDK provides production-ready payment processing capabilities built for multiple high-performance blockchains. This SDK enables developers to integrate sophisticated microtransaction functionality into web applications, supporting automated payment flows with HTTP 402 Payment Required protocol.
 
 ## Overview
 
-Lumen402's x402 SDK delivers comprehensive tooling for implementing payment-gated resources across multiple blockchain networks. Applications can leverage automated transaction processing, multi-wallet compatibility, and enterprise-grade security features without complex blockchain integrations.
+Nova402's x402 SDK delivers comprehensive tooling for implementing payment-gated resources across multiple blockchain networks. Applications can leverage automated transaction processing, multi-wallet compatibility, and enterprise-grade security features without complex blockchain integrations.
 
 **Core Capabilities:**
 - **Multi-Chain Support**: Base, Solana, Polygon, BSC, Sei, and Peaq
@@ -19,14 +19,14 @@ Lumen402's x402 SDK delivers comprehensive tooling for implementing payment-gate
 
 ## Installation
 
-Add the Lumen402 x402 SDK to your project:
+Add the Nova402 x402 SDK to your project:
 
 ```bash
-npm install @lumen402/x402-sdk
+npm install @nova402/x402-sdk
 # or
-yarn add @lumen402/x402-sdk  
+yarn add @nova402/x402-sdk  
 # or
-pnpm add @lumen402/x402-sdk
+pnpm add @nova402/x402-sdk
 ```
 
 ## Quick Start
@@ -36,7 +36,7 @@ pnpm add @lumen402/x402-sdk
 Implement automatic payment handling in browser environments:
 
 ```typescript
-import { createX402Client } from '@lumen402/x402-sdk/client';
+import { createX402Client } from '@nova402/x402-sdk/client';
 import { useAccount } from 'wagmi';
 
 export function usePaymentClient() {
@@ -68,7 +68,7 @@ export function usePaymentClient() {
 Configure payment verification and settlement on your backend:
 
 ```typescript
-import { X402PaymentProcessor } from '@lumen402/x402-sdk/server';
+import { X402PaymentProcessor } from '@nova402/x402-sdk/server';
 import { Request, Response } from 'express';
 
 const processor = new X402PaymentProcessor({
@@ -130,7 +130,7 @@ export async function handlePaymentGatedEndpoint(req: Request, res: Response) {
 ## Project Structure
 
 ```
-@lumen402/x402-sdk/
+@nova402/x402-sdk/
 ├── client/
 │   ├── payment-interceptor.ts    # Automatic HTTP 402 detection
 │   ├── transaction-builder.ts    # Multi-chain transaction assembly
@@ -274,8 +274,8 @@ Compatible with modern web development stacks:
 ## Development
 
 ```bash
-git clone https://github.com/lumen402/lumen402
-cd lumen402
+git clone https://github.com/nova402/nova402
+cd nova402
 npm install
 npm run build  
 npm test
@@ -283,10 +283,10 @@ npm test
 
 ## Resources
 
-- **Documentation:** [lumen402.com/docs](https://lumen402.com/docs)
-- **GitHub:** [github.com/lumen402/lumen402](https://github.com/lumen402/lumen402)
-- **Twitter:** [@lumen402](https://x.com/lumen402)
-- **Website:** [lumen402.com](https://lumen402.com)
+- **Documentation:** [nova402.com/docs](https://nova402.com/docs)
+- **GitHub:** [github.com/nova402/nova402](https://github.com/nova402/nova402)
+- **Twitter:** [@xNova402](https://x.com/xNova402)
+- **Website:** [nova402.com](https://nova402.com)
 
 ## License
 
@@ -298,6 +298,6 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 
 ---
 
-**Lumen402** - The App Store for x402. Built on the HTTP 402 Payment Required standard.
+**Nova402** - The App Store for x402. Built on the HTTP 402 Payment Required standard.
 
 *Powered by [PayAI Network](https://payai.network) facilitator infrastructure*

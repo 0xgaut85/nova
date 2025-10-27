@@ -1,6 +1,18 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  webpack: (config) => {
+    config.externals.push("pino-pretty", "lokijs", "encoding");
+    if (!config.isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        '@react-native-async-storage/async-storage': false,
+        'bufferutil': false,
+        'utf-8-validate': false,
+      };
+    }
+    return config;
+  },
   async headers() {
     return [
       {
@@ -22,7 +34,7 @@ const nextConfig: NextConfig = {
           has: [
             {
               type: 'host',
-              value: 'explorer.lumen402.com',
+              value: 'explorer.nova402.com',
             },
           ],
           destination: '/explorer',

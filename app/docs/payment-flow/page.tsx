@@ -26,7 +26,7 @@ export default function PaymentFlowPage() {
       <div className="space-y-4 mb-8">
         <div className="bg-black/80 backdrop-blur-sm rounded-xl p-6 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-xs font-light">
+            <div className="w-8 h-8 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-xs font-light">
               1
             </div>
             <h3 className="text-base font-light text-white m-0">Client Initiates Request</h3>
@@ -45,7 +45,7 @@ Accept: application/json`}
 
         <div className="bg-black/80 backdrop-blur-sm rounded-xl p-6 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-xs font-light">
+            <div className="w-8 h-8 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-xs font-light">
               2
             </div>
             <h3 className="text-base font-light text-white m-0">Server Returns 402</h3>
@@ -73,7 +73,7 @@ Content-Type: application/json
 
         <div className="bg-black/80 backdrop-blur-sm rounded-xl p-6 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-xs font-light">
+            <div className="w-8 h-8 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-xs font-light">
               3
             </div>
             <h3 className="text-base font-light text-white m-0">Client Parses Payment Info</h3>
@@ -91,7 +91,7 @@ Content-Type: application/json
 
         <div className="bg-black/80 backdrop-blur-sm rounded-xl p-6 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-xs font-light">
+            <div className="w-8 h-8 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-xs font-light">
               4
             </div>
             <h3 className="text-base font-light text-white m-0">Create Transaction</h3>
@@ -113,7 +113,7 @@ Content-Type: application/json
 
         <div className="bg-black/80 backdrop-blur-sm rounded-xl p-6 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-xs font-light">
+            <div className="w-8 h-8 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-xs font-light">
               5
             </div>
             <h3 className="text-base font-light text-white m-0">Sign & Broadcast</h3>
@@ -125,7 +125,7 @@ Content-Type: application/json
 
         <div className="bg-black/80 backdrop-blur-sm rounded-xl p-6 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-xs font-light">
+            <div className="w-8 h-8 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-xs font-light">
               6
             </div>
             <h3 className="text-base font-light text-white m-0">Retry with Proof</h3>
@@ -146,7 +146,7 @@ Accept: application/json`}
 
         <div className="bg-black/80 backdrop-blur-sm rounded-xl p-6 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-xs font-light">
+            <div className="w-8 h-8 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-xs font-light">
               7
             </div>
             <h3 className="text-base font-light text-white m-0">Server Validates Payment</h3>
@@ -158,7 +158,7 @@ Accept: application/json`}
 
         <div className="bg-black/80 backdrop-blur-sm rounded-xl p-6 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-xs font-light">
+            <div className="w-8 h-8 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-xs font-light">
               8
             </div>
             <h3 className="text-base font-light text-white m-0">Service Delivered</h3>
@@ -237,7 +237,7 @@ Content-Type: application/json
 
       <div className="relative rounded-2xl p-6 text-white not-prose overflow-hidden">
         {/* Enhanced gradient background - black to green */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#74a180]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#b2a962]" />
         
         {/* Heavy grain texture overlay - increased for more visibility */}
         <div 
@@ -265,7 +265,7 @@ Content-Type: application/json
           <div className="flex gap-3">
             <Link
               href="/docs/facilitators"
-              className="px-5 py-2.5 bg-white text-[#74a180] rounded-xl text-sm font-light hover:shadow-lg transition-all"
+              className="px-5 py-2.5 bg-white text-[#b2a962] rounded-xl text-sm font-light hover:shadow-lg transition-all"
             >
               Facilitators Guide
             </Link>

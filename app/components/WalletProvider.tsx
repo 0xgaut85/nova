@@ -1,20 +1,24 @@
 'use client';
 
 import { FC, ReactNode } from 'react';
-import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { config } from '../config/wagmi';
+import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi';
+import { wagmiAdapter } from '../config/wagmi';
+import '../config/appkit'; // Initialize AppKit
 
 interface WalletProviderProps {
-  children: ReactNode;  
+  children: ReactNode;
+  cookies: string | null;
 }
 
 // Create a client for react-query
 const queryClient = new QueryClient();
 
-export const WalletProvider: FC<WalletProviderProps> = ({ children }) => {
+export const WalletProvider: FC<WalletProviderProps> = ({ children, cookies }) => {
+  const initialState = cookieToInitialState(wagmiAdapter.wagmiConfig as Config, cookies);
+
   return (
-    <WagmiProvider config={config}>
+    <WagmiProvider config={wagmiAdapter.wagmiConfig as Config} initialState={initialState}>
       <QueryClientProvider client={queryClient}>
         {children}
       </QueryClientProvider>

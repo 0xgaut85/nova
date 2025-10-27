@@ -167,32 +167,53 @@ export default function BubbleBackground() {
       bubbles.push(m);
     }
 
-    // Center bubble - smaller with more deformation
-    addBubble(
-      { radius: 0.50, noiseAmp: 0.25, noiseScale: 1.3, noiseSpeed: 0.15, roughness: 0.06, envMapIntensity: 1.8 },
-      new THREE.Vector3(0.0, 0.0, 0.0),
-      { x: 0.03, y: 0.025 },
-      0.0,
-      0.0
-    );
+    // Create 20 small to very small bubbles distributed across the scene
+    const bubbleConfigs = [
+      // First row - scattered around
+      { radius: 0.15, noiseAmp: 0.20, noiseScale: 1.3, noiseSpeed: 0.15, roughness: 0.06, envMapIntensity: 1.8, pos: [-1.2, 0.8, 0.1], swing: { x: 0.04, y: 0.03 }, phase: 0.0 },
+      { radius: 0.18, noiseAmp: 0.22, noiseScale: 1.2, noiseSpeed: 0.18, roughness: 0.08, envMapIntensity: 1.6, pos: [-0.6, 0.6, -0.15], swing: { x: 0.05, y: 0.04 }, phase: 0.5 },
+      { radius: 0.12, noiseAmp: 0.20, noiseScale: 1.5, noiseSpeed: 0.20, roughness: 0.07, envMapIntensity: 1.5, pos: [0.2, 0.5, 0.05], swing: { x: 0.06, y: 0.05 }, phase: 1.0 },
+      { radius: 0.16, noiseAmp: 0.25, noiseScale: 1.1, noiseSpeed: 0.16, roughness: 0.09, envMapIntensity: 1.7, pos: [0.8, 0.7, -0.12], swing: { x: 0.03, y: 0.04 }, phase: 1.5 },
+      { radius: 0.14, noiseAmp: 0.22, noiseScale: 1.4, noiseSpeed: 0.19, roughness: 0.08, envMapIntensity: 1.6, pos: [1.3, 0.6, 0.08], swing: { x: 0.05, y: 0.03 }, phase: 2.0 },
+      
+      // Second row
+      { radius: 0.17, noiseAmp: 0.20, noiseScale: 1.2, noiseSpeed: 0.17, roughness: 0.07, envMapIntensity: 1.5, pos: [-1.1, -0.2, -0.10], swing: { x: 0.04, y: 0.05 }, phase: 0.3 },
+      { radius: 0.13, noiseAmp: 0.23, noiseScale: 1.3, noiseSpeed: 0.18, roughness: 0.08, envMapIntensity: 1.7, pos: [-0.4, 0.0, 0.12], swing: { x: 0.06, y: 0.04 }, phase: 0.8 },
+      { radius: 0.15, noiseAmp: 0.21, noiseScale: 1.4, noiseSpeed: 0.16, roughness: 0.09, envMapIntensity: 1.6, pos: [0.0, -0.1, -0.08], swing: { x: 0.04, y: 0.05 }, phase: 1.2 },
+      { radius: 0.19, noiseAmp: 0.24, noiseScale: 1.1, noiseSpeed: 0.19, roughness: 0.07, envMapIntensity: 1.8, pos: [0.6, 0.1, 0.15], swing: { x: 0.05, y: 0.06 }, phase: 1.7 },
+      { radius: 0.11, noiseAmp: 0.20, noiseScale: 1.5, noiseSpeed: 0.20, roughness: 0.08, envMapIntensity: 1.5, pos: [1.1, -0.3, -0.05], swing: { x: 0.03, y: 0.04 }, phase: 2.3 },
+      
+      // Third row
+      { radius: 0.16, noiseAmp: 0.22, noiseScale: 1.3, noiseSpeed: 0.17, roughness: 0.06, envMapIntensity: 1.7, pos: [-0.9, -0.7, 0.09], swing: { x: 0.04, y: 0.05 }, phase: 0.6 },
+      { radius: 0.12, noiseAmp: 0.20, noiseScale: 1.4, noiseSpeed: 0.18, roughness: 0.08, envMapIntensity: 1.6, pos: [-0.3, -0.6, -0.13], swing: { x: 0.05, y: 0.04 }, phase: 1.1 },
+      { radius: 0.18, noiseAmp: 0.23, noiseScale: 1.2, noiseSpeed: 0.19, roughness: 0.07, envMapIntensity: 1.8, pos: [0.3, -0.5, 0.11], swing: { x: 0.06, y: 0.05 }, phase: 1.6 },
+      { radius: 0.14, noiseAmp: 0.21, noiseScale: 1.3, noiseSpeed: 0.16, roughness: 0.09, envMapIntensity: 1.6, pos: [0.9, -0.8, -0.07], swing: { x: 0.04, y: 0.05 }, phase: 2.1 },
+      { radius: 0.15, noiseAmp: 0.24, noiseScale: 1.5, noiseSpeed: 0.20, roughness: 0.08, envMapIntensity: 1.7, pos: [1.4, -0.5, 0.13], swing: { x: 0.05, y: 0.04 }, phase: 2.6 },
+      
+      // Fourth row - very small bubbles
+      { radius: 0.10, noiseAmp: 0.18, noiseScale: 1.5, noiseSpeed: 0.21, roughness: 0.09, envMapIntensity: 1.5, pos: [-0.7, -1.2, 0.06], swing: { x: 0.03, y: 0.04 }, phase: 0.9 },
+      { radius: 0.11, noiseAmp: 0.19, noiseScale: 1.4, noiseSpeed: 0.19, roughness: 0.10, envMapIntensity: 1.6, pos: [-0.1, -1.0, -0.10], swing: { x: 0.05, y: 0.03 }, phase: 1.4 },
+      { radius: 0.13, noiseAmp: 0.22, noiseScale: 1.3, noiseSpeed: 0.17, roughness: 0.08, envMapIntensity: 1.7, pos: [0.5, -1.3, 0.08], swing: { x: 0.04, y: 0.06 }, phase: 1.9 },
+      { radius: 0.09, noiseAmp: 0.20, noiseScale: 1.6, noiseSpeed: 0.22, roughness: 0.11, envMapIntensity: 1.5, pos: [1.0, -1.1, -0.09], swing: { x: 0.06, y: 0.05 }, phase: 2.4 },
+      { radius: 0.12, noiseAmp: 0.21, noiseScale: 1.4, noiseSpeed: 0.18, roughness: 0.09, envMapIntensity: 1.6, pos: [1.5, -1.4, 0.07], swing: { x: 0.03, y: 0.04 }, phase: 2.9 }
+    ];
 
-    // Small — bottom-right with more deformation
-    addBubble(
-      { radius: 0.32, noiseAmp: 0.22, noiseScale: 1.2, noiseSpeed: 0.18, roughness: 0.08, envMapIntensity: 1.6 },
-      new THREE.Vector3(1.00, -0.65, 0.0),
-      { x: 0.05, y: 0.04 },
-      1.3,
-      0.18
-    );
-
-    // Small — top-left with more deformation
-    addBubble(
-      { radius: 0.28, noiseAmp: 0.20, noiseScale: 1.5, noiseSpeed: 0.20, roughness: 0.07, envMapIntensity: 1.5 },
-      new THREE.Vector3(-1.05, 0.70, 0.0),
-      { x: 0.06, y: 0.05 },
-      2.7,
-      0.12
-    );
+    bubbleConfigs.forEach((config) => {
+      addBubble(
+        {
+          radius: config.radius,
+          noiseAmp: config.noiseAmp,
+          noiseScale: config.noiseScale,
+          noiseSpeed: config.noiseSpeed,
+          roughness: config.roughness,
+          envMapIntensity: config.envMapIntensity
+        },
+        new THREE.Vector3(config.pos[0], config.pos[1], config.pos[2]),
+        config.swing,
+        config.phase,
+        config.pos[2]
+      );
+    });
 
     const pointer = new THREE.Vector2();
     const handlePointerMove = (e: PointerEvent) => {

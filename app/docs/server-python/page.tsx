@@ -226,7 +226,7 @@ async def multi_network_endpoint():
 
       <div className="relative rounded-2xl p-6 text-white not-prose overflow-hidden">
         {/* Enhanced gradient background - black to green */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#74a180]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#b2a962]" />
         
         {/* Heavy grain texture overlay - increased for more visibility */}
         <div 
@@ -254,7 +254,7 @@ async def multi_network_endpoint():
           <div className="flex gap-3">
             <Link
               href="/docs/clients"
-              className="px-5 py-2.5 bg-white text-[#74a180] rounded-xl text-sm font-light hover:shadow-lg transition-all"
+              className="px-5 py-2.5 bg-white text-[#b2a962] rounded-xl text-sm font-light hover:shadow-lg transition-all"
             >
               Client Integration
             </Link>

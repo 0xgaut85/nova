@@ -8,7 +8,7 @@ interface PaymentSuccessModalProps {
 export function PaymentSuccessModal({ txHash, onClose }: PaymentSuccessModalProps) {
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[60] p-4">
-      <div className="relative bg-black border border-[#74a180]/30 rounded-lg max-w-md w-full p-8">
+      <div className="relative bg-black border border-[#b2a962]/30 rounded-lg max-w-md w-full p-8">
         {/* Grain texture overlay */}
         <div
           className="absolute inset-0 opacity-[0.15] pointer-events-none rounded-lg"
@@ -20,7 +20,7 @@ export function PaymentSuccessModal({ txHash, onClose }: PaymentSuccessModalProp
         />
 
         {/* Gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#74a180]/10 to-transparent rounded-lg" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#b2a962]/10 to-transparent rounded-lg" />
 
         <div className="relative z-10">
           {/* Close button */}
@@ -35,7 +35,7 @@ export function PaymentSuccessModal({ txHash, onClose }: PaymentSuccessModalProp
 
           {/* Success Icon */}
           <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 bg-[#74a180] rounded-full flex items-center justify-center">
+            <div className="w-20 h-20 bg-[#b2a962] rounded-full flex items-center justify-center">
               <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
@@ -62,7 +62,7 @@ export function PaymentSuccessModal({ txHash, onClose }: PaymentSuccessModalProp
               href={`https://basescan.org/tx/${txHash}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 px-4 py-3 bg-[#74a180] text-white rounded-lg hover:bg-[#8fb896] transition-all text-center text-sm font-light"
+              className="flex-1 px-4 py-3 bg-[#b2a962] text-white rounded-lg hover:bg-[#c4b876] transition-all text-center text-sm font-light"
             >
               View on Explorer
             </a>
@@ -78,4 +78,5 @@ export function PaymentSuccessModal({ txHash, onClose }: PaymentSuccessModalProp
     </div>
   );
 }
+
 

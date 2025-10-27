@@ -136,7 +136,7 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
     return (
       <div className="flex items-center justify-center py-12">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#74a180] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-16 h-16 border-4 border-[#b2a962] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-400 font-light">Discovering x402 services...</p>
         </div>
       </div>
@@ -151,7 +151,7 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
           <p className="text-gray-400 text-sm mb-4 font-light">{error}</p>
           <button
             onClick={handleRefresh}
-            className="px-4 py-2 bg-[#74a180] text-white rounded hover:bg-[#8fb896] transition-colors text-sm font-light"
+            className="px-4 py-2 bg-[#b2a962] text-white rounded hover:bg-[#c4b876] transition-colors text-sm font-light"
           >
             Try Again
           </button>
@@ -171,7 +171,7 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
               {filteredServices.length} services available
             </p>
             <span className="text-gray-700">|</span>
-            <p className="text-[#74a180] font-light">
+            <p className="text-[#b2a962] font-light">
               {productionCount} Production
             </p>
             <p className="text-gray-400 font-light">
@@ -179,8 +179,8 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
             </p>
           </div>
           <div className="flex items-center gap-2 mt-2 text-sm">
-            <span className="inline-flex items-center gap-2 text-[#74a180] font-light">
-              <span className="w-2 h-2 bg-[#74a180] rounded-full animate-pulse"></span>
+            <span className="inline-flex items-center gap-2 text-[#b2a962] font-light">
+              <span className="w-2 h-2 bg-[#b2a962] rounded-full animate-pulse"></span>
               <span>Live</span>
             </span>
             <span className="text-gray-700">|</span>
@@ -218,8 +218,8 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
             onClick={() => setServiceType('production')}
             className={`px-6 py-3 rounded font-light transition-all ${
               serviceType === 'production'
-                ? 'bg-[#74a180] text-white'
-                : 'bg-white/5 text-gray-400 border border-[#74a180]/30 hover:bg-[#74a180]/20 hover:text-white'
+                ? 'bg-[#b2a962] text-white'
+                : 'bg-white/5 text-gray-400 border border-[#b2a962]/30 hover:bg-[#b2a962]/20 hover:text-white'
             }`}
           >
             Production ({productionCount})
@@ -248,7 +248,7 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search services..."
-              className="w-full px-4 py-3 border border-white/20 rounded focus:outline-none focus:border-[#74a180] bg-white/5 text-white placeholder-gray-500 font-light"
+              className="w-full px-4 py-3 border border-white/20 rounded focus:outline-none focus:border-[#b2a962] bg-white/5 text-white placeholder-gray-500 font-light"
             />
           </div>
 
@@ -258,7 +258,7 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-4 py-3 border border-white/20 rounded focus:outline-none focus:border-[#74a180] bg-white/5 text-white font-light"
+              className="w-full px-4 py-3 border border-white/20 rounded focus:outline-none focus:border-[#b2a962] bg-white/5 text-white font-light"
             >
               {categories.map(cat => (
                 <option key={cat} value={cat} className="bg-black">{cat}</option>
@@ -272,7 +272,7 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
             <select
               value={selectedNetwork}
               onChange={(e) => setSelectedNetwork(e.target.value)}
-              className="w-full px-4 py-3 border border-white/20 rounded focus:outline-none focus:border-[#74a180] bg-white/5 text-white font-light"
+              className="w-full px-4 py-3 border border-white/20 rounded focus:outline-none focus:border-[#b2a962] bg-white/5 text-white font-light"
             >
               {networks.map(net => (
                 <option key={net} value={net} className="bg-black">{net}</option>
@@ -301,7 +301,7 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
             </button>
             <button
               onClick={() => {/* Service registration modal */}}
-              className="px-6 py-3 bg-[#74a180] text-white rounded hover:bg-[#8fb896] transition-colors font-light"
+              className="px-6 py-3 bg-[#b2a962] text-white rounded hover:bg-[#c4b876] transition-colors font-light"
             >
               Register Your Service
             </button>
@@ -340,7 +340,7 @@ export function ServiceMarketplace({ onTestService, onGetCode, onPayAndUse, isTe
             <div className="flex justify-center mt-8">
               <button
                 onClick={() => setShowAll(true)}
-                className="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-[#74a180] text-white rounded-lg transition-all duration-300 font-light text-lg group"
+                className="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-[#b2a962] text-white rounded-lg transition-all duration-300 font-light text-lg group"
               >
                 <span className="flex items-center gap-3">
                   Load More

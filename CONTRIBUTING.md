@@ -1,11 +1,11 @@
-# Contributing to Lumen402 x402 SDK
+# Contributing to Nova402 x402 SDK
 
-Thank you for your interest in contributing to the Lumen402 x402 SDK! We welcome contributions from the community.
+Thank you for your interest in contributing to the Nova402 x402 SDK! We welcome contributions from the community.
 
 ## Getting Started
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/lumen402.git`
+2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/nova402.git`
 3. Create a new branch: `git checkout -b feature/your-feature-name`
 4. Make your changes
 5. Run tests: `npm test`
@@ -71,8 +71,8 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 ## Questions?
 
 - Open a GitHub Discussion
-- Reach out on Twitter [@lumen402](https://x.com/lumen402)
-- Visit our website: [lumen402.com](https://lumen402.com)
+- Reach out on Twitter [@xNova402](https://x.com/xNova402)
+- Visit our website: [nova402.com](https://nova402.com)
 
 ## Code of Conduct
 

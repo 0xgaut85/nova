@@ -1,37 +1,25 @@
-'use client';
+import { cookieStorage, createStorage, http } from '@wagmi/core';
+import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
+import { base, baseSepolia, bsc, bscTestnet } from '@reown/appkit/networks';
 
-import { http, createConfig } from 'wagmi';
-import { base, baseSepolia, bsc, bscTestnet } from 'wagmi/chains';
-import { injected, coinbaseWallet } from 'wagmi/connectors';
+// Get projectId from https://dashboard.reown.com
+export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || 'bb1ac17de596e3590a24a476c5cb419c';
 
-// Configure chains - Adding Base networks for x402 support
-export const chains = [base, baseSepolia, bsc, bscTestnet] as const;
+if (!projectId) {
+  throw new Error('Project ID is not defined');
+}
 
-// Configure wagmi with Base and BSC support for x402 payments
-export const config = createConfig({
-  chains: [base, baseSepolia, bsc, bscTestnet],
-  connectors: [
-    // Injected connector for MetaMask and Rabby
-    injected({
-      target: {
-        id: 'injected',
-        name: 'MetaMask / Rabby',
-        provider: (window) => window?.ethereum,
-      },
-    }),
-    // Coinbase Wallet for Base network optimization
-    coinbaseWallet({
-      appName: 'Lumen402',
-      appLogoUrl: '/logo.png',
-    }),
-  ],
-  transports: {
-    // Base networks for x402 payments
-    [base.id]: http('https://mainnet.base.org'),
-    [baseSepolia.id]: http('https://sepolia.base.org'),
-    // BSC networks (existing)
-    [bsc.id]: http('https://bsc-dataseed.binance.org'),
-    [bscTestnet.id]: http('https://data-seed-prebsc-1-s1.binance.org:8545'),
-  },
+export const networks = [base, baseSepolia, bsc, bscTestnet] as const;
+
+// Set up the Wagmi Adapter (Config)
+export const wagmiAdapter = new WagmiAdapter({
+  storage: createStorage({
+    storage: cookieStorage
+  }),
+  ssr: true,
+  projectId,
+  networks
 });
+
+export const config = wagmiAdapter.wagmiConfig;
 

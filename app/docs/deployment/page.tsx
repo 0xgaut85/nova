@@ -10,7 +10,7 @@ export default function DeploymentPage() {
       </h1>
 
       <p className="text-base text-gray-400 leading-relaxed mb-8">
-        Deploy your x402-enabled service to production and list it on the Lumen402 marketplace.
+        Deploy your x402-enabled service to production and list it on the Nova402 marketplace.
       </p>
 
       <div className="bg-black/80 backdrop-blur-xl rounded-2xl p-6 border border-white/[0.15] mb-8 not-prose">
@@ -20,7 +20,7 @@ export default function DeploymentPage() {
           <li>• Configure environment variables</li>
           <li>• Set up monitoring and logging</li>
           <li>• Deploy to hosting provider</li>
-          <li>• Register on Lumen402 marketplace</li>
+          <li>• Register on Nova402 marketplace</li>
         </ul>
       </div>
 
@@ -201,7 +201,7 @@ app.use(
         </pre>
       </div>
 
-      <h2 className="text-2xl font-light text-white mb-4 mt-8">Register on Lumen402</h2>
+      <h2 className="text-2xl font-light text-white mb-4 mt-8">Register on Nova402</h2>
 
       <p className="text-sm text-gray-400 mb-4">
         Once your service is deployed, register it on the marketplace:
@@ -210,19 +210,19 @@ app.use(
       <div className="space-y-3 mb-8">
         <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-7 h-7 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-xs font-light">
+            <div className="w-7 h-7 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-xs font-light">
               1
             </div>
             <h3 className="text-sm font-light text-white m-0">Visit Marketplace</h3>
           </div>
           <p className="text-sm text-gray-400 m-0 pl-10">
-            Go to <Link href="/dapp" className="text-[#74a180] hover:text-[#8fb896]">Lumen402 marketplace</Link> and click "Register Service"
+            Go to <Link href="/dapp" className="text-[#b2a962] hover:text-[#c4b876]">Nova Hub</Link> and click "Register Service"
           </p>
         </div>
 
         <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-7 h-7 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-xs font-light">
+            <div className="w-7 h-7 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-xs font-light">
               2
             </div>
             <h3 className="text-sm font-light text-white m-0">Fill Service Details</h3>
@@ -237,7 +237,7 @@ app.use(
 
         <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-7 h-7 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-xs font-light">
+            <div className="w-7 h-7 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-xs font-light">
               3
             </div>
             <h3 className="text-sm font-light text-white m-0">Test & Publish</h3>
@@ -282,7 +282,7 @@ app.use(
 
       <div className="relative rounded-2xl p-6 text-white not-prose overflow-hidden">
         {/* Enhanced gradient background - black to green */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#74a180]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#b2a962]" />
         
         {/* Heavy grain texture overlay - increased for more visibility */}
         <div 
@@ -310,7 +310,7 @@ app.use(
           <div className="flex gap-3">
             <Link
               href="/dapp"
-              className="px-5 py-2.5 bg-white text-[#74a180] rounded-xl text-sm font-light hover:shadow-lg transition-all"
+              className="px-5 py-2.5 bg-white text-[#b2a962] rounded-xl text-sm font-light hover:shadow-lg transition-all"
             >
               Register Service
             </Link>

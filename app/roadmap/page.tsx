@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 import { roadmapData } from './roadmap-data';
 import RoadmapPhase from './RoadmapPhase';
 
-const BubbleBackground = dynamic(() => import('../components/BubbleBackground'), { ssr: false });
+const NovaHero = dynamic(() => import('../components/NovaHero'), { ssr: false });
 
 export default function RoadmapPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -98,9 +98,9 @@ export default function RoadmapPage() {
     <div className="h-screen w-screen bg-black text-white overflow-hidden fixed inset-0">
       {/* Global animated background gradient orbs - SAME AS LANDING PAGE */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#74a180] rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob" />
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#74a180] rounded-full mix-blend-multiply filter blur-[128px] opacity-10 animate-blob animation-delay-2000" />
-        <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-[#74a180] rounded-full mix-blend-multiply filter blur-[128px] opacity-15 animate-blob animation-delay-4000" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#b2a962] rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#b2a962] rounded-full mix-blend-multiply filter blur-[128px] opacity-10 animate-blob animation-delay-2000" />
+        <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-[#b2a962] rounded-full mix-blend-multiply filter blur-[128px] opacity-15 animate-blob animation-delay-4000" />
       </div>
 
       {/* Header */}
@@ -110,12 +110,12 @@ export default function RoadmapPage() {
             <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
               <Image
                 src="/logosvg.svg"
-                alt="Lumen402"
+                alt="Nova402"
                 width={72}
                 height={72}
                 className="w-12 h-12 sm:w-16 sm:h-16 lg:w-[72px] lg:h-[72px] transition-transform duration-300 group-hover:scale-105"
               />
-              <span className="text-xl sm:text-2xl font-normal text-white font-title tracking-wide">Lumen402</span>
+              <span className="text-xl sm:text-2xl font-normal text-white font-title tracking-wide">Nova402</span>
             </Link>
 
             <div className="hidden md:flex items-center gap-6">
@@ -135,7 +135,7 @@ export default function RoadmapPage() {
                 href="/dapp" 
                 className="text-gray-400 hover:text-white transition-colors duration-300 text-base font-light"
               >
-                DApp
+                Nova Hub
               </Link>
             </div>
           </div>
@@ -150,7 +150,7 @@ export default function RoadmapPage() {
             onClick={() => setCurrentSlide(index)}
             className={`w-2 h-2 rounded-full transition-all duration-300 min-h-[28px] min-w-[28px] flex items-center justify-center ${
               currentSlide === index 
-                ? 'bg-[#74a180] h-8 w-2' 
+                ? 'bg-[#b2a962] h-8 w-2' 
                 : 'bg-white/30 hover:bg-white/50'
             }`}
             aria-label={`Go to slide ${index + 1}`}
@@ -172,9 +172,9 @@ export default function RoadmapPage() {
       >
         {/* Hero Slide with Three.js Background - IDENTICAL to landing page */}
         <div className="h-screen w-screen relative flex items-center justify-center px-6 sm:px-8">
-          {/* Three.js Bubble Background */}
+          {/* Three.js Nova Animation */}
           <div className="absolute inset-0 w-full h-full z-0">
-            <BubbleBackground />
+            <NovaHero />
           </div>
 
           {/* Grid overlay */}
@@ -225,7 +225,7 @@ export default function RoadmapPage() {
                   animate={currentSlide === 0 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.8, delay: 1.4 + i * 0.1 }}
                 >
-                  <div className={`text-5xl sm:text-6xl font-light mb-2 ${stat.accent ? 'text-[#74a180]' : 'text-white'}`}>
+                  <div className={`text-5xl sm:text-6xl font-light mb-2 ${stat.accent ? 'text-[#b2a962]' : 'text-white'}`}>
                     {stat.value}
                   </div>
                   <div className="text-xs text-gray-500 font-light uppercase tracking-widest">
@@ -246,7 +246,7 @@ export default function RoadmapPage() {
               className="absolute bottom-10 left-1/2 -translate-x-1/2"
             >
               <div className="flex flex-col items-center gap-3">
-                <div className="w-[1px] h-12 bg-gradient-to-b from-transparent via-[#74a180] to-transparent" />
+                <div className="w-[1px] h-12 bg-gradient-to-b from-transparent via-[#b2a962] to-transparent" />
               </div>
             </motion.div>
           </motion.div>
@@ -279,7 +279,7 @@ export default function RoadmapPage() {
             >
               Join the
               <br />
-              <span className="text-[#74a180]">Revolution</span>
+              <span className="text-[#b2a962]">Revolution</span>
             </motion.h2>
 
             <motion.p 
@@ -299,20 +299,20 @@ export default function RoadmapPage() {
               transition={{ duration: 1, delay: 1 }}
             >
               <a
-                href="https://github.com/lumen402"
+                href="https://github.com/nova402"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative px-8 sm:px-10 py-3 sm:py-4 text-white font-light text-sm sm:text-base overflow-hidden w-full sm:w-auto text-center"
               >
                 <span className="relative z-10">GitHub</span>
                 <motion.div
-                  className="absolute inset-0 bg-[#74a180]"
+                  className="absolute inset-0 bg-[#b2a962]"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.3 }}
                   style={{ originX: 0 }}
                 />
-                <div className="absolute inset-0 border border-[#74a180]" />
+                <div className="absolute inset-0 border border-[#b2a962]" />
               </a>
 
               <Link

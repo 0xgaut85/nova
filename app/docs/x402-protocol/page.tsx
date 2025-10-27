@@ -99,7 +99,7 @@ export default function X402ProtocolPage() {
           { name: 'Sei', logo: '/logos/sei.jpg', desc: 'Optimized L1 • Speed' },
           { name: 'Peaq', logo: '/logos/peaq.jpg', desc: 'DePIN network • IoT' }
         ].map((chain) => (
-          <div key={chain.name} className="bg-black/80 backdrop-blur-sm rounded-lg p-6 border border-white/[0.15] hover:border-[#74a180]/30 transition-all">
+          <div key={chain.name} className="bg-black/80 backdrop-blur-sm rounded-lg p-6 border border-white/[0.15] hover:border-[#b2a962]/30 transition-all">
             <div className="flex items-center gap-3 mb-3">
               <img src={chain.logo} alt={chain.name} className="w-10 h-10 rounded-lg object-cover" />
               <h4 className="text-base font-medium text-white">{chain.name}</h4>

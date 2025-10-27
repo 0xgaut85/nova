@@ -9,7 +9,7 @@ export default function CTABox({ title, description, buttonText, buttonHref }: C
   return (
     <div className="relative rounded-lg p-10 text-white overflow-hidden group">
       {/* Enhanced gradient background - black to green */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#74a180]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#b2a962]" />
       
       {/* Heavy grain texture overlay - increased for more visibility */}
       <div 
@@ -36,7 +36,7 @@ export default function CTABox({ title, description, buttonText, buttonHref }: C
           href={buttonHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 px-8 py-3.5 bg-white text-[#74a180] rounded-lg text-sm font-medium hover:bg-gray-100 transition-all hover:gap-4"
+          className="inline-flex items-center gap-3 px-8 py-3.5 bg-white text-[#b2a962] rounded-lg text-sm font-medium hover:bg-gray-100 transition-all hover:gap-4"
         >
           {buttonText}
           <svg className="w-4 h-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

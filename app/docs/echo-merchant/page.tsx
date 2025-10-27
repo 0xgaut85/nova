@@ -36,7 +36,7 @@ export default function EchoMerchantPage() {
 
         <div className="bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
           <div className="flex items-center gap-3 mb-2">
-            <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs font-light">POST</span>
+            <span className="px-2 py-1 bg-[#b2a962]/10 text-[#b2a962] rounded text-xs font-light">POST</span>
             <code className="text-sm font-mono text-white">https://echo.payai.network/echo</code>
           </div>
           <p className="text-sm text-gray-400 m-0">
@@ -53,7 +53,7 @@ export default function EchoMerchantPage() {
 
       <div className="space-y-4 mb-8">
         <div className="flex gap-4 bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
-          <div className="flex-shrink-0 w-8 h-8 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-sm font-light">
+          <div className="flex-shrink-0 w-8 h-8 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-sm font-light">
             1
           </div>
           <div>
@@ -65,7 +65,7 @@ export default function EchoMerchantPage() {
         </div>
 
         <div className="flex gap-4 bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
-          <div className="flex-shrink-0 w-8 h-8 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-sm font-light">
+          <div className="flex-shrink-0 w-8 h-8 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-sm font-light">
             2
           </div>
           <div>
@@ -77,7 +77,7 @@ export default function EchoMerchantPage() {
         </div>
 
         <div className="flex gap-4 bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
-          <div className="flex-shrink-0 w-8 h-8 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-sm font-light">
+          <div className="flex-shrink-0 w-8 h-8 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-sm font-light">
             3
           </div>
           <div>
@@ -89,7 +89,7 @@ export default function EchoMerchantPage() {
         </div>
 
         <div className="flex gap-4 bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
-          <div className="flex-shrink-0 w-8 h-8 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-sm font-light">
+          <div className="flex-shrink-0 w-8 h-8 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-sm font-light">
             4
           </div>
           <div>
@@ -101,7 +101,7 @@ export default function EchoMerchantPage() {
         </div>
 
         <div className="flex gap-4 bg-black/80 backdrop-blur-sm rounded-xl p-5 border border-white/[0.15]">
-          <div className="flex-shrink-0 w-8 h-8 bg-[#74a180] text-white rounded-lg flex items-center justify-center text-sm font-light">
+          <div className="flex-shrink-0 w-8 h-8 bg-[#b2a962] text-white rounded-lg flex items-center justify-center text-sm font-light">
             5
           </div>
           <div>
@@ -180,14 +180,14 @@ if (response1.status === 402) {
 
       <ul className="text-sm text-gray-400 space-y-2 mb-8">
         <li>Use proper x402 client libraries for production</li>
-        <li>Connect to real services on Lumen402 marketplace</li>
+        <li>Connect to real services on Nova402 marketplace</li>
         <li>Implement actual blockchain transaction signing</li>
         <li>Handle payment confirmations and errors properly</li>
       </ul>
 
       <div className="relative rounded-2xl p-6 text-white not-prose overflow-hidden">
-        {/* Enhanced gradient background - black to green */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#74a180]" />
+        {/* Enhanced gradient background - black to yellow */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#b2a962]" />
         
         {/* Heavy grain texture overlay - increased for more visibility */}
         <div 
@@ -214,7 +214,7 @@ if (response1.status === 402) {
           </p>
           <Link
             href="/docs/clients"
-            className="inline-block px-5 py-2.5 bg-white text-[#74a180] rounded-xl text-sm font-light hover:shadow-lg transition-all"
+            className="inline-block px-5 py-2.5 bg-white text-[#b2a962] rounded-xl text-sm font-light hover:shadow-lg transition-all"
           >
             Client Integration Guide
           </Link>

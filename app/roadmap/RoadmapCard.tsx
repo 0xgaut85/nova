@@ -11,7 +11,7 @@ interface RoadmapCardProps {
 const statusConfig = {
   completed: {
     label: '✓ Completed',
-    color: 'text-[#74a180]',
+    color: 'text-[#b2a962]',
   },
   'in-progress': {
     label: '◉ In Progress',
@@ -93,7 +93,7 @@ export default function RoadmapCard({ item, index }: RoadmapCardProps) {
           <div className="corner-bottom-right-roadmap" />
 
           {/* Enhanced gradient background - black to green */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#74a180]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a0a] via-[#1a1a1a] to-[#b2a962]" />
           
           {/* Heavy grain texture overlay - same as docs CTA */}
           <div 
@@ -127,7 +127,7 @@ export default function RoadmapCard({ item, index }: RoadmapCardProps) {
 
             {/* Title */}
             <motion.h3 
-              className="text-xl sm:text-2xl font-light text-white mb-3 group-hover:text-[#74a180] transition-colors duration-300"
+              className="text-xl sm:text-2xl font-light text-white mb-3 group-hover:text-[#b2a962] transition-colors duration-300"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -237,7 +237,7 @@ export default function RoadmapCard({ item, index }: RoadmapCardProps) {
       `}</style>
 
       {/* Minimalist Design - No boxes but with corner crosses */}
-      <div className="roadmap-card-wrapper py-6 border-b border-white/[0.06] hover:border-[#74a180]/30 transition-all duration-500">
+      <div className="roadmap-card-wrapper py-6 border-b border-white/[0.06] hover:border-[#b2a962]/30 transition-all duration-500">
         {/* Corner crosses */}
         <div className="corner-bottom-left-roadmap-min" />
         <div className="corner-bottom-right-roadmap-min" />
@@ -255,7 +255,7 @@ export default function RoadmapCard({ item, index }: RoadmapCardProps) {
 
         {/* Title - Big and Bold */}
         <motion.h3 
-          className="text-xl sm:text-2xl font-light text-white mb-3 group-hover:text-[#74a180] transition-colors duration-300"
+          className="text-xl sm:text-2xl font-light text-white mb-3 group-hover:text-[#b2a962] transition-colors duration-300"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -293,7 +293,7 @@ export default function RoadmapCard({ item, index }: RoadmapCardProps) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 + 0.6 + i * 0.05 }}
               >
-                <span className="text-[#74a180] mt-0.5">—</span>
+                <span className="text-[#b2a962] mt-0.5">—</span>
                 <span>{feature}</span>
               </motion.li>
             ))}

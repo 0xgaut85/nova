@@ -16,7 +16,7 @@ export function ServiceCard({ service, onTest, onGetCode, onPayAndUse, isTesting
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'online': return 'bg-[#74a180]';
+      case 'online': return 'bg-[#b2a962]';
       case 'offline': return 'bg-gray-500';
       case 'maintenance': return 'bg-yellow-500';
       default: return 'bg-gray-500';
@@ -33,7 +33,7 @@ export function ServiceCard({ service, onTest, onGetCode, onPayAndUse, isTesting
     <div className="service-card-wrapper relative">
       <div 
         className={`relative bg-black/80 backdrop-blur-sm border transition-all duration-300 p-6 h-full ${
-          isHovered ? 'border-[#74a180]' : 'border-white/[0.15]'
+          isHovered ? 'border-[#b2a962]' : 'border-white/[0.15]'
         }`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -51,7 +51,7 @@ export function ServiceCard({ service, onTest, onGetCode, onPayAndUse, isTesting
               TEST SERVICE - FREE
             </span>
           ) : (
-            <span className="px-3 py-1 bg-[#74a180] text-white text-xs font-light rounded">
+            <span className="px-3 py-1 bg-[#b2a962] text-white text-xs font-light rounded">
               PRODUCTION
             </span>
           )}
@@ -92,7 +92,7 @@ export function ServiceCard({ service, onTest, onGetCode, onPayAndUse, isTesting
             <button
               onClick={() => onTest(service.id)}
               disabled={service.status !== 'online' || isTestingActive}
-              className="flex-1 px-4 py-2 bg-white/10 text-white rounded hover:bg-[#74a180] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-light border border-white/10"
+              className="flex-1 px-4 py-2 bg-white/10 text-white rounded hover:bg-[#b2a962] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-light border border-white/10"
             >
               {isTestingActive ? 'Testing...' : 'Test Free'}
             </button>
@@ -101,7 +101,7 @@ export function ServiceCard({ service, onTest, onGetCode, onPayAndUse, isTesting
             <button
               onClick={() => onPayAndUse(service.id)}
               disabled={service.status !== 'online'}
-              className="flex-1 px-4 py-2 bg-[#74a180] text-white rounded hover:bg-[#8fb896] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-light"
+              className="flex-1 px-4 py-2 bg-[#b2a962] text-white rounded hover:bg-[#c4b876] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-light"
             >
               Pay & Use
             </button>

@@ -68,7 +68,7 @@ export default function StepCard({ number, title, description, linkText, linkHre
         <div className="corner-bottom-right-step" />
         
         <div className="flex gap-6 items-start bg-black/80 backdrop-blur-sm rounded-lg p-10 border border-white/[0.15] hover:border-white/[0.15] transition-all duration-300">
-          <div className="flex-shrink-0 w-12 h-12 bg-[#74a180] text-black rounded-lg flex items-center justify-center text-xl font-medium">
+          <div className="flex-shrink-0 w-12 h-12 bg-[#b2a962] text-black rounded-lg flex items-center justify-center text-xl font-medium">
             {number}
           </div>
           <div className="flex-1">
@@ -76,7 +76,7 @@ export default function StepCard({ number, title, description, linkText, linkHre
             <p className="text-base text-gray-400 font-light leading-relaxed mb-4">{description}</p>
             <Link
               href={linkHref}
-              className="inline-flex items-center gap-2 text-sm font-light text-[#74a180] hover:text-[#8bb99a] transition-colors group"
+              className="inline-flex items-center gap-2 text-sm font-light text-[#b2a962] hover:text-[#c4b876] transition-colors group"
             >
               {linkText}
               <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

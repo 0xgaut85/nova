@@ -67,7 +67,7 @@ export default function DocsSidebar({ sidebarOpen, setSidebarOpen }: DocsSidebar
                         onClick={() => setSidebarOpen(false)}
                         className={`block px-3 py-3 text-sm font-light rounded-lg transition-all min-h-[44px] flex items-center ${
                           isActive
-                            ? 'bg-[#74a180] text-white'
+                            ? 'bg-[#b2a962] text-white'
                             : 'text-gray-400 hover:text-white hover:bg-white/5'
                         }`}
                       >
@@ -98,7 +98,7 @@ export default function DocsSidebar({ sidebarOpen, setSidebarOpen }: DocsSidebar
               </li>
               <li>
                 <a
-                  href="https://github.com/lumen402"
+                  href="https://github.com/nova402"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block px-3 py-3 text-sm font-light text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all min-h-[44px] flex items-center"

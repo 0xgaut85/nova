@@ -1,5 +1,5 @@
 {
-  "name": "lumen402",
+  "name": "nova402",
   "version": "1.0.0",
   "description": "The App Store for x402 - Discover, test, and integrate x402-enabled services",
   "private": true,
@@ -25,19 +25,23 @@
     "peaq",
     "micropayments",
     "payai",
-    "lumen402"
+    "nova402"
   ],
-  "author": "Lumen402 <contact@lumen402.com>",
+  "author": "Nova402 <contact@nova402.com>",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.67.0",
+    "@reown/appkit": "^1.8.12",
+    "@reown/appkit-adapter-solana": "^1.8.12",
+    "@reown/appkit-adapter-wagmi": "^1.8.12",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.35",
     "@solana/wallet-adapter-wallets": "^0.19.32",
     "@solana/web3.js": "^1.95.8",
-    "@tanstack/react-query": "^5.0.0",
+    "@tanstack/react-query": "^5.90.5",
     "framer-motion": "^11.15.0",
     "lucide-react": "^0.548.0",
     "next": "^15.1.6",

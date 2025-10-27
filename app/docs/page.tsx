@@ -55,9 +55,9 @@ export default function DocsPage() {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="bg-black/80 backdrop-blur-sm rounded-lg p-12 border border-white/[0.15] mb-24"
       >
-        <h2 className="text-3xl font-medium text-white mb-5 tracking-wide">What is Lumen402?</h2>
+        <h2 className="text-3xl font-medium text-white mb-5 tracking-wide">What is Nova402?</h2>
         <p className="text-lg text-gray-400 font-light leading-relaxed">
-          Lumen402 is unlocking the next economy of APIs, AI and digital services through x402 pay-per-request rails. 
+          Nova402 is building x402 protocol infrastructure for the emerging API economy and beyond. 
           Every API call becomes a micropayment transaction, enabling true usage-based pricing with instant on-chain settlement.
         </p>
       </motion.div>

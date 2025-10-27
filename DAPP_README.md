@@ -1,14 +1,14 @@
-# Lumen402 - The App Store for x402
+# Nova402 - The App Store for x402
 
-![Lumen402](public/logo.png)
+![Nova402](public/logo.png)
 
 **The first real marketplace for x402-enabled AI services and APIs**
 
 Live at: [Your Domain Here]
 
-## 🌟 What is Lumen402?
+## 🌟 What is Nova402?
 
-Lumen402 is the **App Store for x402 protocol** - a revolutionary marketplace where developers can discover, test, and use AI services with instant micropayments. Built on PayAI's x402 infrastructure, we enable **real blockchain payments** for API usage without subscriptions or accounts.
+Nova402 is the **App Store for x402 protocol** - a revolutionary marketplace where developers can discover, test, and use AI services with instant micropayments. Built on PayAI's x402 infrastructure, we enable **real blockchain payments** for API usage without subscriptions or accounts.
 
 ## 🚀 Features
 
@@ -41,8 +41,8 @@ Lumen402 is the **App Store for x402 protocol** - a revolutionary marketplace wh
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/Lumen402.git
-cd Lumen402
+git clone https://github.com/yourusername/Nova402.git
+cd Nova402
 
 # Install dependencies
 npm install
@@ -147,9 +147,9 @@ app.use(paymentMiddleware(
 ));
 ```
 
-### 2. Register on Lumen402
+### 2. Register on Nova402
 
-1. Connect your wallet to Lumen402
+1. Connect your wallet to Nova402
 2. Click "Register Service" button
 3. Fill in service details
 4. Submit for review (approved within 24 hours)
@@ -176,7 +176,7 @@ All payments and interactions are:
 
 ## 🌍 Ecosystem Integration
 
-Lumen402 integrates with the complete PayAI ecosystem:
+Nova402 integrates with the complete PayAI ecosystem:
 
 - **PayAI Facilitator**: Service discovery and payment coordination
 - **Echo Merchant**: Protocol testing and validation
@@ -208,19 +208,19 @@ MIT License - see LICENSE file for details
 ## 🔗 Links
 
 - **Website**: [Your Domain]
-- **Twitter**: [@lumen402](https://x.com/lumen402)
-- **GitHub**: [github.com/lumen402](https://github.com/lumen402)
-- **Explorer**: [explorer.lumen402.com](https://explorer.lumen402.com)
+- **Twitter**: [@xNova402](https://x.com/xNova402)
+- **GitHub**: [github.com/nova402](https://github.com/nova402)
+- **Explorer**: [explorer.nova402.com](https://explorer.nova402.com)
 - **PayAI Docs**: [docs.payai.network](https://docs.payai.network)
 
 ## 💬 Support
 
-- Discord: [Join our Discord](#)
-- Twitter: [@lumen402](https://x.com/lumen402)
-- Email: support@lumen402.com
+- Telegram: [Join our Telegram](https://t.me/xnova402)
+- Twitter: [@xNova402](https://x.com/xNova402)
+- Email: support@nova402.com
 
 ---
 
 **Built with ❤️ using PayAI's x402 Protocol**
 
-*Lumen402 - Making micropayments accessible for everyone*
+*Nova402 - Making micropayments accessible for everyone*

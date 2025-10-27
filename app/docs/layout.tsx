@@ -16,7 +16,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
       <div className="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:80px_80px] pointer-events-none z-0" />
       
       {/* Subtle gradient overlay */}
-      <div className="fixed inset-0 bg-gradient-to-br from-[#74a180]/5 via-transparent to-transparent pointer-events-none z-0" />
+      <div className="fixed inset-0 bg-gradient-to-br from-[#b2a962]/5 via-transparent to-transparent pointer-events-none z-0" />
 
       <div className="relative z-10">
         <DocsHeader sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />

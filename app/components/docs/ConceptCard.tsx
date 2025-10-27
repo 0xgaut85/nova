@@ -8,7 +8,7 @@ interface ConceptCardProps {
 
 export default function ConceptCard({ title, description, children }: ConceptCardProps) {
   return (
-    <div className="relative bg-black/80 backdrop-blur-sm rounded-lg p-10 border border-white/[0.15] hover:border-[#74a180]/40 transition-all duration-300 group overflow-visible">
+    <div className="relative bg-black/80 backdrop-blur-sm rounded-lg p-10 border border-white/[0.15] hover:border-[#b2a962]/40 transition-all duration-300 group overflow-visible">
       {/* Corner markers - matching landing page style */}
       <style jsx>{`
         .concept-card-wrapper {
@@ -21,8 +21,8 @@ export default function ConceptCard({ title, description, children }: ConceptCar
           left: -1px;
           width: 12px;
           height: 12px;
-          border-top: 1px solid rgba(116, 161, 128, 0.3);
-          border-left: 1px solid rgba(116, 161, 128, 0.3);
+          border-top: 1px solid rgba(178, 169, 98, 0.3);
+          border-left: 1px solid rgba(178, 169, 98, 0.3);
           z-index: 10;
           pointer-events: none;
         }
@@ -33,8 +33,8 @@ export default function ConceptCard({ title, description, children }: ConceptCar
           right: -1px;
           width: 12px;
           height: 12px;
-          border-top: 1px solid rgba(116, 161, 128, 0.3);
-          border-right: 1px solid rgba(116, 161, 128, 0.3);
+          border-top: 1px solid rgba(178, 169, 98, 0.3);
+          border-right: 1px solid rgba(178, 169, 98, 0.3);
           z-index: 10;
           pointer-events: none;
         }
@@ -44,8 +44,8 @@ export default function ConceptCard({ title, description, children }: ConceptCar
           left: -1px;
           width: 12px;
           height: 12px;
-          border-bottom: 1px solid rgba(116, 161, 128, 0.3);
-          border-left: 1px solid rgba(116, 161, 128, 0.3);
+          border-bottom: 1px solid rgba(178, 169, 98, 0.3);
+          border-left: 1px solid rgba(178, 169, 98, 0.3);
           pointer-events: none;
           z-index: 10;
         }
@@ -55,8 +55,8 @@ export default function ConceptCard({ title, description, children }: ConceptCar
           right: -1px;
           width: 12px;
           height: 12px;
-          border-bottom: 1px solid rgba(116, 161, 128, 0.3);
-          border-right: 1px solid rgba(116, 161, 128, 0.3);
+          border-bottom: 1px solid rgba(178, 169, 98, 0.3);
+          border-right: 1px solid rgba(178, 169, 98, 0.3);
           pointer-events: none;
           z-index: 10;
         }
@@ -66,7 +66,7 @@ export default function ConceptCard({ title, description, children }: ConceptCar
         <div className="corner-bottom-left-concept" />
         <div className="corner-bottom-right-concept" />
         
-        <div className="mb-4 w-12 h-[2px] bg-[#74a180] group-hover:w-16 transition-all duration-300" />
+        <div className="mb-4 w-12 h-[2px] bg-[#b2a962] group-hover:w-16 transition-all duration-300" />
         <h3 className="text-2xl font-medium text-white mb-4 tracking-wide">{title}</h3>
         <p className="text-base text-gray-400 font-light leading-relaxed">{description}</p>
         {children}

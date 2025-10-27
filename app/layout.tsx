@@ -1,42 +1,71 @@
 import type { Metadata } from "next";
+import { headers } from 'next/headers';
 import "./globals.css";
 import { WalletProvider } from "./components/WalletProvider";
 
 export const metadata: Metadata = {
-  title: "Lumen402 - Unlocking the Next Economy of APIs",
-  description: "Unlocking the next economy of APIs, AI and digital services through x402 pay-per-request rails. Build and deploy pay-per-request services with instant on-chain micropayments.",
+  title: "Nova402",
+  description: "x402 protocol infrastructure. Every API call becomes an instant micropayment—pay-per-request with no subscriptions.",
   icons: {
-    icon: '/logoblack.png',
-    shortcut: '/logoblack.png',
-    apple: '/logoblack.png',
+    icon: '/logox.png',
+    shortcut: '/logox.png',
+    apple: '/logox.png',
   },
   openGraph: {
-    title: "Lumen402 - Unlocking the Next Economy of APIs",
-    description: "Unlocking the next economy of APIs, AI and digital services through x402 pay-per-request rails. Build and deploy pay-per-request services with instant on-chain micropayments.",
-    images: ['/logoblack.png'],
+    title: "Nova402",
+    description: "x402 protocol infrastructure. Every API call becomes an instant micropayment—pay-per-request with no subscriptions.",
+    images: ['/logox.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Lumen402 - Unlocking the Next Economy of APIs",
-    description: "Unlocking the next economy of APIs, AI and digital services through x402 pay-per-request rails.",
-    images: ['/logoblack.png'],
+    title: "Nova402",
+    description: "x402 protocol infrastructure. Every API call becomes an instant micropayment—pay-per-request with no subscriptions.",
+    images: ['/logox.png'],
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersObj = await headers();
+  const cookies = headersObj.get('cookie');
+
   return (
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        <style dangerouslySetInnerHTML={{__html: `
+          .wallet-adapter-button {
+            background-color: rgba(178, 169, 98, 0.1) !important;
+            color: #b2a962 !important;
+            border: 1px solid rgba(178, 169, 98, 0.3) !important;
+          }
+          .wallet-adapter-button:hover {
+            background-color: rgba(178, 169, 98, 0.2) !important;
+          }
+          .wallet-adapter-modal {
+            background: #0a0a0a !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+          }
+          .wallet-adapter-modal-title {
+            color: white !important;
+          }
+          .wallet-adapter-modal-list-item {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+          }
+          .wallet-adapter-modal-list-item:hover {
+            background: rgba(178, 169, 98, 0.1) !important;
+            border-color: rgba(178, 169, 98, 0.3) !important;
+          }
+        `}} />
       </head>
       <body className="antialiased">
-        <WalletProvider>
+        <WalletProvider cookies={cookies}>
           {children}
         </WalletProvider>
       </body>
