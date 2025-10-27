@@ -8,24 +8,40 @@ const anthropic = new Anthropic({
 // Helper functions to fetch data from our utilities
 async function getX402Services() {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/x402/discover`);
+    // Use absolute URL or import the API logic directly
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/x402/discover`, {
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
     const data = await response.json();
+    console.log('Services fetched:', data.services?.length || 0);
     return data.success ? data.services : [];
   } catch (error) {
     console.error('Error fetching services:', error);
+    // Return empty array on error instead of failing
     return [];
   }
 }
 
 async function getTokenList() {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/x402/discover`);
+    // Directly import and use the discover API logic to avoid HTTP calls
+    const { GET } = await import('../../api/x402/discover/route');
+    const request = new Request('http://localhost:3000/api/x402/discover');
+    const response = await GET(request);
     const data = await response.json();
-    if (data.success) {
+    
+    if (data.success && data.services) {
       // Filter for tokens only
       const tokens = data.services.filter((service: any) => service.category === 'Tokens');
+      console.log('Tokens found:', tokens.length);
+      console.log('Token names:', tokens.map((t: any) => t.name));
       return tokens;
     }
+    console.log('No tokens found in response');
     return [];
   } catch (error) {
     console.error('Error fetching tokens:', error);
