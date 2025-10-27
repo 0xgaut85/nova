@@ -15,9 +15,12 @@ import { X402Service } from '@/lib/payai-client';
 
 export default function TokenMintPage() {
   const router = useRouter();
-  const { address, isConnected } = useAppKitAccount();
+  const { address, isConnected, caipAddress } = useAppKitAccount();
   const { disconnect } = useAppKitDisconnect();
   const { open } = useAppKit();
+  
+  // Extract chainId from caipAddress (format: "eip155:8453:0x...")
+  const chainId = caipAddress ? parseInt(caipAddress.split(':')[1]) : undefined;
   
   const [mounted, setMounted] = useState(false);
   const [testingServiceId, setTestingServiceId] = useState<string | null>(null);
@@ -66,6 +69,38 @@ export default function TokenMintPage() {
 
   const handlePaymentSuccess = async (txHash: string) => {
     console.log('Mint successful:', txHash);
+    
+    // Get network name
+    const getNetworkName = (chainId: number | undefined) => {
+      if (!chainId) return 'Not Connected';
+      const networks: Record<number, string> = {
+        8453: 'Base Mainnet',
+        84532: 'Base Sepolia',
+        137: 'Polygon',
+        3338: 'Peaq',
+        56: 'BSC',
+        97: 'BSC Testnet',
+      };
+      return networks[chainId] || `Chain ID: ${chainId}`;
+    };
+    
+    // Save payment to history
+    const newPayment = {
+      txHash,
+      service: `Token Mint: ${paymentService?.name || 'Unknown Token'}`,
+      amount: paymentService?.price.amount || '0',
+      timestamp: Date.now(),
+      network: getNetworkName(chainId)
+    };
+    
+    // Load existing history
+    const savedHistory = localStorage.getItem('x402_payment_history');
+    const paymentHistory = savedHistory ? JSON.parse(savedHistory) : [];
+    
+    // Add new payment and save
+    const updatedHistory = [newPayment, ...paymentHistory];
+    localStorage.setItem('x402_payment_history', JSON.stringify(updatedHistory));
+    
     setPaymentService(null);
     setSuccessTxHash(txHash);
   };
