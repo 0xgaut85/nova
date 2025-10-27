@@ -5,7 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
 import { Search, Activity, TrendingUp, Users, DollarSign, Server, Zap, Globe, ArrowUp, ArrowDown, Wallet, X } from 'lucide-react';
-import { useAccount, useSignMessage } from 'wagmi';
+import { useAppKitAccount } from '@reown/appkit/react';
+import { useSignMessage } from 'wagmi';
 import { WalletButton } from '../components/WalletButton';
 import { WalletContextProvider } from '../components/WalletProvider';
 import { useEffect, useState } from 'react';
@@ -36,7 +37,7 @@ const transactionData = [
 ];
 
 function ExplorerContent() {
-  const { address, isConnected } = useAccount();
+  const { address, isConnected } = useAppKitAccount();
   const { signMessageAsync } = useSignMessage();
   const [isVerified, setIsVerified] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);

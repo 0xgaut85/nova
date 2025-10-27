@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAccount, useSendTransaction, useWaitForTransactionReceipt, useSwitchChain } from 'wagmi';
+import { useAppKitAccount } from '@reown/appkit/react';
+import { useSendTransaction, useWaitForTransactionReceipt, useSwitchChain } from 'wagmi';
 import { parseUnits, encodeFunctionData, erc20Abi } from 'viem';
 import { X402Service } from '@/lib/payai-client';
 import { USDC_CONTRACT_ADDRESS, getNetworkChainId, getNetworkName } from '@/lib/x402-utils';
@@ -16,8 +17,11 @@ interface RealPaymentHandlerProps {
 type PaymentStep = 'check' | 'switch-network' | 'approve' | 'approving' | 'pay' | 'paying' | 'success' | 'error';
 
 export function RealPaymentHandler({ service, onSuccess, onError, onClose }: RealPaymentHandlerProps) {
-  const { address, chainId } = useAccount();
+  const { address, caipAddress } = useAppKitAccount();
   const { switchChain } = useSwitchChain();
+  
+  // Extract chainId from caipAddress (format: "eip155:8453:0x...")
+  const chainId = caipAddress ? parseInt(caipAddress.split(':')[1]) : undefined;
   
   const [step, setStep] = useState<PaymentStep>('check');
   const [error, setError] = useState<string | null>(null);

@@ -16,9 +16,12 @@ import { X402Service } from '@/lib/payai-client';
 
 export default function DappPage() {
   const router = useRouter();
-  const { address, isConnected } = useAppKitAccount();
+  const { address, isConnected, caipAddress } = useAppKitAccount();
   const { disconnect } = useAppKitDisconnect();
   const { open } = useAppKit();
+  
+  // Extract chainId from caipAddress (format: "eip155:8453:0x...")
+  const chainId = caipAddress ? parseInt(caipAddress.split(':')[1]) : undefined;
   
   const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<'marketplace' | 'dashboard'>('marketplace');

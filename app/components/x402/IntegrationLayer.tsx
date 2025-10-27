@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { useAccount } from 'wagmi';
+import { useAppKitAccount } from '@reown/appkit/react';
 import { validateServiceEndpoint, validatePaymentAmount } from '@/lib/x402-utils';
 
 export function IntegrationLayer() {
-  const { address, isConnected } = useAccount();
+  const { address, isConnected } = useAppKitAccount();
   const [formData, setFormData] = useState({
     name: '',
     description: '',

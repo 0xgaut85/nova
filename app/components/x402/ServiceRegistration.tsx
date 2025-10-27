@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useAccount } from 'wagmi';
+import { useAppKitAccount } from '@reown/appkit/react';
 import Image from 'next/image';
 import { validateServiceEndpoint, validatePaymentAmount } from '@/lib/x402-utils';
 
@@ -10,7 +10,7 @@ interface ServiceRegistrationProps {
 }
 
 export function ServiceRegistration({ onClose }: ServiceRegistrationProps) {
-  const { address, isConnected } = useAccount();
+  const { address, isConnected } = useAppKitAccount();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
