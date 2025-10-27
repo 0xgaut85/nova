@@ -42,15 +42,36 @@ export default function DappPage() {
 
   useEffect(() => {
     setMounted(true);
-    // Load payment history from localStorage on mount
-    const savedHistory = localStorage.getItem('x402_payment_history');
-    if (savedHistory) {
-      try {
-        setPaymentHistory(JSON.parse(savedHistory));
-      } catch (error) {
-        console.error('Failed to parse payment history:', error);
+    
+    // Load payment history from localStorage
+    const loadPaymentHistory = () => {
+      const savedHistory = localStorage.getItem('x402_payment_history');
+      if (savedHistory) {
+        try {
+          setPaymentHistory(JSON.parse(savedHistory));
+        } catch (error) {
+          console.error('Failed to parse payment history:', error);
+        }
       }
-    }
+    };
+    
+    // Load on mount
+    loadPaymentHistory();
+    
+    // Reload when window gains focus (e.g., after navigating from Token Mint)
+    const handleFocus = () => {
+      loadPaymentHistory();
+    };
+    
+    window.addEventListener('focus', handleFocus);
+    
+    // Also check periodically for updates (every 2 seconds)
+    const interval = setInterval(loadPaymentHistory, 2000);
+    
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+      clearInterval(interval);
+    };
   }, []);
 
   const handleTestService = (serviceId: string) => {

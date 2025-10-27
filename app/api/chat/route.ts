@@ -18,12 +18,19 @@ async function getX402Services() {
 }
 
 async function getTokenList() {
-  // For now, return sample token data - you can add a real API endpoint later
-  return [
-    { name: 'Nova Token', symbol: 'NOVA', price: '0.001 USDC', network: 'Base' },
-    { name: 'PayAI Token', symbol: 'PAYAI', price: '0.002 USDC', network: 'Base' },
-    { name: 'X402 Token', symbol: 'X402', price: '0.0015 USDC', network: 'Solana' },
-  ];
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/x402/discover`);
+    const data = await response.json();
+    if (data.success) {
+      // Filter for tokens only
+      const tokens = data.services.filter((service: any) => service.category === 'Tokens');
+      return tokens;
+    }
+    return [];
+  } catch (error) {
+    console.error('Error fetching tokens:', error);
+    return [];
+  }
 }
 
 export async function POST(req: NextRequest) {
