@@ -5,6 +5,27 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY || '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',
 });
 
+// Helper functions to fetch data from our utilities
+async function getX402Services() {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/x402/discover`);
+    const data = await response.json();
+    return data.success ? data.services : [];
+  } catch (error) {
+    console.error('Error fetching services:', error);
+    return [];
+  }
+}
+
+async function getTokenList() {
+  // For now, return sample token data - you can add a real API endpoint later
+  return [
+    { name: 'Nova Token', symbol: 'NOVA', price: '0.001 USDC', network: 'Base' },
+    { name: 'PayAI Token', symbol: 'PAYAI', price: '0.002 USDC', network: 'Base' },
+    { name: 'X402 Token', symbol: 'X402', price: '0.0015 USDC', network: 'Solana' },
+  ];
+}
+
 export async function POST(req: NextRequest) {
   try {
     // Debug: Check if API key is loaded
@@ -85,18 +106,89 @@ Your capabilities:
 - Provide coding help, implementation guides, API references
 - Be a general-purpose AI assistant
 - Reference documentation pages when appropriate
+- Use tools to fetch real-time data from Nova utilities when asked
 
-Important: Be conversational, friendly, and natural. You're an AI assistant that people enjoy talking to. You know everything about Nova402, its utilities, documentation, and the x402 protocol. Reference specific pages, features, and capabilities when relevant.`;
+Important: Be conversational, friendly, and natural. You're an AI assistant that people enjoy talking to. You know everything about Nova402, its utilities, documentation, and the x402 protocol. Reference specific pages, features, and capabilities when relevant. When users ask for lists of services or tokens, use your tools to fetch real data.`;
 
-    // Call Claude API
-    const response = await anthropic.messages.create({
+    // Define tools for Claude
+    const tools = [
+      {
+        name: 'get_x402_services',
+        description: 'Fetches the current list of available x402 services from the Nova Service Hub. Use this when users ask about available services, what services exist, or want to see the service marketplace.',
+        input_schema: {
+          type: 'object',
+          properties: {},
+          required: []
+        }
+      },
+      {
+        name: 'get_token_list',
+        description: 'Fetches the current list of available x402 tokens. Use this when users ask about tokens, what tokens are available, or want to browse the token marketplace.',
+        input_schema: {
+          type: 'object',
+          properties: {},
+          required: []
+        }
+      }
+    ];
+
+    // Call Claude API with tools
+    let response = await anthropic.messages.create({
       model: 'claude-3-5-sonnet-20241022',
-      max_tokens: 1024,
+      max_tokens: 2048,
       system: systemPrompt,
       messages: messages,
+      tools: tools,
     });
 
-    const content = response.content[0];
+    // Handle tool use
+    while (response.stop_reason === 'tool_use') {
+      const toolUse = response.content.find((block: any) => block.type === 'tool_use');
+      
+      if (!toolUse) break;
+
+      let toolResult: any;
+
+      // Execute the tool
+      if (toolUse.name === 'get_x402_services') {
+        const services = await getX402Services();
+        toolResult = {
+          type: 'tool_result',
+          tool_use_id: toolUse.id,
+          content: JSON.stringify(services)
+        };
+      } else if (toolUse.name === 'get_token_list') {
+        const tokens = await getTokenList();
+        toolResult = {
+          type: 'tool_result',
+          tool_use_id: toolUse.id,
+          content: JSON.stringify(tokens)
+        };
+      }
+
+      // Continue conversation with tool result
+      const updatedMessages = [
+        ...messages,
+        {
+          role: 'assistant',
+          content: response.content
+        },
+        {
+          role: 'user',
+          content: [toolResult]
+        }
+      ];
+
+      response = await anthropic.messages.create({
+        model: 'claude-3-5-sonnet-20241022',
+        max_tokens: 2048,
+        system: systemPrompt,
+        messages: updatedMessages,
+        tools: tools,
+      });
+    }
+
+    const content = response.content.find((block: any) => block.type === 'text');
     
     if (content.type === 'text') {
       return NextResponse.json({ 
