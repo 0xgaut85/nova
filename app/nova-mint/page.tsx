@@ -82,6 +82,25 @@ export default function NovaMintPage() {
         receiverPubkey
       );
 
+      // Check if sender has USDC account
+      const senderAccountInfo = await connection.getAccountInfo(senderTokenAccount);
+      if (!senderAccountInfo) {
+        setError('You need to have USDC in your wallet first. Please add USDC to your Solana wallet.');
+        setLoading(false);
+        return;
+      }
+
+      // Check USDC balance
+      const balance = await connection.getTokenAccountBalance(senderTokenAccount);
+      const balanceAmount = parseInt(balance.value.amount);
+      
+      if (balanceAmount < usdcAmount) {
+        const currentBalance = (balanceAmount / 1_000_000).toFixed(2);
+        setError(`Insufficient USDC balance. You have ${currentBalance} USDC, but need ${amountNum} USDC.`);
+        setLoading(false);
+        return;
+      }
+
       // Create transfer instruction
       const transaction = new Transaction().add(
         createTransferInstruction(
@@ -95,27 +114,40 @@ export default function NovaMintPage() {
       );
 
       // Get latest blockhash
-      const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
+      const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash('finalized');
       transaction.recentBlockhash = blockhash;
       transaction.feePayer = senderPubkey;
 
       // Sign and send transaction
       const signedTx = await walletProvider.signTransaction(transaction);
-      const signature = await connection.sendRawTransaction(signedTx.serialize());
+      const signature = await connection.sendRawTransaction(signedTx.serialize(), {
+        skipPreflight: false,
+        preflightCommitment: 'finalized'
+      });
 
       // Confirm transaction
       await connection.confirmTransaction({
         signature,
         blockhash,
         lastValidBlockHeight
-      });
+      }, 'finalized');
 
       setTxSignature(signature);
       setAmount('10');
       setError('');
     } catch (err: any) {
       console.error('Transaction error:', err);
-      setError(err.message || 'Transaction failed. Please try again.');
+      
+      // Better error messages
+      if (err.message?.includes('User rejected')) {
+        setError('Transaction was rejected.');
+      } else if (err.message?.includes('Attempt to debit')) {
+        setError('You need USDC in your wallet. Please add USDC to your Solana wallet first.');
+      } else if (err.message?.includes('insufficient funds')) {
+        setError('Insufficient SOL for transaction fees. You need a small amount of SOL (~0.001 SOL) for fees.');
+      } else {
+        setError(err.message || 'Transaction failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
