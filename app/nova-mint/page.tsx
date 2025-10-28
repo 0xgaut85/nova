@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { useAppKit, useAppKitAccount, useAppKitProvider } from '@reown/appkit/react';
 import type { Provider } from '@reown/appkit-adapter-solana';
 import { Connection, PublicKey, Transaction, SystemProgram } from '@solana/web3.js';
-import { getAssociatedTokenAddress, createTransferInstruction, TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { getAssociatedTokenAddress, createTransferInstruction, createAssociatedTokenAccountInstruction, TOKEN_PROGRAM_ID, ASSOCIATED_TOKEN_PROGRAM_ID } from '@solana/spl-token';
 
 // Treasury address
 const TREASURY_ADDRESS = 'DY8zJxPE8G9Ks9LtLUwBT2ux5txYMgPBZqTvopy7X5N6';
@@ -87,8 +87,10 @@ export default function NovaMintPage() {
 
       console.log('Sender USDC token account:', senderTokenAccount.toBase58());
 
-      // Check USDC balance using a more reliable method
+      // Check USDC balance and create account if needed
       let balanceAmount = 0;
+      let needsTokenAccount = false;
+      
       try {
         const balance = await connection.getTokenAccountBalance(senderTokenAccount);
         balanceAmount = parseInt(balance.value.amount);
@@ -96,7 +98,7 @@ export default function NovaMintPage() {
       } catch (balanceError: any) {
         console.error('Balance check error:', balanceError);
         if (balanceError.message?.includes('could not find account')) {
-          setError('You need to have USDC in your wallet first. Please add USDC to your Solana wallet.');
+          setError('You need USDC in your wallet. Please buy USDC and send it to your Solana wallet, or swap SOL for USDC on Jupiter/Raydium.');
           setLoading(false);
           return;
         }
@@ -110,8 +112,26 @@ export default function NovaMintPage() {
         return;
       }
 
-      // Create transfer instruction
-      const transaction = new Transaction().add(
+      // Check if receiver needs token account created
+      const receiverAccountInfo = await connection.getAccountInfo(receiverTokenAccount);
+      const transaction = new Transaction();
+      
+      if (!receiverAccountInfo) {
+        console.log('Creating receiver token account...');
+        transaction.add(
+          createAssociatedTokenAccountInstruction(
+            senderPubkey, // payer
+            receiverTokenAccount, // ata
+            receiverPubkey, // owner
+            USDC_MINT, // mint
+            TOKEN_PROGRAM_ID,
+            ASSOCIATED_TOKEN_PROGRAM_ID
+          )
+        );
+      }
+
+      // Add transfer instruction
+      transaction.add(
         createTransferInstruction(
           senderTokenAccount,
           receiverTokenAccount,
