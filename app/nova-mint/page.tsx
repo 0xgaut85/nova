@@ -552,14 +552,15 @@ export default function NovaMintPage() {
 
               {/* Bridge Button */}
               <div className="mt-6 pt-4 border-t border-white/10">
-                <button
-                  disabled
-                  className="w-full px-6 py-3 bg-white/5 border border-white/10 text-gray-500 rounded-lg text-sm font-normal cursor-not-allowed flex items-center justify-center gap-2"
-                  title="Coming soon"
+                <Link
+                  href="/dapp/service-hub"
+                  className="w-full px-6 py-3 bg-[#b2a962]/10 hover:bg-[#b2a962]/20 border border-[#b2a962]/30 hover:border-[#b2a962]/50 text-[#b2a962] rounded-lg text-sm font-normal flex items-center justify-center gap-2 transition-all duration-300"
                 >
                   <span>Nova to x402 Nova Bridge</span>
-                  <span className="text-xs text-gray-600">(Coming Soon)</span>
-                </button>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </Link>
               </div>
             </div>
 
