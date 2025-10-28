@@ -65,14 +65,16 @@ export default function NovaMintPage() {
     try {
       const connection = getConnection();
       
+      console.log('=== DEBUG INFO ===');
+      console.log('Sender address:', address);
+      console.log('RPC URL being used:', SOLANA_RPC_URL);
+      console.log('Environment variable loaded:', process.env.NEXT_PUBLIC_SOLANA_RPC_URL);
+      
       // USDC has 6 decimals
       const usdcAmount = Math.floor(amountNum * 1_000_000);
       
       const senderPubkey = new PublicKey(address);
       const receiverPubkey = new PublicKey(TREASURY_ADDRESS);
-
-      console.log('Sender address:', address);
-      console.log('Using RPC:', SOLANA_RPC_URL);
 
       // Get token accounts
       const senderTokenAccount = await getAssociatedTokenAddress(
@@ -86,6 +88,7 @@ export default function NovaMintPage() {
       );
 
       console.log('Sender USDC token account:', senderTokenAccount.toBase58());
+      console.log('Checking balance...');
 
       // Check USDC balance and create account if needed
       let balanceAmount = 0;
@@ -94,15 +97,32 @@ export default function NovaMintPage() {
       try {
         const balance = await connection.getTokenAccountBalance(senderTokenAccount);
         balanceAmount = parseInt(balance.value.amount);
-        console.log('USDC balance:', balanceAmount / 1_000_000, 'USDC');
+        console.log('✅ USDC balance found:', balanceAmount / 1_000_000, 'USDC');
       } catch (balanceError: any) {
-        console.error('Balance check error:', balanceError);
+        console.error('❌ Balance check error:', balanceError);
+        console.error('Error details:', {
+          message: balanceError.message,
+          code: balanceError.code,
+          data: balanceError.data
+        });
+        
         if (balanceError.message?.includes('could not find account')) {
-          setError('You need USDC in your wallet. Please buy USDC and send it to your Solana wallet, or swap SOL for USDC on Jupiter/Raydium.');
-          setLoading(false);
-          return;
+          // Try with a different RPC as fallback
+          console.log('Trying fallback RPC...');
+          const fallbackConnection = new Connection('https://api.mainnet-beta.solana.com', 'confirmed');
+          try {
+            const fallbackBalance = await fallbackConnection.getTokenAccountBalance(senderTokenAccount);
+            balanceAmount = parseInt(fallbackBalance.value.amount);
+            console.log('✅ Fallback RPC found balance:', balanceAmount / 1_000_000, 'USDC');
+          } catch (fallbackError) {
+            console.error('❌ Fallback RPC also failed:', fallbackError);
+            setError('You need USDC in your wallet. Please buy USDC and send it to your Solana wallet, or swap SOL for USDC on Jupiter/Raydium.');
+            setLoading(false);
+            return;
+          }
+        } else {
+          throw balanceError;
         }
-        throw balanceError;
       }
       
       if (balanceAmount < usdcAmount) {
@@ -111,6 +131,8 @@ export default function NovaMintPage() {
         setLoading(false);
         return;
       }
+
+      console.log('✅ Balance check passed');
 
       // Check if receiver needs token account created
       const receiverAccountInfo = await connection.getAccountInfo(receiverTokenAccount);
@@ -165,7 +187,7 @@ export default function NovaMintPage() {
         lastValidBlockHeight
       }, 'finalized');
 
-      console.log('Transaction confirmed!');
+      console.log('✅ Transaction confirmed!');
 
       setTxSignature(signature);
       setAmount('10');
