@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAppKit, useAppKitAccount, useAppKitProvider } from '@reown/appkit/react';
 import type { Provider } from '@reown/appkit-adapter-solana';
 import { Connection, PublicKey, Transaction, SystemProgram } from '@solana/web3.js';
@@ -212,10 +213,14 @@ export default function NovaMintPage() {
               {/* Wallet Connection */}
               {!isConnected ? (
                 <div className="text-center py-8 mb-6">
-                  <div className="w-20 h-20 mx-auto mb-6 bg-[#b2a962]/10 rounded-full flex items-center justify-center border border-[#b2a962]/20">
-                    <svg className="w-10 h-10 text-[#b2a962]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" />
-                    </svg>
+                  <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center">
+                    <Image
+                      src="/logosvg.svg"
+                      alt="Nova402"
+                      width={80}
+                      height={80}
+                      className="w-20 h-20 opacity-80"
+                    />
                   </div>
                   <h3 className="text-xl font-normal text-white mb-3">Connect Your Wallet</h3>
                   <p className="text-gray-400 text-sm font-light mb-6 max-w-sm mx-auto">
@@ -314,15 +319,15 @@ export default function NovaMintPage() {
                   {/* Error Message */}
                   {error && (
                     <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-300 text-sm font-light">
-                      ⚠️ {error}
+                      {error}
                     </div>
                   )}
 
                   {/* Success Message */}
                   {txSignature && (
                     <div className="mb-6 p-4 bg-[#b2a962]/10 border border-[#b2a962]/30 rounded-lg">
-                      <div className="text-[#b2a962] font-normal mb-2 flex items-center gap-2">
-                        <span>✓</span> Transaction Successful!
+                      <div className="text-[#b2a962] font-normal mb-2">
+                        Transaction Successful!
                       </div>
                       <a
                         href={`https://solscan.io/tx/${txSignature}`}
@@ -364,17 +369,41 @@ export default function NovaMintPage() {
             {/* Info Section */}
             <div className="mt-8 grid md:grid-cols-3 gap-4">
               <div className="bg-black/80 backdrop-blur-sm border border-white/[0.15] rounded-lg p-6 text-center">
-                <div className="text-2xl mb-2">⚡</div>
+                <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                  <Image
+                    src="/logosvg.svg"
+                    alt="Instant"
+                    width={40}
+                    height={40}
+                    className="w-10 h-10 opacity-60"
+                  />
+                </div>
                 <div className="text-sm font-normal text-white mb-1">Instant</div>
                 <div className="text-xs text-gray-400 font-light">Automatic delivery</div>
               </div>
               <div className="bg-black/80 backdrop-blur-sm border border-white/[0.15] rounded-lg p-6 text-center">
-                <div className="text-2xl mb-2">🔒</div>
+                <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                  <Image
+                    src="/logosvg.svg"
+                    alt="Secure"
+                    width={40}
+                    height={40}
+                    className="w-10 h-10 opacity-60"
+                  />
+                </div>
                 <div className="text-sm font-normal text-white mb-1">Secure</div>
                 <div className="text-xs text-gray-400 font-light">Non-custodial</div>
               </div>
               <div className="bg-black/80 backdrop-blur-sm border border-white/[0.15] rounded-lg p-6 text-center">
-                <div className="text-2xl mb-2">💎</div>
+                <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                  <Image
+                    src="/logosvg.svg"
+                    alt="Fair"
+                    width={40}
+                    height={40}
+                    className="w-10 h-10 opacity-60"
+                  />
+                </div>
                 <div className="text-sm font-normal text-white mb-1">Fair</div>
                 <div className="text-xs text-gray-400 font-light">Equal access</div>
               </div>
@@ -403,7 +432,7 @@ export default function NovaMintPage() {
 
             {/* Disclaimer */}
             <div className="mt-8 text-center text-xs text-gray-500 space-y-2 font-light">
-              <p>⚠️ Transactions are final and cannot be reversed.</p>
+              <p>Transactions are final and cannot be reversed.</p>
               <p>Only send USDC on Solana network. Other tokens or networks will result in loss of funds.</p>
             </div>
 
