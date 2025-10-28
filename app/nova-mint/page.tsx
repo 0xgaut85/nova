@@ -15,8 +15,18 @@ const TREASURY_ADDRESS = 'DY8zJxPE8G9Ks9LtLUwBT2ux5txYMgPBZqTvopy7X5N6';
 // USDC Mint Address on Solana Mainnet
 const USDC_MINT = new PublicKey('EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v');
 
-// Solana RPC endpoint
-const SOLANA_RPC = 'https://api.mainnet-beta.solana.com';
+// Use public RPC endpoints with better rate limits
+const SOLANA_RPC_ENDPOINTS = [
+  'https://api.devnet.solana.com', // Use devnet for testing
+  'https://solana-api.projectserum.com',
+  'https://rpc.ankr.com/solana',
+];
+
+// Try multiple endpoints
+const getConnection = () => {
+  // Try first available endpoint
+  return new Connection(SOLANA_RPC_ENDPOINTS[0], 'confirmed');
+};
 
 export default function NovaMintPage() {
   const [amount, setAmount] = useState<string>('10');
@@ -59,7 +69,7 @@ export default function NovaMintPage() {
     setTxSignature('');
 
     try {
-      const connection = new Connection(SOLANA_RPC, 'confirmed');
+      const connection = getConnection();
       
       // USDC has 6 decimals
       const usdcAmount = Math.floor(amountNum * 1_000_000);
