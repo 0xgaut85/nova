@@ -358,17 +358,27 @@ export default function NovaMintPage() {
                 <>
                   {/* Connected Wallet Info */}
                   <div className="mb-6 p-4 bg-[#b2a962]/10 border border-[#b2a962]/30 rounded-lg">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-[#b2a962] rounded-full animate-pulse" />
-                        <span className="text-sm font-normal text-white">Connected: {formatAddress(address!)}</span>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 bg-[#b2a962] rounded-full animate-pulse" />
+                          <div>
+                            <span className="text-xs text-gray-400 block">Connected Wallet</span>
+                            <span className="text-sm font-mono text-white">{formatAddress(address!)}</span>
+                          </div>
+                        </div>
+                        <button
+                          onClick={connectWallet}
+                          className="text-xs text-gray-400 hover:text-white transition-colors font-light"
+                        >
+                          Change
+                        </button>
                       </div>
-                      <button
-                        onClick={connectWallet}
-                        className="text-xs text-gray-400 hover:text-white transition-colors font-light"
-                      >
-                        Change
-                      </button>
+                      {caipAddress && (
+                        <div className="text-xs text-gray-500 font-mono">
+                          CAIP: {caipAddress}
+                        </div>
+                      )}
                     </div>
                   </div>
 
