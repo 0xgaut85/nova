@@ -137,6 +137,13 @@ export default function Navbar() {
               
               {novaDropdownOpen && (
                 <div className="absolute top-full left-0 mt-2 w-80 bg-black/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl overflow-hidden">
+                  <Link
+                    href="/nova-mint"
+                    className="block px-4 py-3 text-sm font-light text-gray-300 hover:bg-white/5 hover:text-white transition-colors border-b border-white/5"
+                    onClick={() => setNovaDropdownOpen(false)}
+                  >
+                    $NOVA Mint
+                  </Link>
                   <a
                     href="https://dexscreener.com/solana/5kwqfa3rtzrdiyvfyspemnyudhbzmilbucyd1em4rrzs"
                     target="_blank"
