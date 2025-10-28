@@ -36,7 +36,8 @@ export default function NovaMintPage() {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    console.log('Wallet connection status:', { address, isConnected, caipAddress });
+  }, [address, isConnected, caipAddress]);
 
   const copyAddress = () => {
     navigator.clipboard.writeText(TREASURY_ADDRESS);
@@ -66,14 +67,41 @@ export default function NovaMintPage() {
       const connection = getConnection();
       
       console.log('=== DEBUG INFO ===');
-      console.log('Sender address:', address);
+      console.log('useAppKitAccount address:', address);
+      console.log('caipAddress:', caipAddress);
+      console.log('isConnected:', isConnected);
+      
+      // Extract actual Solana address from CAIP format if needed
+      let solanaAddress = address;
+      
+      // CAIP format is like "solana:mainnet:ADDRESS" or "solana:ADDRESS"
+      if (caipAddress && caipAddress.includes('solana:')) {
+        const parts = caipAddress.split(':');
+        solanaAddress = parts[parts.length - 1]; // Get last part which is the address
+        console.log('Extracted Solana address from CAIP:', solanaAddress);
+      }
+      
+      // If address is still wrong, try getting it from wallet provider
+      if (!solanaAddress || solanaAddress === address) {
+        try {
+          const publicKey = await walletProvider.publicKey;
+          if (publicKey) {
+            solanaAddress = publicKey.toBase58();
+            console.log('Got address from wallet provider:', solanaAddress);
+          }
+        } catch (e) {
+          console.log('Could not get address from provider:', e);
+        }
+      }
+      
+      console.log('Final Solana address to use:', solanaAddress);
       console.log('RPC URL being used:', SOLANA_RPC_URL);
       console.log('Environment variable loaded:', process.env.NEXT_PUBLIC_SOLANA_RPC_URL);
       
       // USDC has 6 decimals
       const usdcAmount = Math.floor(amountNum * 1_000_000);
       
-      const senderPubkey = new PublicKey(address);
+      const senderPubkey = new PublicKey(solanaAddress);
       const receiverPubkey = new PublicKey(TREASURY_ADDRESS);
 
       // Get token accounts
