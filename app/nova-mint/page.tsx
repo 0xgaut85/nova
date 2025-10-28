@@ -15,17 +15,11 @@ const TREASURY_ADDRESS = 'DY8zJxPE8G9Ks9LtLUwBT2ux5txYMgPBZqTvopy7X5N6';
 // USDC Mint Address on Solana Mainnet
 const USDC_MINT = new PublicKey('EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v');
 
-// Use public RPC endpoints with better rate limits
-const SOLANA_RPC_ENDPOINTS = [
-  'https://api.devnet.solana.com', // Use devnet for testing
-  'https://solana-api.projectserum.com',
-  'https://rpc.ankr.com/solana',
-];
+// Solana RPC - Use Helius from environment variable
+const SOLANA_RPC_URL = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'https://api.devnet.solana.com';
 
-// Try multiple endpoints
 const getConnection = () => {
-  // Try first available endpoint
-  return new Connection(SOLANA_RPC_ENDPOINTS[0], 'confirmed');
+  return new Connection(SOLANA_RPC_URL, 'confirmed');
 };
 
 export default function NovaMintPage() {
