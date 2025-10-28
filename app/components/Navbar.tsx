@@ -10,6 +10,7 @@ export default function Navbar() {
   const [navVisible, setNavVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hubDropdownOpen, setHubDropdownOpen] = useState(false);
+  const [novaDropdownOpen, setNovaDropdownOpen] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -120,6 +121,40 @@ export default function Navbar() {
                 </div>
               )}
             </div>
+
+            {/* $NOVA Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setNovaDropdownOpen(!novaDropdownOpen)}
+                onBlur={() => setTimeout(() => setNovaDropdownOpen(false), 200)}
+                className="flex items-center gap-1 text-gray-400 hover:text-white transition-colors duration-300 text-base font-light tracking-wide"
+              >
+                <span>$NOVA</span>
+                <svg className={`w-4 h-4 transition-transform duration-200 ${novaDropdownOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {novaDropdownOpen && (
+                <div className="absolute top-full left-0 mt-2 w-80 bg-black/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl overflow-hidden">
+                  <a
+                    href="https://dexscreener.com/solana/5kwqfa3rtzrdiyvfyspemnyudhbzmilbucyd1em4rrzs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-4 py-3 text-sm font-light text-gray-300 hover:bg-white/5 hover:text-white transition-colors border-b border-white/5"
+                    onClick={() => setNovaDropdownOpen(false)}
+                  >
+                    Dexscreener
+                  </a>
+                  <div className="px-4 py-3 text-xs">
+                    <div className="text-gray-500 mb-1">Contract Address</div>
+                    <div className="font-mono text-gray-300 break-all">
+                      Bt7rUdZ62TWyHB5HsBjLhFqQ3VDg42VUb5Ttwiqvpump
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
             
             <Link 
               href="/roadmap" 
@@ -192,6 +227,14 @@ export default function Navbar() {
               >
                 Nova Hub
               </Link>
+              <a 
+                href="https://dexscreener.com/solana/5kwqfa3rtzrdiyvfyspemnyudhbzmilbucyd1em4rrzs" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors duration-300 py-3 px-2 font-light min-h-[44px] flex items-center"
+              >
+                $NOVA
+              </a>
               <Link 
                 href="/roadmap" 
                 className="text-gray-400 hover:text-white transition-colors duration-300 py-3 px-2 font-light min-h-[44px] flex items-center"
