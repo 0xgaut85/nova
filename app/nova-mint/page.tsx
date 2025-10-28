@@ -71,6 +71,9 @@ export default function NovaMintPage() {
       const senderPubkey = new PublicKey(address);
       const receiverPubkey = new PublicKey(TREASURY_ADDRESS);
 
+      console.log('Sender address:', address);
+      console.log('Using RPC:', SOLANA_RPC_URL);
+
       // Get token accounts
       const senderTokenAccount = await getAssociatedTokenAddress(
         USDC_MINT,
@@ -82,17 +85,23 @@ export default function NovaMintPage() {
         receiverPubkey
       );
 
-      // Check if sender has USDC account
-      const senderAccountInfo = await connection.getAccountInfo(senderTokenAccount);
-      if (!senderAccountInfo) {
-        setError('You need to have USDC in your wallet first. Please add USDC to your Solana wallet.');
-        setLoading(false);
-        return;
-      }
+      console.log('Sender USDC token account:', senderTokenAccount.toBase58());
 
-      // Check USDC balance
-      const balance = await connection.getTokenAccountBalance(senderTokenAccount);
-      const balanceAmount = parseInt(balance.value.amount);
+      // Check USDC balance using a more reliable method
+      let balanceAmount = 0;
+      try {
+        const balance = await connection.getTokenAccountBalance(senderTokenAccount);
+        balanceAmount = parseInt(balance.value.amount);
+        console.log('USDC balance:', balanceAmount / 1_000_000, 'USDC');
+      } catch (balanceError: any) {
+        console.error('Balance check error:', balanceError);
+        if (balanceError.message?.includes('could not find account')) {
+          setError('You need to have USDC in your wallet first. Please add USDC to your Solana wallet.');
+          setLoading(false);
+          return;
+        }
+        throw balanceError;
+      }
       
       if (balanceAmount < usdcAmount) {
         const currentBalance = (balanceAmount / 1_000_000).toFixed(2);
@@ -118,6 +127,8 @@ export default function NovaMintPage() {
       transaction.recentBlockhash = blockhash;
       transaction.feePayer = senderPubkey;
 
+      console.log('Sending transaction...');
+
       // Sign and send transaction
       const signedTx = await walletProvider.signTransaction(transaction);
       const signature = await connection.sendRawTransaction(signedTx.serialize(), {
@@ -125,12 +136,16 @@ export default function NovaMintPage() {
         preflightCommitment: 'finalized'
       });
 
+      console.log('Transaction sent:', signature);
+
       // Confirm transaction
       await connection.confirmTransaction({
         signature,
         blockhash,
         lastValidBlockHeight
       }, 'finalized');
+
+      console.log('Transaction confirmed!');
 
       setTxSignature(signature);
       setAmount('10');
