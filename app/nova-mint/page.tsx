@@ -208,10 +208,10 @@ export default function NovaMintPage() {
             {/* Header */}
             <div className="text-center mb-12">
               <h1 className="text-5xl md:text-6xl font-title mb-4 text-white">
-                $NOVA Mint
+                x402 $NOVA Mint
               </h1>
               <p className="text-gray-400 text-lg font-light">
-                Connect your Solana wallet and mint $NOVA tokens instantly
+                Connect your Solana wallet and mint x402 $NOVA tokens instantly
               </p>
             </div>
 
@@ -275,7 +275,7 @@ export default function NovaMintPage() {
                   </div>
                   <h3 className="text-xl font-normal text-white mb-3">Connect Your Wallet</h3>
                   <p className="text-gray-400 text-sm font-light mb-6 max-w-sm mx-auto">
-                    Connect your Solana wallet to mint $NOVA tokens with USDC
+                    Connect your Solana wallet to mint x402 $NOVA tokens with USDC
                   </p>
                   <button
                     onClick={connectWallet}
@@ -463,10 +463,10 @@ export default function NovaMintPage() {
             {/* Token Info */}
             <div className="mt-8 bg-[#b2a962]/10 border border-[#b2a962]/30 rounded-lg p-6">
               <div className="text-center mb-4">
-                <div className="text-xl font-normal text-white mb-2">$NOVA Token</div>
-                <div className="text-sm text-gray-400 font-light">Official Nova402 utility token</div>
+                <div className="text-xl font-normal text-white mb-2">x402 $NOVA Token</div>
+                <div className="text-sm text-gray-400 font-light">Official Nova402 x402 utility token</div>
               </div>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xs">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xs mb-4">
                 <div className="font-mono text-gray-400 font-light break-all text-center">
                   Bt7rUdZ62TWyHB5HsBjLhFqQ3VDg42VUb5Ttwiqvpump
                 </div>
@@ -478,6 +478,18 @@ export default function NovaMintPage() {
                 >
                   View Chart
                 </a>
+              </div>
+
+              {/* Bridge Button */}
+              <div className="mt-6 pt-4 border-t border-white/10">
+                <button
+                  disabled
+                  className="w-full px-6 py-3 bg-white/5 border border-white/10 text-gray-500 rounded-lg text-sm font-normal cursor-not-allowed flex items-center justify-center gap-2"
+                  title="Coming soon"
+                >
+                  <span>Nova to x402 Nova Bridge</span>
+                  <span className="text-xs text-gray-600">(Coming Soon)</span>
+                </button>
               </div>
             </div>
 
