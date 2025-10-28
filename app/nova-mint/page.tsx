@@ -1,15 +1,37 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useAppKit, useAppKitAccount, useAppKitProvider } from '@reown/appkit/react';
+import type { Provider } from '@reown/appkit-adapter-solana';
+import { Connection, PublicKey, Transaction, SystemProgram } from '@solana/web3.js';
+import { getAssociatedTokenAddress, createTransferInstruction, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 
 // Treasury address
 const TREASURY_ADDRESS = 'DY8zJxPE8G9Ks9LtLUwBT2ux5txYMgPBZqTvopy7X5N6';
 
+// USDC Mint Address on Solana Mainnet
+const USDC_MINT = new PublicKey('EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v');
+
+// Solana RPC endpoint
+const SOLANA_RPC = 'https://api.mainnet-beta.solana.com';
+
 export default function NovaMintPage() {
   const [amount, setAmount] = useState<string>('10');
   const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [txSignature, setTxSignature] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [mounted, setMounted] = useState(false);
+
+  const { address, isConnected, caipAddress } = useAppKitAccount();
+  const { walletProvider } = useAppKitProvider<Provider>('solana');
+  const { open } = useAppKit();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const copyAddress = () => {
     navigator.clipboard.writeText(TREASURY_ADDRESS);
@@ -19,6 +41,98 @@ export default function NovaMintPage() {
 
   const amountNum = parseFloat(amount) || 0;
   const isValid = amountNum >= 10 && amountNum <= 1000;
+
+  const handleSendUSDC = async () => {
+    if (!isConnected || !walletProvider || !address) {
+      setError('Please connect your Solana wallet first');
+      return;
+    }
+
+    if (!isValid) {
+      setError('Amount must be between $10 and $1,000');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+    setTxSignature('');
+
+    try {
+      const connection = new Connection(SOLANA_RPC, 'confirmed');
+      
+      // USDC has 6 decimals
+      const usdcAmount = Math.floor(amountNum * 1_000_000);
+      
+      const senderPubkey = new PublicKey(address);
+      const receiverPubkey = new PublicKey(TREASURY_ADDRESS);
+
+      // Get token accounts
+      const senderTokenAccount = await getAssociatedTokenAddress(
+        USDC_MINT,
+        senderPubkey
+      );
+
+      const receiverTokenAccount = await getAssociatedTokenAddress(
+        USDC_MINT,
+        receiverPubkey
+      );
+
+      // Create transfer instruction
+      const transaction = new Transaction().add(
+        createTransferInstruction(
+          senderTokenAccount,
+          receiverTokenAccount,
+          senderPubkey,
+          usdcAmount,
+          [],
+          TOKEN_PROGRAM_ID
+        )
+      );
+
+      // Get latest blockhash
+      const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
+      transaction.recentBlockhash = blockhash;
+      transaction.feePayer = senderPubkey;
+
+      // Sign and send transaction
+      const signedTx = await walletProvider.signTransaction(transaction);
+      const signature = await connection.sendRawTransaction(signedTx.serialize());
+
+      // Confirm transaction
+      await connection.confirmTransaction({
+        signature,
+        blockhash,
+        lastValidBlockHeight
+      });
+
+      setTxSignature(signature);
+      setAmount('10');
+      setError('');
+    } catch (err: any) {
+      console.error('Transaction error:', err);
+      setError(err.message || 'Transaction failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const connectWallet = () => {
+    open({ view: 'Connect' });
+  };
+
+  const formatAddress = (addr: string) => {
+    return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
+  };
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-black text-white">
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="animate-pulse text-gray-500">Loading...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -45,7 +159,7 @@ export default function NovaMintPage() {
                 $NOVA Mint
               </h1>
               <p className="text-gray-400 text-lg font-light">
-                Send USDC on Solana to mint $NOVA tokens
+                Connect your Solana wallet and mint $NOVA tokens instantly
               </p>
             </div>
 
@@ -94,122 +208,175 @@ export default function NovaMintPage() {
               `}</style>
               <div className="corner-bottom-left" />
               <div className="corner-bottom-right" />
-              
-              {/* Amount Input */}
-              <div className="mb-6">
-                <label className="block text-sm text-gray-400 mb-2 font-light">
-                  Amount (USDC)
-                </label>
-                <div className="relative">
-                  <input
-                    type="number"
-                    min="10"
-                    max="1000"
-                    step="1"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    className={`w-full bg-black/50 border rounded-lg px-4 py-4 text-white text-2xl font-normal focus:outline-none transition-colors ${
-                      isValid ? 'border-white/[0.15] focus:border-[#b2a962]' : 'border-red-500/50 focus:border-red-500'
-                    }`}
-                    placeholder="10"
-                  />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg font-light">
-                    USDC
-                  </span>
-                </div>
-                <div className="flex justify-between mt-2 text-xs font-light">
-                  <span className={amountNum < 10 ? 'text-red-400' : 'text-gray-500'}>
-                    Min: $10
-                  </span>
-                  <span className={amountNum > 1000 ? 'text-red-400' : 'text-gray-500'}>
-                    Max: $1,000
-                  </span>
-                </div>
-              </div>
 
-              {/* Quick Amount Buttons */}
-              <div className="grid grid-cols-4 gap-2 mb-8">
-                {[10, 50, 100, 500].map((preset) => (
-                  <button
-                    key={preset}
-                    onClick={() => setAmount(preset.toString())}
-                    className={`border rounded-lg py-2 text-sm transition-all duration-300 font-normal ${
-                      amount === preset.toString()
-                        ? 'bg-[#b2a962]/20 border-[#b2a962] text-[#b2a962]'
-                        : 'bg-white/[0.04] hover:bg-white/[0.08] border-white/[0.12] text-white'
-                    }`}
-                  >
-                    ${preset}
-                  </button>
-                ))}
-              </div>
-
-              {/* Treasury Address */}
-              <div className="mb-6">
-                <div className="text-sm text-gray-400 mb-2 font-light">Send USDC to this address:</div>
-                <div className="relative bg-black/30 border border-white/[0.15] rounded-lg p-4">
-                  <div className="font-mono text-sm text-gray-300 break-all pr-12 font-light">
-                    {TREASURY_ADDRESS}
+              {/* Wallet Connection */}
+              {!isConnected ? (
+                <div className="text-center py-8 mb-6">
+                  <div className="w-20 h-20 mx-auto mb-6 bg-[#b2a962]/10 rounded-full flex items-center justify-center border border-[#b2a962]/20">
+                    <svg className="w-10 h-10 text-[#b2a962]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" />
+                    </svg>
                   </div>
+                  <h3 className="text-xl font-normal text-white mb-3">Connect Your Wallet</h3>
+                  <p className="text-gray-400 text-sm font-light mb-6 max-w-sm mx-auto">
+                    Connect your Solana wallet to mint $NOVA tokens with USDC
+                  </p>
                   <button
-                    onClick={copyAddress}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.12] rounded-lg px-3 py-2 transition-colors text-xs font-normal"
+                    onClick={connectWallet}
+                    className="px-8 py-3 bg-[#b2a962] hover:bg-[#c4b876] text-black font-normal rounded-lg transition-all duration-300"
                   >
-                    {copied ? '✓ Copied!' : 'Copy'}
+                    Connect Wallet
                   </button>
                 </div>
-              </div>
+              ) : (
+                <>
+                  {/* Connected Wallet Info */}
+                  <div className="mb-6 p-4 bg-[#b2a962]/10 border border-[#b2a962]/30 rounded-lg">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-[#b2a962] rounded-full animate-pulse" />
+                        <span className="text-sm font-normal text-white">Connected: {formatAddress(address!)}</span>
+                      </div>
+                      <button
+                        onClick={connectWallet}
+                        className="text-xs text-gray-400 hover:text-white transition-colors font-light"
+                      >
+                        Change
+                      </button>
+                    </div>
+                  </div>
 
-              {/* Instructions */}
-              <div className="bg-[#b2a962]/10 border border-[#b2a962]/30 rounded-lg p-4 mb-6">
-                <div className="font-normal text-[#b2a962] mb-2 flex items-center gap-2">
-                  <span>📝</span> How to Mint:
-                </div>
-                <ol className="text-sm text-gray-300 space-y-2 ml-6 list-decimal font-light">
-                  <li>Choose your amount (${amount} USDC)</li>
-                  <li>Copy the treasury address above</li>
-                  <li>Open your Solana wallet (Phantom, Solflare, etc.)</li>
-                  <li>Send exactly <span className="font-normal text-white">{amount} USDC</span> to the address</li>
-                  <li>$NOVA tokens will be sent to your wallet automatically</li>
-                </ol>
-              </div>
+                  {/* Amount Input */}
+                  <div className="mb-6">
+                    <label className="block text-sm text-gray-400 mb-2 font-light">
+                      Amount (USDC)
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        min="10"
+                        max="1000"
+                        step="1"
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        className={`w-full bg-black/50 border rounded-lg px-4 py-4 text-white text-2xl font-normal focus:outline-none transition-colors ${
+                          isValid ? 'border-white/[0.15] focus:border-[#b2a962]' : 'border-red-500/50 focus:border-red-500'
+                        }`}
+                        placeholder="10"
+                      />
+                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg font-light">
+                        USDC
+                      </span>
+                    </div>
+                    <div className="flex justify-between mt-2 text-xs font-light">
+                      <span className={amountNum < 10 ? 'text-red-400' : 'text-gray-500'}>
+                        Min: $10
+                      </span>
+                      <span className={amountNum > 1000 ? 'text-red-400' : 'text-gray-500'}>
+                        Max: $1,000
+                      </span>
+                    </div>
+                  </div>
 
-              {/* Warning */}
-              {!isValid && (
-                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-6 text-red-300 text-sm font-light">
-                  ⚠️ Amount must be between $10 and $1,000
-                </div>
+                  {/* Quick Amount Buttons */}
+                  <div className="grid grid-cols-4 gap-2 mb-8">
+                    {[10, 50, 100, 500].map((preset) => (
+                      <button
+                        key={preset}
+                        onClick={() => setAmount(preset.toString())}
+                        className={`border rounded-lg py-2 text-sm transition-all duration-300 font-normal ${
+                          amount === preset.toString()
+                            ? 'bg-[#b2a962]/20 border-[#b2a962] text-[#b2a962]'
+                            : 'bg-white/[0.04] hover:bg-white/[0.08] border-white/[0.12] text-white'
+                        }`}
+                      >
+                        ${preset}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Treasury Address */}
+                  <div className="mb-6">
+                    <div className="text-sm text-gray-400 mb-2 font-light">Receiving Address:</div>
+                    <div className="relative bg-black/30 border border-white/[0.15] rounded-lg p-4">
+                      <div className="font-mono text-xs text-gray-300 break-all pr-12 font-light">
+                        {TREASURY_ADDRESS}
+                      </div>
+                      <button
+                        onClick={copyAddress}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.12] rounded-lg px-3 py-2 transition-colors text-xs font-normal"
+                      >
+                        {copied ? '✓' : 'Copy'}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Error Message */}
+                  {error && (
+                    <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-300 text-sm font-light">
+                      ⚠️ {error}
+                    </div>
+                  )}
+
+                  {/* Success Message */}
+                  {txSignature && (
+                    <div className="mb-6 p-4 bg-[#b2a962]/10 border border-[#b2a962]/30 rounded-lg">
+                      <div className="text-[#b2a962] font-normal mb-2 flex items-center gap-2">
+                        <span>✓</span> Transaction Successful!
+                      </div>
+                      <a
+                        href={`https://solscan.io/tx/${txSignature}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-white hover:text-[#b2a962] font-mono break-all underline transition-colors"
+                      >
+                        {txSignature}
+                      </a>
+                    </div>
+                  )}
+
+                  {/* Send Button */}
+                  <button
+                    onClick={handleSendUSDC}
+                    disabled={loading || !isValid}
+                    className={`w-full text-center font-normal py-4 rounded-lg transition-all duration-300 transform ${
+                      loading || !isValid
+                        ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                        : 'bg-[#b2a962] hover:bg-[#c4b876] text-black hover:scale-[1.02] active:scale-[0.98]'
+                    }`}
+                  >
+                    {loading ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        Processing...
+                      </span>
+                    ) : (
+                      `Send ${amount} USDC`
+                    )}
+                  </button>
+                </>
               )}
-
-              {/* Open Wallet Button */}
-              <a
-                href={`solana:${TREASURY_ADDRESS}?amount=${isValid ? amountNum : 10}&spl-token=${USDC_MINT}`}
-                className={`block w-full text-center font-normal py-4 rounded-lg transition-all duration-300 transform ${
-                  isValid
-                    ? 'bg-[#b2a962] hover:bg-[#c4b876] text-black hover:scale-[1.02] active:scale-[0.98]'
-                    : 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                }`}
-              >
-                Open Wallet App
-              </a>
             </div>
 
             {/* Info Section */}
             <div className="mt-8 grid md:grid-cols-3 gap-4">
               <div className="bg-black/80 backdrop-blur-sm border border-white/[0.15] rounded-lg p-6 text-center">
                 <div className="text-2xl mb-2">⚡</div>
-                <div className="text-sm font-normal text-white mb-1">Instant Delivery</div>
-                <div className="text-xs text-gray-400 font-light">Receive $NOVA immediately</div>
+                <div className="text-sm font-normal text-white mb-1">Instant</div>
+                <div className="text-xs text-gray-400 font-light">Automatic delivery</div>
               </div>
               <div className="bg-black/80 backdrop-blur-sm border border-white/[0.15] rounded-lg p-6 text-center">
                 <div className="text-2xl mb-2">🔒</div>
                 <div className="text-sm font-normal text-white mb-1">Secure</div>
-                <div className="text-xs text-gray-400 font-light">Non-custodial minting</div>
+                <div className="text-xs text-gray-400 font-light">Non-custodial</div>
               </div>
               <div className="bg-black/80 backdrop-blur-sm border border-white/[0.15] rounded-lg p-6 text-center">
                 <div className="text-2xl mb-2">💎</div>
-                <div className="text-sm font-normal text-white mb-1">Fair Launch</div>
-                <div className="text-xs text-gray-400 font-light">Equal opportunity</div>
+                <div className="text-sm font-normal text-white mb-1">Fair</div>
+                <div className="text-xs text-gray-400 font-light">Equal access</div>
               </div>
             </div>
 
@@ -236,9 +403,8 @@ export default function NovaMintPage() {
 
             {/* Disclaimer */}
             <div className="mt-8 text-center text-xs text-gray-500 space-y-2 font-light">
-              <p>⚠️ This is a one-way transaction. Please verify the treasury address before sending.</p>
-              <p>Transactions on blockchain are final and cannot be reversed.</p>
-              <p>Only send USDC on Solana network. Sending other tokens or on wrong network will result in loss of funds.</p>
+              <p>⚠️ Transactions are final and cannot be reversed.</p>
+              <p>Only send USDC on Solana network. Other tokens or networks will result in loss of funds.</p>
             </div>
 
             {/* Back Link */}
@@ -256,5 +422,3 @@ export default function NovaMintPage() {
     </div>
   );
 }
-
-const USDC_MINT = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
