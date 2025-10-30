@@ -113,10 +113,17 @@ export default function Navbar() {
                   </Link>
                   <Link
                     href="/dapp/agent"
-                    className="block px-4 py-3 text-sm font-light text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
+                    className="block px-4 py-3 text-sm font-light text-gray-300 hover:bg-white/5 hover:text-white transition-colors border-b border-white/5"
                     onClick={() => setHubDropdownOpen(false)}
                   >
                     Nova Native Agent
+                  </Link>
+                  <Link
+                    href="/dapp/bridge"
+                    className="block px-4 py-3 text-sm font-light text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
+                    onClick={() => setHubDropdownOpen(false)}
+                  >
+                    Bridge
                   </Link>
                 </div>
               )}
