@@ -51,6 +51,15 @@ async function getTokenList() {
 
 export async function POST(req: NextRequest) {
   try {
+    // Validate API key before proceeding
+    if (!process.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY.trim() === '') {
+      console.error('ANTHROPIC_API_KEY is not set or is empty');
+      return NextResponse.json({ 
+        message: 'ANTHROPIC_API_KEY is not configured. Please set it in your environment variables.',
+        error: 'MISSING_API_KEY'
+      }, { status: 500 });
+    }
+    
     // Debug: Check if API key is loaded
     console.log('API Key exists:', !!process.env.ANTHROPIC_API_KEY);
     console.log('API Key length:', process.env.ANTHROPIC_API_KEY?.length);
@@ -223,10 +232,20 @@ Important: Be conversational, friendly, and natural. You're an AI assistant that
       message: 'Sorry, I encountered an error processing your request.' 
     }, { status: 500 });
     
-  } catch (error) {
+  } catch (error: any) {
     console.error('Anthropic API error:', error);
+    
+    // Check if it's an authentication error (missing/invalid API key)
+    if (error?.status === 401 || error?.message?.includes('api_key') || error?.message?.includes('authentication')) {
+      return NextResponse.json({ 
+        message: 'Invalid or missing ANTHROPIC_API_KEY. Please check your environment variables.',
+        error: 'AUTH_ERROR'
+      }, { status: 500 });
+    }
+    
     return NextResponse.json({ 
-      message: 'I encountered an error. Please check your API key and try again.' 
+      message: error?.message || 'I encountered an error processing your request. Please try again.',
+      error: 'API_ERROR'
     }, { status: 500 });
   }
 }

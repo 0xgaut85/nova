@@ -96,14 +96,19 @@ export default function AgentPage() {
         };
         setMessages(prev => [...prev, agentMessage]);
       } else {
-        throw new Error(data.message || 'Failed to get response');
+        // Use the error message from the API if available
+        const errorMessage = data.error === 'MISSING_API_KEY' || data.error === 'AUTH_ERROR'
+          ? data.message || 'ANTHROPIC_API_KEY is not configured. On Vercel, make sure it\'s set in your project settings (Settings → Environment Variables) and redeploy.'
+          : data.message || 'Sorry, I encountered an error processing your request.';
+        
+        throw new Error(errorMessage);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error calling API:', error);
       const agentMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'agent',
-        content: 'Sorry, I encountered an error. Please make sure your ANTHROPIC_API_KEY is set in .env.local',
+        content: error?.message || 'Sorry, I encountered an error. Please try again.',
         timestamp: Date.now()
       };
       setMessages(prev => [...prev, agentMessage]);
