@@ -120,10 +120,17 @@ export default function Navbar() {
                   </Link>
                   <Link
                     href="/dapp/bridge"
-                    className="block px-4 py-3 text-sm font-light text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
+                    className="block px-4 py-3 text-sm font-light text-gray-300 hover:bg-white/5 hover:text-white transition-colors border-b border-white/5"
                     onClick={() => setHubDropdownOpen(false)}
                   >
                     Bridge
+                  </Link>
+                  <Link
+                    href="/dapp/x402-lending"
+                    className="block px-4 py-3 text-sm font-light text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
+                    onClick={() => setHubDropdownOpen(false)}
+                  >
+                    x402 Lending
                   </Link>
                 </div>
               )}
@@ -150,6 +157,13 @@ export default function Navbar() {
                     onClick={() => setNovaDropdownOpen(false)}
                   >
                     $NOVA Mint
+                  </Link>
+                  <Link
+                    href="/dapp/claim-nova"
+                    className="block px-4 py-3 text-sm font-light text-gray-300 hover:bg-white/5 hover:text-white transition-colors border-b border-white/5"
+                    onClick={() => setNovaDropdownOpen(false)}
+                  >
+                    Claim $Nova
                   </Link>
                   <a
                     href="https://dexscreener.com/solana/5kwqfa3rtzrdiyvfyspemnyudhbzmilbucyd1em4rrzs"

@@ -61,6 +61,20 @@ export default function NovaHubPage() {
       href: '/dapp/agent',
       status: 'Live',
       gradient: 'from-[#b2a962]/20 via-transparent to-transparent'
+    },
+    {
+      name: 'Claim $Nova',
+      description: 'Migrate your $Nova v1 tokens to $Nova v2 with a 1:1 conversion rate. Snapshot taken Sunday, November 9th, 2025 at 5:00 PM UTC.',
+      href: '/dapp/claim-nova',
+      status: 'Live',
+      gradient: 'from-[#b2a962]/20 via-transparent to-transparent'
+    },
+    {
+      name: 'x402 Lending',
+      description: 'Enable AI agents to autonomously access paid services. Stake $Nova v2, enable agent lending, and supply liquidity for agent payments.',
+      href: '/dapp/x402-lending',
+      status: 'Live',
+      gradient: 'from-[#b2a962]/20 via-transparent to-transparent'
     }
   ];
 
