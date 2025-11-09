@@ -83,8 +83,82 @@ export default function X402ProtocolPage() {
         <div className="bg-black/60 backdrop-blur-sm rounded-lg p-8 border border-white/[0.12]">
           <h3 className="text-lg font-medium text-white mb-3">Machine Economy Ready</h3>
           <p className="text-base text-gray-400 font-light leading-relaxed">
-            Perfect for AI agents and autonomous systems that need to pay for services.
+            Perfect for AI agents and autonomous systems. With x402 Lending, agents can borrow capital, execute workflows, and repay automatically—enabling true economic autonomy.
           </p>
+        </div>
+      </div>
+
+      <h2 className="text-3xl font-medium text-white mb-8 tracking-wide">Nova's x402 Infrastructure</h2>
+
+      <p className="text-lg text-gray-400 font-light leading-relaxed mb-12">
+        Nova provides the execution and economic layer for x402, making the protocol usable at scale. Our suite of utilities transforms x402 from a payment protocol into a complete machine economy.
+      </p>
+
+      <div className="grid md:grid-cols-2 gap-6 mb-16">
+        <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15]">
+          <h3 className="text-xl font-medium text-white mb-4">Service Hub</h3>
+          <p className="text-base text-gray-400 font-light leading-relaxed mb-4">
+            Discover and consume x402 services with deterministic execution. Every service defines pricing, accepted currency, and validation rules in x402 format. Services can reference other services internally through dependency resolution.
+          </p>
+          <Link href="/docs/service-hub" className="text-[#b2a962] hover:text-[#c4b876] text-sm font-light transition-colors">
+            Learn more →
+          </Link>
+        </div>
+
+        <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15]">
+          <h3 className="text-xl font-medium text-white mb-4">Nova Native Agent</h3>
+          <p className="text-base text-gray-400 font-light leading-relaxed mb-4">
+            Autonomous agent that runs workflows, not just calls services. Evaluates cost, success rate, and latency before selecting providers. Routes work through the lending layer, generating economic activity.
+          </p>
+          <Link href="/docs/nova-agent" className="text-[#b2a962] hover:text-[#c4b876] text-sm font-light transition-colors">
+            Learn more →
+          </Link>
+        </div>
+
+        <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15]">
+          <h3 className="text-xl font-medium text-white mb-4">x402 Lending Layer</h3>
+          <p className="text-base text-gray-400 font-light leading-relaxed mb-4">
+            Enable AI agents to autonomously access paid services. Agents borrow working capital through x402, execute workflows, and repay automatically. Stake $NOVA to participate and earn rewards from agent activity.
+          </p>
+          <Link href="/docs/x402-lending" className="text-[#b2a962] hover:text-[#c4b876] text-sm font-light transition-colors">
+            Learn more →
+          </Link>
+        </div>
+
+        <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15]">
+          <h3 className="text-xl font-medium text-white mb-4">Integration Layer</h3>
+          <p className="text-base text-gray-400 font-light leading-relaxed mb-4">
+            Register and manage your x402 services. Define service schemas, pricing models, validation rules, and dependencies. Makes services plug-and-play across the x402 economy.
+          </p>
+          <Link href="/docs/integration-layer" className="text-[#b2a962] hover:text-[#c4b876] text-sm font-light transition-colors">
+            Learn more →
+          </Link>
+        </div>
+      </div>
+
+      <h2 className="text-3xl font-medium text-white mb-8 tracking-wide">x402 in Practice</h2>
+
+      <div className="bg-black/80 backdrop-blur-sm rounded-lg p-10 border border-white/[0.15] mb-16">
+        <p className="text-base text-gray-400 font-light leading-relaxed mb-6">
+          With Nova's infrastructure, x402 goes beyond simple request-payment flows:
+        </p>
+        <div className="space-y-4 text-base text-gray-400 font-light">
+          <div className="flex gap-3">
+            <span className="text-[#b2a962] flex-shrink-0">•</span>
+            <span><strong className="text-white font-medium">Composable Services:</strong> Services can call other x402 services internally, with payments flowing automatically</span>
+          </div>
+          <div className="flex gap-3">
+            <span className="text-[#b2a962] flex-shrink-0">•</span>
+            <span><strong className="text-white font-medium">Agent Autonomy:</strong> AI agents operate independently with access to capital through the lending layer</span>
+          </div>
+          <div className="flex gap-3">
+            <span className="text-[#b2a962] flex-shrink-0">•</span>
+            <span><strong className="text-white font-medium">Economic Participation:</strong> $NOVA stakers earn rewards from all x402 activity flowing through the network</span>
+          </div>
+          <div className="flex gap-3">
+            <span className="text-[#b2a962] flex-shrink-0">•</span>
+            <span><strong className="text-white font-medium">Deterministic Execution:</strong> Structured output validation ensures reliable, predictable service responses</span>
+          </div>
         </div>
       </div>
 

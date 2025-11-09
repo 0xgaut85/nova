@@ -17,8 +17,11 @@ export default function QuickStartPage() {
 
       <div className="bg-black/80 backdrop-blur-sm rounded-lg p-10 border border-white/[0.15] mb-16">
         <h2 className="text-2xl font-medium text-white mb-4">Choose Your Path</h2>
+        <p className="text-base text-gray-400 font-light leading-relaxed mb-4">
+          Building a service to monetize? Or consuming existing services? Pick your path and get started. Nova provides the complete infrastructure to make x402 usable at scale.
+        </p>
         <p className="text-base text-gray-400 font-light leading-relaxed">
-          Building a service to monetize? Or consuming existing services? Pick your path and get started.
+          Use our Service Hub to discover services, Nova Native Agent for autonomous workflows, or x402 Lending to enable agents with capital access. All utilities work together to create a complete machine economy.
         </p>
       </div>
 
@@ -141,6 +144,54 @@ const client = new X402Client({
 const data = await client.get('https://api.example.com/api/data');
 console.log(data);`}
           </pre>
+        </div>
+      </div>
+
+      <h2 className="text-3xl font-medium text-white mb-8 tracking-wide">Nova Utilities</h2>
+
+      <p className="text-base text-gray-400 font-light mb-8">
+        Enhance your x402 integration with Nova's utilities:
+      </p>
+
+      <div className="grid md:grid-cols-2 gap-6 mb-16">
+        <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15]">
+          <h3 className="text-lg font-medium text-white mb-3">Service Hub</h3>
+          <p className="text-base text-gray-400 font-light leading-relaxed mb-4">
+            Browse and discover x402 services. Test services free, validate integration, and integrate with structured output validation.
+          </p>
+          <Link href="/docs/service-hub" className="text-[#b2a962] hover:text-[#c4b876] text-sm font-light transition-colors">
+            Explore Service Hub →
+          </Link>
+        </div>
+
+        <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15]">
+          <h3 className="text-lg font-medium text-white mb-3">Integration Layer</h3>
+          <p className="text-base text-gray-400 font-light leading-relaxed mb-4">
+            Register your service with comprehensive metadata. Define schemas, pricing, and make your service discoverable.
+          </p>
+          <Link href="/docs/integration-layer" className="text-[#b2a962] hover:text-[#c4b876] text-sm font-light transition-colors">
+            Register Service →
+          </Link>
+        </div>
+
+        <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15]">
+          <h3 className="text-lg font-medium text-white mb-3">Nova Native Agent</h3>
+          <p className="text-base text-gray-400 font-light leading-relaxed mb-4">
+            Use autonomous agents to run workflows. Agents evaluate cost, handle fallbacks, and route through the lending layer.
+          </p>
+          <Link href="/docs/nova-agent" className="text-[#b2a962] hover:text-[#c4b876] text-sm font-light transition-colors">
+            Learn About Agent →
+          </Link>
+        </div>
+
+        <div className="bg-black/80 backdrop-blur-sm rounded-lg p-8 border border-white/[0.15]">
+          <h3 className="text-lg font-medium text-white mb-3">x402 Lending</h3>
+          <p className="text-base text-gray-400 font-light leading-relaxed mb-4">
+            Enable agents to access paid services autonomously. Stake $NOVA to participate and earn rewards from agent activity.
+          </p>
+          <Link href="/docs/x402-lending" className="text-[#b2a962] hover:text-[#c4b876] text-sm font-light transition-colors">
+            About Lending →
+          </Link>
         </div>
       </div>
 
