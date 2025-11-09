@@ -106,6 +106,50 @@ export default function DocsPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.35 }}
       >
+        <h2 className="text-4xl font-medium text-white mb-12 tracking-wide">Nova Utilities</h2>
+
+        <p className="text-lg text-gray-400 font-light leading-relaxed mb-12">
+          Nova provides a suite of utilities that work together to create a complete ecosystem for x402 services, agents, and economic activity.
+        </p>
+
+        <div className="grid md:grid-cols-2 gap-6 mb-24">
+          <ConceptCard 
+            title="Service Hub"
+            description="Discover and consume x402 services. Browse APIs, AI models, and digital tools with pay-per-request pricing. Structured services with deterministic execution and dependency resolution."
+          />
+
+          <ConceptCard 
+            title="Nova Native Agent"
+            description="Autonomous agent that runs workflows, not just calls services. Evaluates cost, success rate, and latency before selecting providers. Automatic fallback and output validation."
+          />
+
+          <ConceptCard 
+            title="x402 Lending"
+            description="Enable AI agents to autonomously access paid services. Stake $NOVA, enable agent lending, and supply liquidity. Agents borrow capital and repay automatically."
+          />
+
+          <ConceptCard 
+            title="Token Mint"
+            description="Create and distribute x402-native tokens that represent services, usage, and value. Browse tokens and mint or buy them. Like OpenSea for x402."
+          />
+
+          <ConceptCard 
+            title="x402 Indexer"
+            description="Real-time visibility into all x402 services. Monitor service health, usage patterns, pricing trends, and network activity. Service-level analytics and discovery."
+          />
+
+          <ConceptCard 
+            title="Integration Layer"
+            description="Register and manage your services. Define service schemas, pricing models, validation rules, and dependencies. Makes services plug-and-play across the x402 economy."
+          />
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
         <h2 className="text-4xl font-medium text-white mb-12 tracking-wide">Quick Start</h2>
 
         <div className="space-y-6 mb-24">
