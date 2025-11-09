@@ -13,6 +13,17 @@ const docSections = [
     ]
   },
   {
+    title: 'Nova Utilities',
+    items: [
+      { label: 'Service Hub', href: '/docs/service-hub' },
+      { label: 'Nova Native Agent', href: '/docs/nova-agent' },
+      { label: 'x402 Lending', href: '/docs/x402-lending' },
+      { label: 'Token Mint', href: '/docs/token-mint' },
+      { label: 'x402 Indexer', href: '/docs/x402-indexer' },
+      { label: 'Integration Layer', href: '/docs/integration-layer' },
+    ]
+  },
+  {
     title: 'Building Services',
     items: [
       { label: 'Express.js Server', href: '/docs/server-express' },

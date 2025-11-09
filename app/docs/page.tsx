@@ -44,7 +44,7 @@ export default function DocsPage() {
           </h1>
 
           <p className="text-2xl text-gray-400 font-light leading-relaxed mb-0 max-w-3xl">
-            Build and deploy pay-per-request services. Integrate micropayments. Create the next generation of digital commerce.
+            Build and deploy pay-per-request services. Integrate micropayments. Create the next generation of digital commerce. We're not predicting the agent economy—we're enabling it.
           </p>
         </motion.div>
       </div>
@@ -56,9 +56,12 @@ export default function DocsPage() {
         className="bg-black/80 backdrop-blur-sm rounded-lg p-12 border border-white/[0.15] mb-24"
       >
         <h2 className="text-3xl font-medium text-white mb-5 tracking-wide">What is Nova402?</h2>
-        <p className="text-lg text-gray-400 font-light leading-relaxed">
+        <p className="text-lg text-gray-400 font-light leading-relaxed mb-4">
           Nova402 is building x402 protocol infrastructure for the emerging API economy and beyond. 
           Every API call becomes a micropayment transaction, enabling true usage-based pricing with instant on-chain settlement.
+        </p>
+        <p className="text-lg text-gray-400 font-light leading-relaxed">
+          Nova exists for one purpose: make x402 usable. We're building the infrastructure that enables the agent economy. With Service Hub, Nova Native Agent, x402 Lending, and our suite of utilities, we're creating the execution and economic layer where agents operate, transact, and drive an economy.
         </p>
       </motion.div>
 
@@ -101,7 +104,7 @@ export default function DocsPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
+        transition={{ duration: 0.6, delay: 0.35 }}
       >
         <h2 className="text-4xl font-medium text-white mb-12 tracking-wide">Quick Start</h2>
 

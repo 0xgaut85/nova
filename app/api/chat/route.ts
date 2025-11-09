@@ -166,7 +166,7 @@ Important: Be conversational, friendly, and natural. You're an AI assistant that
 
     // Call Claude API with tools
     let response = await anthropic.messages.create({
-      model: 'claude-haiku-4-20250514',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 2048,
       system: systemPrompt,
       messages: messages,
@@ -212,7 +212,7 @@ Important: Be conversational, friendly, and natural. You're an AI assistant that
       ];
 
       response = await anthropic.messages.create({
-        model: 'claude-haiku-4-20250514',
+        model: 'claude-haiku-4-5-20251001',
         max_tokens: 2048,
         system: systemPrompt,
         messages: updatedMessages,
