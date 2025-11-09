@@ -26,8 +26,17 @@ export default function ClaimNova() {
   const [novaV1Balance, setNovaV1Balance] = useState<string>('0');
   const [isLoadingBalance, setIsLoadingBalance] = useState(false);
   const [tokenDecimals, setTokenDecimals] = useState<number>(6);
+  const [isSnapshotActive, setIsSnapshotActive] = useState(false);
 
-  // Fetch Nova v1 token balance
+  // Snapshot time: 5pm UTC, Nov 9, 2025
+  const SNAPSHOT_TIME = new Date('2025-11-09T17:00:00Z');
+
+  // Check if snapshot time has passed
+  const isSnapshotTimePassed = () => {
+    return new Date() >= SNAPSHOT_TIME;
+  };
+
+  // Fetch Nova v1 token balance (from snapshot if time passed, real-time if before)
   useEffect(() => {
     const loadTokenBalance = async () => {
       if (!address || !walletProvider) {
@@ -37,8 +46,9 @@ export default function ClaimNova() {
 
       setIsLoadingBalance(true);
       try {
-        const connection = getConnection();
-        
+        const snapshotTimePassed = isSnapshotTimePassed();
+        setIsSnapshotActive(snapshotTimePassed);
+
         // Get Solana address from wallet provider
         let solanaAddress = address;
         try {
@@ -50,38 +60,16 @@ export default function ClaimNova() {
           console.log('Could not get address from provider:', e);
         }
 
-        const senderPubkey = new PublicKey(solanaAddress);
-        const senderTokenAccount = await getAssociatedTokenAddress(
-          NOVA_V1_MINT,
-          senderPubkey
-        );
+        // Fetch balance from API (handles snapshot logic)
+        const response = await fetch(`/api/nova-claim/balance?address=${solanaAddress}`);
+        const data = await response.json();
 
-        // Get token decimals first
-        let decimals = 6; // default
-        try {
-          const mintInfo = await getMint(connection, NOVA_V1_MINT);
-          decimals = mintInfo.decimals;
-          setTokenDecimals(decimals);
-        } catch (e) {
-          console.log('Could not get mint info, using default 6 decimals');
-        }
-
-        // Get balance
-        try {
-          const balance = await connection.getTokenAccountBalance(senderTokenAccount);
-          const balanceAmount = parseInt(balance.value.amount);
-          const formattedBalance = (balanceAmount / Math.pow(10, decimals)).toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 6
-          });
-          setNovaV1Balance(formattedBalance);
-        } catch (balanceError: any) {
-          if (balanceError.message?.includes('could not find account')) {
-            setNovaV1Balance('0');
-          } else {
-            console.error('Error fetching balance:', balanceError);
-            setNovaV1Balance('0');
-          }
+        if (data.error) {
+          console.error('Error fetching balance:', data.error);
+          setNovaV1Balance('0');
+        } else {
+          setNovaV1Balance(data.balance || '0');
+          setIsSnapshotActive(data.isSnapshot || false);
         }
       } catch (err) {
         console.error('Error loading token balance:', err);
@@ -92,6 +80,15 @@ export default function ClaimNova() {
     };
 
     loadTokenBalance();
+    
+    // Refresh balance every 10 seconds if before snapshot, or once if after
+    const interval = setInterval(() => {
+      if (!isSnapshotTimePassed()) {
+        loadTokenBalance();
+      }
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, [address, walletProvider]);
 
   // Claimable amount is same as v1 balance (1:1 conversion)
@@ -267,7 +264,9 @@ export default function ClaimNova() {
               {/* Balance Display */}
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className="p-6 bg-white/[0.03] border border-white/[0.08] rounded-lg">
-                  <p className="text-sm text-gray-400 font-light mb-2">$Nova v1 Balance (Snapshot)</p>
+                  <p className="text-sm text-gray-400 font-light mb-2">
+                    $Nova v1 Balance {isSnapshotActive ? '(Snapshot)' : '(Live)'}
+                  </p>
                   {isLoadingBalance ? (
                     <div className="flex items-center gap-2">
                       <svg className="w-5 h-5 animate-spin text-[#b2a962]" fill="none" viewBox="0 0 24 24">
@@ -278,6 +277,11 @@ export default function ClaimNova() {
                     </div>
                   ) : (
                     <p className="text-3xl text-white font-normal">{novaV1Balance}</p>
+                  )}
+                  {isSnapshotActive && (
+                    <p className="text-xs text-gray-500 font-light mt-1">
+                      Balance locked at snapshot time
+                    </p>
                   )}
                 </div>
                 <div className="p-6 bg-[#b2a962]/10 border border-[#b2a962]/20 rounded-lg">
