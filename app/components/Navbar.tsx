@@ -166,7 +166,7 @@ export default function Navbar() {
                     Claim $Nova
                   </Link>
                   <a
-                    href="https://dexscreener.com/solana/5kwqfa3rtzrdiyvfyspemnyudhbzmilbucyd1em4rrzs"
+                    href="https://dexscreener.com/solana/JCtMgUQ7eW5B1ke6CcNbeMW8YcYS7JfXZQgExNJYpump"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block px-4 py-3 text-sm font-light text-gray-300 hover:bg-white/5 hover:text-white transition-colors border-b border-white/5"
@@ -177,7 +177,7 @@ export default function Navbar() {
                   <div className="px-4 py-3 text-xs">
                     <div className="text-gray-500 mb-1">Contract Address</div>
                     <div className="font-mono text-gray-300 break-all">
-                      Bt7rUdZ62TWyHB5HsBjLhFqQ3VDg42VUb5Ttwiqvpump
+                      JCtMgUQ7eW5B1ke6CcNbeMW8YcYS7JfXZQgExNJYpump
                     </div>
                   </div>
                 </div>
