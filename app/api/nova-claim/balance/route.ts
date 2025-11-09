@@ -3,7 +3,7 @@ import { Connection, PublicKey } from '@solana/web3.js';
 import { getAssociatedTokenAddress, getMint } from '@solana/spl-token';
 import { Redis } from '@upstash/redis';
 
-const NOVA_V1_MINT = new PublicKey('Bt7rUdZ62TwyHB5HsBjLhFqQ3VDg42VUb5Ttwiqvpump');
+const NOVA_V1_MINT = new PublicKey('Bt7rUdZ62TWyHB5HsBjLhFqQ3VDg42VUb5Ttwiqvpump');
 const SOLANA_RPC_URL = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'https://mainnet.helius-rpc.com/?api-key=112de5d5-6530-46c2-b382-527e71c48e68';
 
 const SNAPSHOT_TIME = new Date('2025-11-09T17:00:00Z'); // 5pm UTC Nov 9, 2025

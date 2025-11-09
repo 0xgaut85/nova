@@ -360,29 +360,24 @@
             font-weight: 300;
         }
 
-        .t2-stat-box {
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 50px 60px;
-            position: relative;
-            text-align: center;
+        .t2-logo-large-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 80px;
         }
 
-        .t2-stat-value {
-            font-family: 'archetype balmer', sans-serif;
-            font-size: 72px;
-            color: white;
-            margin-bottom: 15px;
-            letter-spacing: 0.05em;
+        .t2-logo-large {
+            width: 480px;
+            height: 480px;
+            filter: drop-shadow(0 0 80px rgba(255, 255, 255, 0.15));
+            opacity: 0.95;
         }
 
-        .t2-stat-label {
-            font-size: 20px;
-            color: rgba(255, 255, 255, 0.6);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 500;
+        .t2-logo-large path {
+            fill: white;
         }
 
         /* ==================== TEMPLATE 3: FOOTER STYLE ==================== */
@@ -559,25 +554,22 @@
             </div>
             
             <h1 class="t2-title">
-                Revolutionizing Digital Payments
+                x402 Lending & Borrowing
             </h1>
             
             <p class="t2-description">
-                Pay-per-request infrastructure for APIs and AI services. Built on open standards, powered by blockchain technology.
+                Lend, borrow, and earn with $NOVA. Unlock liquidity with competitive yields and seamless staking rewards.
             </p>
         </div>
         
         <div class="t2-divider"></div>
         
         <div class="t2-right">
-            <div class="t2-stat-box">
-                <div class="corner corner-tl"></div>
-                <div class="corner corner-tr"></div>
-                <div class="corner corner-bl"></div>
-                <div class="corner corner-br"></div>
-                
-                <div class="t2-stat-value">99.9%</div>
-                <div class="t2-stat-label">Uptime</div>
+            <div class="t2-logo-large-wrapper">
+                <svg class="t2-logo-large" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 375 375">
+                    <path d="M 197.230469 197.226562 L 345.09375 187.273438 L 197.230469 177.316406 L 187.269531 29.449219 L 177.3125 177.316406 L 29.449219 187.273438 L 177.3125 197.226562 L 187.269531 345.09375 Z M 197.230469 197.226562"/>
+                    <path d="M 187.269531 195.128906 L 249.546875 249.539062 L 195.128906 187.273438 L 249.546875 125 L 187.269531 179.417969 L 125 125 L 179.414062 187.273438 L 125 249.539062 Z M 187.269531 195.128906"/>
+                </svg>
             </div>
         </div>
     </div>
